@@ -393,7 +393,7 @@
       
       <div class="btn-group">
         <button type="button" class="btn btn-claim" onclick="bukaModal()">
-          📋 Lapor Klaim
+          Lapor Klaim
         </button>
 
         <a 
@@ -402,7 +402,7 @@
           rel="noopener noreferrer" 
           class="btn btn-wa"
         >
-          💬 WA Admin Klaim
+          WA Admin
         </a>
       </div>
     </aside>
@@ -419,8 +419,8 @@
 
       <form id="formLaporKlaim" onsubmit="kirimLaporanWA(event)">
         <div class="form-group">
-          <label for="nama">Nama Lengkap Tertanggung *</label>
-          <input type="text" id="nama" required placeholder="Contoh: Budi Santoso">
+          <label for="nama">Nama Tertanggung sesuai Polis *</label>
+          <input type="text" id="nama" required placeholder="Contoh: Hendrik Qin QQ Andi">
         </div>
 
         <div class="form-group">
@@ -441,7 +441,7 @@
         <div class="form-group">
           <label for="jenisKlaim">Jenis Pengajuan Klaim *</label>
           <select id="jenisKlaim" required>
-            <option value="Kerusakan Sebagian (Kecelakaan / Lecet)">Kerusakan Sebagian (Kecelakaan / Lecet)</option>
+            <option value="Kerusakan Sebagian (Kecelakaan / Lecet)">Kerusakan Sebagian (Kecelakaan / Penyok / Lecet)</option>
             <option value="Kecelakaan Melibatkan Pihak Ketiga (TJH)">Kecelakaan Melibatkan Pihak Ketiga (TJH)</option>
             <option value="Kehilangan Kendaraan (TLO)">Kehilangan Kendaraan (TLO)</option>
             <option value="Bencana Alam (Banjir / Gempa)">Bencana Alam (Banjir / Gempa)</option>
@@ -462,7 +462,7 @@
         
         <div class="form-group">
           <label for="kronologi">Kronologi Singkat Kejadian *</label>
-          <textarea id="kronologi" required placeholder="Ceritakan singkat waktu, lokasi, dan bagian mobil yang terdampak..."></textarea>
+          <textarea id="kronologi" required placeholder="Ceritakan kronologis kejadiannya dan bagian mobil yang terdampak..."></textarea>
         </div>
 
         <button type="submit" class="btn btn-claim">Kirim Laporan ke WhatsApp Admin</button>
