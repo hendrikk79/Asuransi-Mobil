@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hitung Premi Asuransi Kendaraan Bermotor - Resmi Tarif OJK</title>
+  <style>
+    :root {
+      --primary: #0f3d68;
+      --primary-dark: #0a2947;
+      --accent: #e67e22;
+      --accent-hover: #d35400;
+      --whatsapp: #25d366;
+      --whatsapp-dark: #1ebe57;
+      --bg: #f4f7fa;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+      --warn-text: #92400e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      padding: 2.25rem 1.25rem 3.5rem;
+      text-align: center;
+    }
+
+    .badge-ojk {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      margin-bottom: 0.75rem;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: -2rem auto 3rem;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.07), 0 4px 10px -6px rgba(15, 23, 42, 0.05);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+
+    @media (max-width: 540px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: #334155;
+    }
+
+    .req {
+      color: #dc2626;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.94rem;
+      color: var(--text);
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 61, 104, 0.12);
+    }
+
+    .input-prefix {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-prefix span {
+      position: absolute;
+      left: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .input-prefix input {
+      padding-left: 2.35rem;
+      font-weight: 600;
+    }
+
+    .hint {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .age-alert {
+      display: none;
+      margin-top: 0.45rem;
+      padding: 0.55rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-text);
+    }
+
+    .coverage-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .coverage-option {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .coverage-option input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .coverage-option.active {
+      border-color: var(--primary);
+      background: #f0f7ff;
+    }
+
+    .coverage-option.disabled {
+      opacity: 0.48;
+      cursor: not-allowed;
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .coverage-option strong {
+      display: block;
+      font-size: 0.92rem;
+      color: var(--primary);
+    }
+
+    .coverage-option span {
+      font-size: 0.76rem;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    .addon-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .addon-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #f8fafc;
+      cursor: pointer;
+    }
+
+    .addon-item input[type="checkbox"] {
+      margin-top: 0.2rem;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .addon-info {
+      flex: 1;
+    }
+
+    .addon-info strong {
+      font-size: 0.86rem;
+      display: block;
+      color: #1e293b;
+    }
+
+    .addon-info small {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .btn-calc {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .btn-calc:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Result Panel */
+    .result-box {
+      position: sticky;
+      top: 1.25rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2.2rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .result-content {
+      display: none;
+    }
+
+    .summary-pill {
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.83rem;
+      margin-bottom: 1rem;
+    }
+
+    .summary-pill div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+      gap: 0.5rem;
+    }
+
+    .summary-pill div:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary-pill span:last-child {
+      text-align: right;
+    }
+
+    .price-highlight {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .price-highlight .label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #065f46;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .price-highlight .amount {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #047857;
+      margin: 0.25rem 0;
+    }
+
+    .price-highlight .sub {
+      font-size: 0.76rem;
+      color: #065f46;
+    }
+
+    .breakdown-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      margin-bottom: 1rem;
+    }
+
+    .breakdown-table td {
+      padding: 0.45rem 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .breakdown-table td:last-child {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    .breakdown-table tr.total-row td {
+      border-top: 2px solid #cbd5e1;
+      border-bottom: none;
+      padding-top: 0.65rem;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.92rem;
+    }
+
+    .note-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 0.7rem 0.85rem;
+      font-size: 0.76rem;
+      color: #92400e;
+      margin-bottom: 1rem;
+    }
+
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--whatsapp);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.96rem;
+      transition: background 0.2s;
+    }
+
+    .btn-wa:hover {
+      background: var(--whatsapp-dark);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding: 1.5rem 1rem 2.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge-ojk">Mengacu Tarif Resmi OJK &bull; SEOJK No. 6/SEOJK.05/2017</div>
+    <h1>Simulasi Premi Asuransi Kendaraan Bermotor</h1>
+    <p>Hitung estimasi premi asuransi mobil pribadi, pickup/truk, maupun bus secara transparan dalam hitungan detik sesuai ketentuan batas bawah &amp; batas atas OJK.</p>
+  </header>
+
+  <main class="container">
+    <!-- FORM INPUT -->
+    <section class="card">
+      <div class="card-title">Data Pemohon &amp; Kendaraan</div>
+
+      <form id="premiForm" novalidate>
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="namaPemohon">Nama Lengkap <span class="req">*</span></label>
+            <input type="text" id="namaPemohon" placeholder="Contoh: Hendrik Qin" required />
+          </div>
+
+          <div class="form-group">
+            <label for="noHp">Nomor HP / WhatsApp <span class="req">*</span></label>
+            <input type="tel" id="noHp" placeholder="Contoh: 082121647215" required />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="jenisKendaraan">Jenis / Kategori Kendaraan <span class="req">*</span></label>
+            <select id="jenisKendaraan">
+              <option value="PENUMPANG">Mobil Penumpang (Kategori 1 - 5)</option>
+              <option value="TRUK_PICKUP">Truk &amp; Pickup (Kategori 6)</option>
+              <option value="BUS">Bus (Kategori 7)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tahunKendaraan">Tahun Pembuatan<span class="req">*</span></label>
+            <select id="tahunKendaraan"></select>
+          </div>
+        </div>
+
+        <div id="ageAlert" class="age-alert"></div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="merkMobil">Merek &amp; Tipe Kendaraan <span class="req">*</span></label>
+            <input type="text" id="merkMobil" placeholder="Contoh: Toyota Avanza G / Hino Dutro / Mercedes Bus" required />
+          </div>
+
+          <div class="form-group">
+            <label for="wilayah">Wilayah Plat Nomor<span class="req">*</span></label>
+            <select id="wilayah">
+              <option value="W1">Wilayah 1 (Sumatera &amp; Kepulauan sekitarnya)</option>
+              <option value="W2" selected>Wilayah 2 (DKI Jakarta, Jawa Barat, Banten)</option>
+              <option value="W3">Wilayah 3 (Jawa Tengah, Jawa Timur, Bali, Kalimantan, Sulawesi, dll.)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="hargaPasaran">Harga Pasaran Kendaraan / Uang Pertanggungan (Rp) <span class="req">*</span></label>
+          <div class="input-prefix">
+            <span>Rp</span>
+            <input type="text" id="hargaPasaran" inputmode="numeric" placeholder="250.000.000" required />
+          </div>
+          <div class="hint" id="kategoriHint">Masukkan nilai pertanggungan sesuai harga pasar kendaraan saat ini.</div>
+        </div>
+
+        <div class="form-group">
+          <label>Jenis Perlindungan Utama<span class="req">*</span></label>
+          <div class="coverage-toggle">
+            <label class="coverage-option active" id="optComp">
+              <input type="radio" name="jenisPertanggungan" value="COMPREHENSIVE" checked />
+              <strong>Comprehensive (All Risk)</strong>
+              <span>Menanggung kerusakan ringan, berat, hingga kehilangan.</span>
+            </label>
+            <label class="coverage-option" id="optTlo">
+              <input type="radio" name="jenisPertanggungan" value="TLO" />
+              <strong>Total Loss Only (TLO)</strong>
+              <span>Menanggung kehilangan atau kerusakan &ge; 75% nilai kendaraan.</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Perluasan Jaminan Opsional (Tabel IV.B OJK)</label>
+          <div class="addon-list">
+            <label class="addon-item">
+              <input type="checkbox" id="extBanjir" />
+              <div class="addon-info">
+                <strong>Banjir termasuk Angin Topan (0,10%)</strong>
+                <small>Menanggung kerusakan akibat banjir, genangan air, badai, dan angin topan.</small>
+              </div>
+            </label>
+
+            <label class="addon-item">
+              <input type="checkbox" id="extGempa" />
+              <div class="addon-info">
+                <strong>Gempa Bumi, Tsunami (0,10%)</strong>
+                <small>Menanggung risiko gempa bumi, tsunami, dan letusan gunung berapi.</small>
+              </div>
+            </label>
+
+            <label class="addon-item">
+              <input type="checkbox" id="extSrcc" />
+              <div class="addon-info">
+                <strong>Huru-hara dan Kerusuhan / SRCC (<span id="rateSrccLabel">0,05%</span>)</strong>
+                <small>Menanggung kerusakan akibat kerusuhan, pemogokan, dan penghalangan kerja.</small>
+              </div>
+            </label>
+
+            <label class="addon-item">
+              <input type="checkbox" id="extTs" />
+              <div class="addon-info">
+                <strong>Terorisme dan Sabotase (<span id="rateTsLabel">0,05%</span>)</strong>
+                <small>Menanggung kerugian akibat tindakan terorisme dan sabotase.</small>
+              </div>
+            </label>
+
+            <div class="addon-item" style="flex-direction: column; align-items: stretch;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong style="font-size:0.86rem;">Tanggung Jawab Hukum (TJH) Pihak Ketiga</strong>
+                <small style="color:var(--muted);" id="tjhRateHint">Tarif Progresif Penumpang</small>
+              </div>
+              <select id="tjhLimit" style="margin-top:0.35rem;">
+                <option value="0">Tidak Perlu TJH Pihak Ketiga</option>
+                <option value="10000000">Limit Rp 10.000.000</option>
+                <option value="15000000">Limit Rp 15.000.000</option>
+                <option value="20000000">Limit Rp 20.000.000</option>
+                <option value="25000000">Limit Rp 25.000.000</option>
+                <option value="50000000">Limit Rp 50.000.000</option>
+                <option value="75000000">Limit Rp 75.000.000</option>
+                <option value="100000000">Limit Rp 100.000.000</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-calc">Hitung Estimasi Premi Sekarang</button>
+      </form>
+    </section>
+
+    <!-- RESULT PANEL -->
+    <aside class="card result-box">
+      <div class="card-title">Hasil Simulasi Premi</div>
+
+      <div id="emptyState" class="empty-state">
+        Lengkapi data pemohon, kendaraan, tahun pembuatan, dan harga pasaran di samping, lalu klik <strong>Hitung Estimasi Premi Sekarang</strong> untuk melihat rincian biaya asuransi Anda.
+      </div>
+
+      <div id="resultContent" class="result-content">
+        <div class="summary-pill">
+          <div><span>Nama Pemohon:</span><strong id="resNama">-</strong></div>
+          <div><span>No. HP / WA:</span><strong id="resHp">-</strong></div>
+          <div><span>Kendaraan:</span><strong id="resMobil">-</strong></div>
+          <div><span>Usia Kendaraan:</span><strong id="resUsia">-</strong></div>
+          <div><span>Kategori OJK:</span><strong id="resKategori">-</strong></div>
+          <div><span>Wilayah &amp; Jenis:</span><strong id="resJenis">-</strong></div>
+          <div><span>Nilai Pertanggungan:</span><strong id="resUp">-</strong></div>
+        </div>
+
+        <div class="price-highlight">
+          <div class="label">Estimasi Total Premi Tahunan</div>
+          <div class="amount" id="resTotalRange">Rp 0</div>
+          <div class="sub" id="resRateInfo">Tarif dasar OJK: 0% - 0%</div>
+        </div>
+
+        <table class="breakdown-table">
+          <tbody>
+            <tr>
+              <td>Premi Pokok (<span id="resBaseRate">0% - 0%</span>)</td>
+              <td id="resPremiPokok">Rp 0</td>
+            </tr>
+            <tr id="rowLoading" style="display:none;">
+              <td>Loading Rate Usia (<span id="resLoadingPct">+0%</span>)</td>
+              <td id="resLoadingVal">Rp 0</td>
+            </tr>
+            <tr id="rowBanjir" style="display:none;">
+              <td>Perluasan Banjir &amp; Angin Topan (0,10%)</td>
+              <td id="resBanjir">Rp 0</td>
+            </tr>
+            <tr id="rowGempa" style="display:none;">
+              <td>Perluasan Gempa Bumi &amp; Tsunami (0,10%)</td>
+              <td id="resGempa">Rp 0</td>
+            </tr>
+            <tr id="rowSrcc" style="display:none;">
+              <td>Perluasan SRCC (<span id="resSrccPct">0,05%</span>)</td>
+              <td id="resSrcc">Rp 0</td>
+            </tr>
+            <tr id="rowTs" style="display:none;">
+              <td>Perluasan Terorisme &amp; Sabotase (<span id="resTsPct">0,05%</span>)</td>
+              <td id="resTs">Rp 0</td>
+            </tr>
+            <tr id="rowTjh" style="display:none;">
+              <td>TJH Pihak Ketiga (<span id="resTjhLimit">Rp 0</span>)</td>
+              <td id="resTjh">Rp 0</td>
+            </tr>
+            <tr class="total-row">
+              <td>Total Estimasi Premi</td>
+              <td id="resTotalBottom">Rp 0</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note-box" id="resNote">
+          <strong>Catatan Ketentuan OJK:</strong> Risiko Sendiri (Deductible) standar kendaraan roda 4 minimum Rp 300.000/kejadian. Belum termasuk biaya administrasi polis &amp; meterai.
+        </div>
+
+        <a id="btnWa" href="#" target="_blank" rel="noopener" class="btn-wa">
+          Kirim Hasil Hitungan melalui WhatsApp ke Admin
+        </a>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    &copy; 2026 Hendrik Qin - Hitungan Premi Asuransi Kendaraan Bermotor &bull; Acuan Tarif Lampiran IV SEOJK Nomor 6/SEOJK.05/2017
+  </footer>
+
+  <script>
+    const CURRENT_YEAR = new Date().getFullYear();
+    const ADMIN_WA = '6282121647215';
+
+    // Populate Year Dropdown (Current year down to 20 years ago)
+    const tahunSelect = document.getElementById('tahunKendaraan');
+    for (let y = CURRENT_YEAR; y >= CURRENT_YEAR - 20; y--) {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y;
+      tahunSelect.appendChild(opt);
+    }
+
+    // Format Rupiah Input
+    const hargaInput = document.getElementById('hargaPasaran');
+    hargaInput.addEventListener('input', function () {
+      const raw = this.value.replace(/[^0-9]/g, '');
+      this.value = raw ? parseInt(raw, 10).toLocaleString('id-ID') : '';
+    });
+
+    function formatRp(num) {
+      return 'Rp ' + Math.round(num).toLocaleString('id-ID');
+    }
+
+    function formatPct(dec) {
+      return (dec * 100).toFixed(2).replace('.', ',') + '%';
+    }
+
+    // Coverage Radio Styling & Logic
+    const optComp = document.getElementById('optComp');
+    const optTlo = document.getElementById('optTlo');
+    const radioComp = optComp.querySelector('input');
+    const radioTlo = optTlo.querySelector('input');
+
+    function syncCoverageUI() {
+      const isTlo = radioTlo.checked;
+      optComp.classList.toggle('active', !isTlo);
+      optTlo.classList.toggle('active', isTlo);
+
+      const srccRateText = isTlo ? '0,035%' : '0,05%';
+      document.getElementById('rateSrccLabel').textContent = srccRateText;
+      document.getElementById('rateTsLabel').textContent = srccRateText;
+    }
+
+    radioComp.addEventListener('change', syncCoverageUI);
+    radioTlo.addEventListener('change', syncCoverageUI);
+
+    // Check Vehicle Age Rules:
+    // > 5 years: loading rate +5% per year from base premium (Year 6 = +5%, Year 7 = +10%, etc.)
+    // > 10 years: only TLO allowed (Comprehensive disabled)
+    function evaluateVehicleAge() {
+      const selectedYear = parseInt(tahunSelect.value, 10);
+      const age = CURRENT_YEAR - selectedYear;
+      const ageAlert = document.getElementById('ageAlert');
+
+      if (age > 10) {
+        // Force TLO & disable Comprehensive
+        radioComp.disabled = true;
+        optComp.classList.add('disabled');
+        radioTlo.checked = true;
+        syncCoverageUI();
+
+        const loadingPct = (age - 5) * 5;
+        ageAlert.style.display = 'block';
+        ageAlert.innerHTML = `Usia kendaraan <strong>${age} tahun</strong> (&gt; 10 tahun dari tahun berjalan ${CURRENT_YEAR}). Sesuai ketentuan underwriting, perlindungan hanya tersedia untuk kategori <strong>Total Loss Only (TLO)</strong> dengan loading rate usia sebesar <strong>+${loadingPct}%</strong> dari premi dasar.`;
+      } else if (age > 5) {
+        radioComp.disabled = false;
+        optComp.classList.remove('disabled');
+
+        const loadingPct = (age - 5) * 5;
+        ageAlert.style.display = 'block';
+        ageAlert.innerHTML = `Usia kendaraan <strong>${age} tahun</strong> (&gt; 5 tahun dari tahun berjalan ${CURRENT_YEAR}). Dikenakan tambahan <strong>Loading Rate Usia sebesar +${loadingPct}%</strong> dari nilai premi dasar.`;
+      } else {
+        radioComp.disabled = false;
+        optComp.classList.remove('disabled');
+        ageAlert.style.display = 'none';
+      }
+
+      return age;
+    }
+
+    tahunSelect.addEventListener('change', evaluateVehicleAge);
+
+    // Update TJH hint when vehicle category changes
+    const jenisKendaraanSelect = document.getElementById('jenisKendaraan');
+    jenisKendaraanSelect.addEventListener('change', function () {
+      const isNiaga = this.value === 'TRUK_PICKUP' || this.value === 'BUS';
+      document.getElementById('tjhRateHint').textContent = isNiaga
+        ? 'Tarif Progresif Niaga/Truk/Bus'
+        : 'Tarif Progresif Penumpang';
+    });
+
+    // Tariff Lookup Table IV.A SEOJK No. 6/SEOJK.05/2017
+    function getBaseRate(jenisKendaraan, up, wilayah, jenisPertanggungan) {
+      if (jenisKendaraan === 'TRUK_PICKUP') {
+        const rates = {
+          COMPREHENSIVE: {
+            W1: [0.0242, 0.0267],
+            W2: [0.0239, 0.0263],
+            W3: [0.0223, 0.0246]
+          },
+          TLO: {
+            W1: [0.0088, 0.0107],
+            W2: [0.0168, 0.0202],
+            W3: [0.0081, 0.0098]
+          }
+        };
+        return {
+          kategori: 'Kategori 6 (Truk & Pickup)',
+          range: rates[jenisPertanggungan][wilayah]
+        };
+      }
+
+      if (jenisKendaraan === 'BUS') {
+        const rates = {
+          COMPREHENSIVE: {
+            W1: [0.0104, 0.0114],
+            W2: [0.0104, 0.0114],
+            W3: [0.0088, 0.0097]
+          },
+          TLO: {
+            W1: [0.0023, 0.0029],
+            W2: [0.0023, 0.0029],
+            W3: [0.0018, 0.0022]
+          }
+        };
+        return {
+          kategori: 'Kategori 7 (Bus)',
+          range: rates[jenisPertanggungan][wilayah]
+        };
+      }
+
+      // Mobil Penumpang (Kategori 1 - 5)
+      let katIndex = 0;
+      let katLabel = 'Kategori 1 (UP s.d. Rp 125 Juta)';
+      if (up <= 125000000) {
+        katIndex = 0;
+        katLabel = 'Kategori 1 (UP s.d. Rp 125 Juta)';
+      } else if (up <= 200000000) {
+        katIndex = 1;
+        katLabel = 'Kategori 2 (UP > Rp 125 Juta - 200 Juta)';
+      } else if (up <= 400000000) {
+        katIndex = 2;
+        katLabel = 'Kategori 3 (UP > Rp 200 Juta - 400 Juta)';
+      } else if (up <= 800000000) {
+        katIndex = 3;
+        katLabel = 'Kategori 4 (UP > Rp 400 Juta - 800 Juta)';
+      } else {
+        katIndex = 4;
+        katLabel = 'Kategori 5 (UP > Rp 800 Juta)';
+      }
+
+      const passengerRates = {
+        COMPREHENSIVE: [
+          { W1: [0.0382, 0.0420], W2: [0.0326, 0.0359], W3: [0.0253, 0.0278] },
+          { W1: [0.0267, 0.0294], W2: [0.0247, 0.0272], W3: [0.0269, 0.0296] },
+          { W1: [0.0218, 0.0240], W2: [0.0208, 0.0229], W3: [0.0179, 0.0197] },
+          { W1: [0.0120, 0.0132], W2: [0.0120, 0.0132], W3: [0.0114, 0.0125] },
+          { W1: [0.0105, 0.0116], W2: [0.0105, 0.0116], W3: [0.0105, 0.0116] }
+        ],
+        TLO: [
+          { W1: [0.0047, 0.0056], W2: [0.0065, 0.0078], W3: [0.0051, 0.0056] },
+          { W1: [0.0063, 0.0069], W2: [0.0044, 0.0053], W3: [0.0044, 0.0048] },
+          { W1: [0.0041, 0.0046], W2: [0.0038, 0.0042], W3: [0.0029, 0.0035] },
+          { W1: [0.0025, 0.0030], W2: [0.0025, 0.0030], W3: [0.0023, 0.0027] },
+          { W1: [0.0020, 0.0024], W2: [0.0020, 0.0024], W3: [0.0020, 0.0024] }
+        ]
+      };
+
+      return {
+        kategori: katLabel,
+        range: passengerRates[jenisPertanggungan][katIndex][wilayah]
+      };
+    }
+
+    // Progressive TJH Pihak Ketiga (Tabel IV.B No. 5)
+    function calcTjhPremi(limit, isNiaga) {
+      if (limit <= 0) return 0;
+      const r1 = isNiaga ? 0.015 : 0.01;
+      const r2 = isNiaga ? 0.0075 : 0.005;
+      const r3 = isNiaga ? 0.00375 : 0.0025;
+
+      let premi = 0;
+      const tier1 = Math.min(limit, 25000000);
+      premi += tier1 * r1;
+
+      if (limit > 25000000) {
+        const tier2 = Math.min(limit - 25000000, 25000000);
+        premi += tier2 * r2;
+      }
+
+      if (limit > 50000000) {
+        const tier3 = Math.min(limit - 50000000, 50000000);
+        premi += tier3 * r3;
+      }
+
+      return premi;
+    }
+
+    // Form Submission & Calculation
+    document.getElementById('premiForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const namaPemohon = document.getElementById('namaPemohon').value.trim();
+      const noHp = document.getElementById('noHp').value.trim();
+      const jenisKendaraan = jenisKendaraanSelect.value;
+      const tahun = parseInt(tahunSelect.value, 10);
+      const merkMobil = document.getElementById('merkMobil').value.trim();
+      const wilayah = document.getElementById('wilayah').value;
+      const upRaw = hargaInput.value.replace(/[^0-9]/g, '');
+      const up = upRaw ? parseInt(upRaw, 10) : 0;
+
+      if (!namaPemohon) {
+        alert('Silakan masukkan Nama Lengkap Anda.');
+        document.getElementById('namaPemohon').focus();
+        return;
+      }
+      if (!noHp) {
+        alert('Silakan masukkan Nomor HP / WhatsApp Anda.');
+        document.getElementById('noHp').focus();
+        return;
+      }
+      if (!merkMobil) {
+        alert('Silakan masukkan Merek & Tipe Kendaraan.');
+        document.getElementById('merkMobil').focus();
+        return;
+      }
+      if (up <= 0) {
+        alert('Silakan masukkan Harga Pasaran Kendaraan yang valid.');
+        hargaInput.focus();
+        return;
+      }
+
+      const age = evaluateVehicleAge();
+      const jenisPertanggungan = radioTlo.checked ? 'TLO' : 'COMPREHENSIVE';
+      const isTlo = jenisPertanggungan === 'TLO';
+      const isNiaga = jenisKendaraan === 'TRUK_PICKUP' || jenisKendaraan === 'BUS';
+
+      // Base Premium
+      const baseInfo = getBaseRate(jenisKendaraan, up, wilayah, jenisPertanggungan);
+      const [rateLow, rateHigh] = baseInfo.range;
+      const baseLow = up * rateLow;
+      const baseHigh = up * rateHigh;
+
+      // Age Loading Rate (> 5 years: +5% per year from base premium)
+      const loadingFactor = age > 5 ? (age - 5) * 0.05 : 0;
+      const loadingPctDisplay = age > 5 ? (age - 5) * 5 : 0;
+      const loadingLow = baseLow * loadingFactor;
+      const loadingHigh = baseHigh * loadingFactor;
+
+      // Extensions
+      const useBanjir = document.getElementById('extBanjir').checked;
+      const useGempa = document.getElementById('extGempa').checked;
+      const useSrcc = document.getElementById('extSrcc').checked;
+      const useTs = document.getElementById('extTs').checked;
+      const tjhLimit = parseInt(document.getElementById('tjhLimit').value, 10);
+
+      const rateSrcc = isTlo ? 0.00035 : 0.0005;
+      const rateTs = isTlo ? 0.00035 : 0.0005;
+
+      const premiBanjir = useBanjir ? up * 0.001 : 0;
+      const premiGempa = useGempa ? up * 0.001 : 0;
+      const premiSrcc = useSrcc ? up * rateSrcc : 0;
+      const premiTs = useTs ? up * rateTs : 0;
+      const premiTjh = calcTjhPremi(tjhLimit, isNiaga);
+
+      const totalExt = premiBanjir + premiGempa + premiSrcc + premiTs + premiTjh;
+      const totalLow = baseLow + loadingLow + totalExt;
+      const totalHigh = baseHigh + loadingHigh + totalExt;
+
+      // Update Summary UI
+      const wilayahLabel = wilayah === 'W1' ? 'Wilayah 1' : wilayah === 'W2' ? 'Wilayah 2' : 'Wilayah 3';
+      const jenisLabel = isTlo ? 'Total Loss Only (TLO)' : 'Comprehensive';
+
+      document.getElementById('resNama').textContent = namaPemohon;
+      document.getElementById('resHp').textContent = noHp;
+      document.getElementById('resMobil').textContent = `${merkMobil} (${tahun})`;
+      document.getElementById('resUsia').textContent = age === 0 ? 'Baru (< 1 Tahun)' : `${age} Tahun`;
+      document.getElementById('resKategori').textContent = baseInfo.kategori;
+      document.getElementById('resJenis').textContent = `${wilayahLabel} - ${jenisLabel}`;
+      document.getElementById('resUp').textContent = formatRp(up);
+
+      const rangeText = `${formatRp(totalLow)} - ${formatRp(totalHigh)}`;
+      const baseRangeText = `${formatRp(baseLow)} - ${formatRp(baseHigh)}`;
+
+      document.getElementById('resTotalRange').textContent = rangeText;
+      document.getElementById('resRateInfo').textContent = `Tarif dasar OJK: ${formatPct(rateLow)} - ${formatPct(rateHigh)}`;
+      document.getElementById('resBaseRate').textContent = `${formatPct(rateLow)} - ${formatPct(rateHigh)}`;
+      document.getElementById('resPremiPokok').textContent = baseRangeText;
+
+      // Loading Row
+      const rowLoading = document.getElementById('rowLoading');
+      if (loadingFactor > 0) {
+        rowLoading.style.display = 'table-row';
+        document.getElementById('resLoadingPct').textContent = `+${loadingPctDisplay}%`;
+        document.getElementById('resLoadingVal').textContent = `${formatRp(loadingLow)} - ${formatRp(loadingHigh)}`;
+      } else {
+        rowLoading.style.display = 'none';
+      }
+
+      // Extension Rows
+      document.getElementById('rowBanjir').style.display = useBanjir ? 'table-row' : 'none';
+      document.getElementById('resBanjir').textContent = formatRp(premiBanjir);
+
+      document.getElementById('rowGempa').style.display = useGempa ? 'table-row' : 'none';
+      document.getElementById('resGempa').textContent = formatRp(premiGempa);
+
+      document.getElementById('rowSrcc').style.display = useSrcc ? 'table-row' : 'none';
+      document.getElementById('resSrccPct').textContent = isTlo ? '0,035%' : '0,05%';
+      document.getElementById('resSrcc').textContent = formatRp(premiSrcc);
+
+      document.getElementById('rowTs').style.display = useTs ? 'table-row' : 'none';
+      document.getElementById('resTsPct').textContent = isTlo ? '0,035%' : '0,05%';
+      document.getElementById('resTs').textContent = formatRp(premiTs);
+
+      document.getElementById('rowTjh').style.display = tjhLimit > 0 ? 'table-row' : 'none';
+      document.getElementById('resTjhLimit').textContent = formatRp(tjhLimit);
+      document.getElementById('resTjh').textContent = formatRp(premiTjh);
+
+      document.getElementById('resTotalBottom').textContent = rangeText;
+
+      // Dynamic Note
+      let noteHtml = '<strong>Catatan Ketentuan OJK:</strong> Risiko Sendiri (Deductible) standar kendaraan roda 4 minimum Rp 300.000/kejadian.';
+      if (useBanjir || useGempa) {
+        noteHtml += ' Untuk risiko Banjir/Angin Topan &amp; Gempa Bumi/Tsunami berlaku risiko sendiri 10% dari klaim disetujui (minimum Rp 500.000/kejadian).';
+      }
+      if (age > 10) {
+        noteHtml += ' Kendaraan usia &gt; 10 tahun otomatis dialihkan ke perlindungan TLO.';
+      }
+      noteHtml += ' Belum termasuk biaya administrasi polis &amp; meterai.';
+      document.getElementById('resNote').innerHTML = noteHtml;
+
+      // Build WhatsApp Message
+      let extList = [];
+      if (useBanjir) extList.push(`- Banjir & Angin Topan (0,100%): ${formatRp(premiBanjir)}`);
+      if (useGempa) extList.push(`- Gempa Bumi & Tsunami (0,100%): ${formatRp(premiGempa)}`);
+      if (useSrcc) extList.push(`- SRCC (${isTlo ? '0,035%' : '0,05%'}): ${formatRp(premiSrcc)}`);
+      if (useTs) extList.push(`- Terorisme & Sabotase (${isTlo ? '0,035%' : '0,05%'}): ${formatRp(premiTs)}`);
+      if (tjhLimit > 0) extList.push(`- TJH Pihak Ketiga (Limit ${formatRp(tjhLimit)}): ${formatRp(premiTjh)}`);
+
+      const waLines = [
+        `Halo Admin, saya ingin mengajukan penawaran Asuransi Kendaraan dengan rincian simulasi berikut:`,
+        ``,
+        `*DATA PEMOHON*`,
+        `• Nama: ${namaPemohon}`,
+        `• No. HP/WA: ${noHp}`,
+        ``,
+        `*DATA KENDARAAN*`,
+        `• Kategori OJK: ${baseInfo.kategori}`,
+        `• Merek/Tipe: ${merkMobil}`,
+        `• Tahun Pembuatan: ${tahun} (Usia ${age} tahun)`,
+        `• Wilayah: ${wilayahLabel}`,
+        `• Harga Pertanggungan: ${formatRp(up)}`,
+        `• Perlindungan: ${jenisLabel}`,
+        ``,
+        `*RINCIAN ESTIMASI PREMI*`,
+        `• Premi Pokok (${formatPct(rateLow)} - ${formatPct(rateHigh)}): ${baseRangeText}`
+      ];
+
+      if (loadingFactor > 0) {
+        waLines.push(`• Loading Rate Usia (+${loadingPctDisplay}%): ${formatRp(loadingLow)} - ${formatRp(loadingHigh)}`);
+      }
+      if (extList.length > 0) {
+        waLines.push(`• Perluasan Jaminan:`);
+        waLines.push(...extList);
+      } else {
+        waLines.push(`• Perluasan Jaminan: Tidak ada`);
+      }
+
+      waLines.push(``);
+      waLines.push(`*Total Estimasi Premi: ${rangeText}*`);
+      waLines.push(`Mohon dibantu untuk proses penawaran resminya. Terima kasih.`);
+
+      const waUrl = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(waLines.join('\n'))}`;
+      document.getElementById('btnWa').href = waUrl;
+
+      // Show Result
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('resultContent').style.display = 'block';
+    });
+
+    // Initialize state
+    evaluateVehicleAge();
+  </script>
+</body>
+</html>
