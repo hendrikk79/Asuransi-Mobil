@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asuransi Rekanan</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #333333;
+        }
+
+        .slider {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            background: #f1f3f5;
+            padding: 20px 0;
+            border-radius: 8px;
+        }
+
+        .slider:hover .slide-track {
+            animation-play-state: paused;
+        }
+
+        .slide-track {
+            display: inline-flex;
+            width: calc(200% * 6);
+            animation: scroll 25s linear infinite;
+        }
+
+        .slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 180px;
+            height: 90px;
+            margin: 0 20px;
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .slide img {
+            max-width: 80%;
+            max-height: 60px;
+            object-fit: contain;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Rekan Asuransi Terrekomendasi</h2>
+        <div class="slider">
+            <div class="slide-track">
+                <!-- Slide Set 1 -->
+                <div class="slide"><img src="https://placeholder.com" alt="Allianz"></div>
+                <div class="slide"><img src="https://placeholder.com" alt="AXA"></div>
+                <div class="slide"><img src="https://placeholder.com" alt="Prudential"></div>
+                <div class="slide"><img src="https://placeholder.com" alt="Manulife"></div>
+                <div class="slide"><img src="https://placeholder.com" alt="Sinarmas"></div>
+                <div class="slide"><img src="https://placeholder.com" alt="Adira"></div>
+
+                <!-- Slide Set 2 (Duplikat untuk efek infinite loop yang mulus) -->
+                <div class="slide"><img src="https://placeholder.com" alt="Allianz"></div>
+                <div class="slide"><img src="https://placeholder.com" alt="AXA"></div>
+                <div class="slide"><img src="https://placeholder.com" alt="Prudential"></div>
+                <div class="slide"><img src="https://placeholder.com" alt="Manulife"></div>
+                <div class="slide"><img src="https://placeholder.com" alt="Sinarmas"></div>
+                <div class="slide"><img src="https://placeholder.com" alt="Adira"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
