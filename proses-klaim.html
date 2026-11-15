@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proses &amp; Syarat Klaim - Asuransi Mobil Mudah</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    /* Menu Navigasi */
+    .navbar {
+      background-color: #0f172a;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
+
+    .navbar a:hover, .navbar a.active {
+      color: #38bdf8;
+    }
+
+    /* Header Halaman */
+    .page-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      text-align: center;
+      padding: 45px 20px;
+    }
+
+    .page-header h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .page-header p {
+      color: #cbd5e1;
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 15px;
+    }
+
+    /* Layout Utama: Kiri Konten, Kanan Sidebar (Desktop) */
+    .content-wrapper {
+      max-width: 1120px;
+      margin: 35px auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .main-column {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Kartu Syarat Dokumen */
+    .doc-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .doc-card h2 {
+      font-size: 19px;
+      color: #0f172a;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .doc-list {
+      list-style: none;
+    }
+
+    .doc-list li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: #334155;
+    }
+
+    .doc-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #0284c7;
+      font-weight: bold;
+    }
+
+    .alert-box {
+      background-color: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 16px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #92400e;
+      margin-bottom: 24px;
+    }
+
+    /* Sidebar Aksi di Samping (Tampilan Desktop) */
+    .action-sidebar {
+      width: 320px;
+      position: sticky;
+      top: 24px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      flex-shrink: 0;
+    }
+
+    .action-sidebar h3 {
+      font-size: 18px;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .action-sidebar p {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 20px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 13px 18px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .btn-claim {
+      background-color: #0284c7;
+      color: #ffffff;
+    }
+
+    .btn-wa {
+      background-color: #25D366;
+      color: #ffffff;
+    }
+
+    /* Tampilan Handphone: Pindah ke Bagian Paling Bawah Layar */
+    @media (max-width: 860px) {
+      .content-wrapper {
+        flex-direction: column;
+      }
+
+      .action-sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        width: 100%;
+        border-radius: 16px 16px 0 0;
+        padding: 14px 16px;
+        z-index: 999;
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
+        border-bottom: none;
+      }
+
+      .action-sidebar h3,
+      .action-sidebar p {
+        display: none;
+      }
+
+      .btn-group {
+        flex-direction: row;
+        gap: 10px;
+      }
+
+      .btn {
+        padding: 12px 10px;
+        font-size: 14px;
+      }
+    }
+
+    /* Styling Modal Popup Lapor Klaim */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.65);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 14px;
+      padding: 26px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .modal-header h3 {
+      font-size: 19px;
+      color: #0f172a;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #64748b;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #1e293b;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      background-color: #0f172a;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    @media (min-width: 861px) {
+      body {
+        padding-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu Navigasi -->
+  <nav class="navbar">
+    <a href="index.html">Beranda</a>
+    <a href="rekanan-asuransi.html">Rekanan Asuransi</a>
+    <a href="proses-klaim.html" class="active">Proses Klaim</a>
+  </nav>
+
+  <!-- Header -->
+  <header class="page-header">
+    <h1>Panduan &amp; Syarat Pengajuan Klaim</h1>
+    <p>Persiapkan dokumen di bawah ini agar proses klaim asuransi kendaraan Anda berjalan cepat dan lancar.</p>
+  </header>
+
+  <!-- Konten Utama & Sidebar -->
+  <div class="content-wrapper">
+    
+    <!-- Bagian Kiri: Daftar Syarat & Dokumen -->
+    <div class="main-column">
+      
+      <div class="alert-box">
+        <strong>Penting:</strong> Segera laporkan kejadian kecelakaan atau kehilangan maksimal <strong>5 x 24 jam (5 hari kalender)</strong> sejak kejadian berlangsung agar klaim tidak ditolak oleh pihak asuransi.
+      </div>
+
+      <!-- Syarat 1 -->
+      <div class="doc-card">
+        <h2>1. Dokumen Standar (Klaim Kerusakan / Kecelakaan)</h2>
+        <ul class="doc-list">
+          <li>Fotokopi / Foto <strong>Polis Asuransi</strong> kendaraan yang masih aktif.</li>
+          <li>Fotokopi / Foto <strong>STNK</strong> kendaraan yang masih berlaku.</li>
+          <li>Fotokopi / Foto <strong>SIM pengemudi</strong> yang masih berlaku saat kejadian terjadi.</li>
+          <li>Fotokopi / Foto <strong>KTP tertanggung</strong> (pemilik polis).</li>
+          <li><strong>Formulir Laporan Klaim</strong> yang telah diisi lengkap dan ditandatangani (mencakup kronologi kejadian).</li>
+          <li><strong>Foto bagian kendaraan yang rusak</strong> (tampak dekat dan tampak keseluruhan beserta pelat nomor).</li>
+        </ul>
+      </div>
+
+      <!-- Syarat 2 -->
+      <div class="doc-card">
+        <h2>2. Tambahan Dokumen (Kecelakaan Melibatkan Pihak Ketiga / TJH)</h2>
+        <ul class="doc-list">
+          <li><strong>Surat Keterangan Laporan Kepolisian</strong> dari Polsek/Polres setempat.</li>
+          <li>Fotokopi <strong>KTP, SIM, dan STNK milik pihak ketiga</strong> yang dirugikan.</li>
+          <li><strong>Surat Pernyataan Tuntutan Ganti Rugi</strong> dari pihak ketiga beserta rincian estimasi biaya perbaikan.</li>
+          <li>Foto kerusakan kendaraan/properti milik pihak ketiga di lokasi kejadian.</li>
+        </ul>
+      </div>
+
+      <!-- Syarat 3 -->
+      <div class="doc-card">
+        <h2>3. Tambahan Dokumen (Klaim Kehilangan / Pencurian - TLO)</h2>
+        <ul class="doc-list">
+          <li><strong>Surat Keterangan Laporan Kehilangan</strong> resmi dari Kepolisian (Polda/Polres).</li>
+          <li><strong>STNK Asli</strong> dan <strong>BPKB Asli</strong> (jika kendaraan berstatus kredit/leasing, dilampirkan surat keterangan dari pihak leasing).</li>
+          <li><strong>Kunci Kontak Asli</strong> kendaraan (minimal 2 buah / kunci utama dan cadangan).</li>
+          <li><strong>Surat Blokir STNK</strong> dari Samsat setempat.</li>
+          <li>Kuitansi kosong bermeterai yang ditandatangani tertanggung (untuk proses balik nama klaim).</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bagian Samping (Desktop) / Bagian Bawah (Handphone) -->
+    <aside class="action-sidebar">
+      <h3>Butuh Bantuan Klaim?</h3>
+      <p>Laporkan insiden kendaraan Anda sekarang atau konsultasikan kelengkapan berkas langsung dengan admin kami.</p>
+      
+      <div class="btn-group">
+        <button type="button" class="btn btn-claim" onclick="bukaModal()">
+          📋 Lapor Klaim
+        </button>
+
+        <a 
+          href="https://wa.me/6281234567890?text=Hallo%20Admin%2C%20saya%20ingin%20konsultasi%20dan%20dibantu%20untuk%20proses%20klaim%20asuransi%20mobil%20saya." 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn-wa"
+        >
+          💬 WA Admin Klaim
+        </a>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Modal Popup Formulir Lapor Klaim -->
+  <div class="modal-overlay" id="modalKlaim">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Formulir Laporan Klaim Cepat</h3>
+        <button type="button" class="close-btn" onclick="tutupModal()">&times;</button>
+      </div>
+
+      <form id="formLaporKlaim" onsubmit="kirimLaporanWA(event)">
+        <div class="form-group">
+          <label for="nama">Nama Lengkap Tertanggung *</label>
+          <input type="text" id="nama" required placeholder="Contoh: Budi Santoso">
+        </div>
+
+        <div class="form-group">
+          <label for="nopol">Nomor Polisi Kendaraan *</label>
+          <input type="text" id="nopol" required placeholder="Contoh: B 1234 ABC">
+        </div>
+
+        <div class="form-group">
+          <label for="asuransi">Nama Perusahaan Asuransi *</label>
+          <input type="text" id="asuransi" required placeholder="Contoh: Garda Oto / ACA / Sinarmas">
+        </div>
+
+        <div class="form-group">
+          <label for="jenisKlaim">Jenis Pengajuan Klaim *</label>
+          <select id="jenisKlaim" required>
+            <option value="Kerusakan Sebagian (Kecelakaan / Lecet)">Kerusakan Sebagian (Kecelakaan / Lecet)</option>
+            <option value="Kecelakaan Melibatkan Pihak Ketiga (TJH)">Kecelakaan Melibatkan Pihak Ketiga (TJH)</option>
+            <option value="Kehilangan Kendaraan (TLO)">Kehilangan Kendaraan (TLO)</option>
+            <option value="Bencana Alam (Banjir / Gempa)">Bencana Alam (Banjir / Gempa)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tglKejadian">Tanggal Kejadian *</label>
+          <input type="date" id="tglKejadian" required>
+        </div>
+
+        <div class="form-group">
+          <label for="kronologi">Kronologi Singkat Kejadian *</label>
+          <textarea id="kronologi" required placeholder="Ceritakan singkat waktu, lokasi, dan bagian mobil yang terdampak..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-claim">Kirim Laporan ke WhatsApp Admin</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Asuransi Mobil Mudah &bull; Layanan Bantuan Klaim Asuransi Kendaraan
+  </footer>
+
+  <script>
+    const NOMOR_WA_ADMIN = "6281234567890";
+    const modal = document.getElementById("modalKlaim");
+
+    function bukaModal() {
+      modal.classList.add("show");
+    }
+
+    function tutupModal() {
+      modal.classList.remove("show");
+    }
+
+    window.onclick = function(event) {
+      if (event.target === modal) {
+        tutupModal();
+      }
+    };
+
+    function kirimLaporanWA(event) {
+      event.preventDefault();
+
+      const nama = document.getElementById("nama").value;
+      const nopol = document.getElementById("nopol").value;
+      const asuransi = document.getElementById("asuransi").value;
+      const jenisKlaim = document.getElementById("jenisKlaim").value;
+      const tglKejadian = document.getElementById("tglKejadian").value;
+      const kronologi = document.getElementById("kronologi").value;
+
+      const pesan = 
+        `Halo Admin, saya ingin mengajukan *LAPORAN KLAIM ASURANSI*:
+
+` +
+        `• *Nama Tertanggung:* ${nama}
+` +
+        `• *No. Polisi:* ${nopol}
+` +
+        `• *Perusahaan Asuransi:* ${asuransi}
+` +
+        `• *Jenis Klaim:* ${jenisKlaim}
+` +
+        `• *Tanggal Kejadian:* ${tglKejadian}
+` +
+        `• *Kronologi Singkat:* ${kronologi}
+
+` +
+        `Mohon dibantu untuk proses selanjutnya. Terima kasih.`;
+
+      const urlWA = `https://wa.me/${NOMOR_WA_ADMIN}?text=${encodeURIComponent(pesan)}`;
+      window.open(urlWA, "_blank");
+      tutupModal();
+    }
+  </script>
+
+</body>
+</html>
