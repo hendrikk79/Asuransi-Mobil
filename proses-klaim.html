@@ -355,7 +355,7 @@
           <li>Fotokopi / Foto <strong>STNK</strong> kendaraan yang masih berlaku.</li>
           <li>Fotokopi / Foto <strong>SIM pengemudi</strong> yang masih berlaku saat kejadian terjadi.</li>
           <li>Fotokopi / Foto <strong>KTP tertanggung</strong> (pemilik polis).</li>
-          <li><strong>Formulir Laporan Klaim</strong> yang telah diisi lengkap dan ditandatangani (mencakup kronologi kejadian).</li>
+          <li><strong>Formulir Laporan Klaim</strong> yang telah diisi lengkap dan ditandatangani / stempel jika atas nama perusahaan (mencakup kronologi kejadian).</li>
           <li><strong>Foto bagian kendaraan yang rusak</strong> (tampak dekat dan tampak keseluruhan beserta pelat nomor).</li>
         </ul>
       </div>
@@ -396,7 +396,7 @@
         </button>
 
         <a 
-          href="https://wa.me/6281234567890?text=Hallo%20Admin%2C%20saya%20ingin%20konsultasi%20dan%20dibantu%20untuk%20proses%20klaim%20asuransi%20mobil%20saya." 
+          href="https://wa.me/6282121647215?text=Hallo%20Admin%2C%20saya%20ingin%20konsultasi%20dan%20dibantu%20untuk%20proses%20klaim%20asuransi%20mobil%20saya." 
           target="_blank" 
           rel="noopener noreferrer" 
           class="btn btn-wa"
@@ -429,9 +429,14 @@
 
         <div class="form-group">
           <label for="asuransi">Nama Perusahaan Asuransi *</label>
-          <input type="text" id="asuransi" required placeholder="Contoh: Garda Oto / ACA / Sinarmas">
+          <input type="text" id="asuransi" required placeholder="">
         </div>
-
+        
+        <div class="form-group">
+          <label for="nopolis">Nomor Polis Asuransi *</label>
+          <input type="text" id="nopolis" required placeholder="">
+        </div>
+        
         <div class="form-group">
           <label for="jenisKlaim">Jenis Pengajuan Klaim *</label>
           <select id="jenisKlaim" required>
@@ -439,6 +444,7 @@
             <option value="Kecelakaan Melibatkan Pihak Ketiga (TJH)">Kecelakaan Melibatkan Pihak Ketiga (TJH)</option>
             <option value="Kehilangan Kendaraan (TLO)">Kehilangan Kendaraan (TLO)</option>
             <option value="Bencana Alam (Banjir / Gempa)">Bencana Alam (Banjir / Gempa)</option>
+            <option value="Huru Hara / Terorisme">Huru Hara / Terorisme</option>
           </select>
         </div>
 
@@ -446,7 +452,13 @@
           <label for="tglKejadian">Tanggal Kejadian *</label>
           <input type="date" id="tglKejadian" required>
         </div>
+        
+        <div class="form-group">
+          <label for="lokKejadian">Lokasi Kejadian *</label>
+          <input type="text" id="lokKejadian" required>
+        </div>
 
+        
         <div class="form-group">
           <label for="kronologi">Kronologi Singkat Kejadian *</label>
           <textarea id="kronologi" required placeholder="Ceritakan singkat waktu, lokasi, dan bagian mobil yang terdampak..."></textarea>
@@ -462,7 +474,7 @@
   </footer>
 
   <script>
-    const NOMOR_WA_ADMIN = "6281234567890";
+    const NOMOR_WA_ADMIN = "6282121647215";
     const modal = document.getElementById("modalKlaim");
 
     function bukaModal() {
@@ -499,16 +511,20 @@
 ` +
         `• *Perusahaan Asuransi:* ${asuransi}
 ` +
+        `• *No. Polis Asuransi:* ${nopolis}
+` +
         `• *Jenis Klaim:* ${jenisKlaim}
 ` +
         `• *Tanggal Kejadian:* ${tglKejadian}
+` +
+        `• *Lokasi Kejadian:* ${lokKejadian}
 ` +
         `• *Kronologi Singkat:* ${kronologi}
 
 ` +
         `Mohon dibantu untuk proses selanjutnya. Terima kasih.`;
 
-      const urlWA = `https://wa.me/${NOMOR_WA_ADMIN}?text=${encodeURIComponent(pesan)}`;
+      const urlWA = `https://wa.me/${6282121647215}?text=${encodeURIComponent(pesan)}`;
       window.open(urlWA, "_blank");
       tutupModal();
     }
