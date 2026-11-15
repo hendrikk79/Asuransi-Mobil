@@ -1,117 +1,256 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asuransi Rekanan</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asuransi Rekanan</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 1000px;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+    /* Menu Navigasi */
+    .navbar {
+      background-color: #0f172a;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
 
-        h2 {
-            margin-bottom: 25px;
-            color: #333333;
-        }
+    .navbar a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: color 0.2s;
+    }
 
-        .slider {
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-            background: #f1f3f5;
-            padding: 20px 0;
-            border-radius: 8px;
-        }
+    .navbar a:hover, .navbar a.active {
+      color: #38bdf8;
+    }
 
-        .slider:hover .slide-track {
-            animation-play-state: paused;
-        }
+    /* Konten Utama */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 20px;
+    }
 
-        .slide-track {
-            display: inline-flex;
-            width: calc(200% * 6);
-            animation: scroll 25s linear infinite;
-        }
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 40px 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
 
-        .slide {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 180px;
-            height: 90px;
-            margin: 0 20px;
-            background: #ffffff;
-            border-radius: 6px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            font-weight: bold;
-            color: #555;
-            font-size: 14px;
-        }
+    h1 {
+      font-size: 26px;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
 
-        .slide img {
-            max-width: 80%;
-            max-height: 60px;
-            object-fit: contain;
-        }
+    p.subtitle {
+      color: #64748b;
+      font-size: 15px;
+      margin-bottom: 35px;
+    }
 
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-    </style>
+    /* Area Slider Logo Berjalan */
+    .slider {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      background: #f1f5f9;
+      padding: 28px 0;
+      border-radius: 10px;
+    }
+
+    /* Efek bayangan halus di tepi kiri dan kanan */
+    .slider::before,
+    .slider::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 80px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .slider::before {
+      left: 0;
+      background: linear-gradient(to right, #f1f5f9, transparent);
+    }
+
+    .slider::after {
+      right: 0;
+      background: linear-gradient(to left, #f1f5f9, transparent);
+    }
+
+    /* Jeda sebentar jika kursor diarahkan ke logo */
+    .slider:hover .slide-track {
+      animation-play-state: paused;
+    }
+
+    /* Jalur Animasi Pelan & Terus Menerus */
+    .slide-track {
+      display: flex;
+      width: max-content;
+      /* Ubah 45s menjadi 60s jika ingin lebih pelan lagi */
+      animation: scrollInfinite 45s linear infinite;
+    }
+
+    .slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      height: 110px;
+      margin: 0 15px;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      padding: 12px;
+      flex-shrink: 0;
+    }
+
+    .slide img {
+      max-width: 140px;
+      max-height: 55px;
+      object-fit: contain;
+      margin-bottom: 6px;
+    }
+
+    .slide span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    /* Animasi menyambung tepat di titik tengah (50%) */
+    @keyframes scrollInfinite {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #0f172a;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2>Rekan Asuransi Terrekomendasi</h2>
-        <div class="slider">
-            <div class="slide-track">
-                <!-- Slide Set 1 -->
-                <div class="slide"><img src="https://placeholder.com" alt="Allianz"></div>
-                <div class="slide"><img src="https://placeholder.com" alt="AXA"></div>
-                <div class="slide"><img src="https://placeholder.com" alt="Prudential"></div>
-                <div class="slide"><img src="https://placeholder.com" alt="Manulife"></div>
-                <div class="slide"><img src="https://placeholder.com" alt="Sinarmas"></div>
-                <div class="slide"><img src="https://placeholder.com" alt="Adira"></div>
+  <!-- Menu Navigasi -->
+  <nav class="navbar">
+    <a href="index.html">Beranda</a>
+    <a href="rekanan-asuransi.html" class="active">Rekanan Asuransi</a>
+  </nav>
 
-                <!-- Slide Set 2 (Duplikat untuk efek infinite loop yang mulus) -->
-                <div class="slide"><img src="https://placeholder.com" alt="Allianz"></div>
-                <div class="slide"><img src="https://placeholder.com" alt="AXA"></div>
-                <div class="slide"><img src="https://placeholder.com" alt="Prudential"></div>
-                <div class="slide"><img src="https://placeholder.com" alt="Manulife"></div>
-                <div class="slide"><img src="https://placeholder.com" alt="Sinarmas"></div>
-                <div class="slide"><img src="https://placeholder.com" alt="Adira"></div>
-            </div>
+  <div class="main-content">
+    <div class="container">
+      <h1>Rekanan Asuransi Terpercaya</h1>
+      <p class="subtitle">Pilihan perusahaan asuransi kendaraan bermotor terbaik yang bekerja sama dengan kami</p>
+
+      <div class="slider">
+        <div class="slide-track">
+          
+          <!-- KELOMPOK 1: Daftar Asli -->
+          <div class="slide">
+            <img src="https://placehold.co" alt="Garda Oto">
+            <span>Garda Oto (Astra)</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="ACA">
+            <span>ACA Asuransi</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="Sinarmas">
+            <span>Asuransi Sinar Mas</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="Zurich">
+            <span>Zurich Asuransi</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="Allianz">
+            <span>Allianz Utama</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="Autocillin">
+            <span>Autocillin</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="Tugu Insurance">
+            <span>Tugu Insurance</span>
+          </div>
+
+          <!-- KELOMPOK 2: Duplikat Persis (Membuat sambungan dari terakhir ke pertama mulus tanpa putus) -->
+          <div class="slide">
+            <img src="https://placehold.co" alt="Garda Oto">
+            <span>Garda Oto (Astra)</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="ACA">
+            <span>ACA Asuransi</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="Sinarmas">
+            <span>Asuransi Sinar Mas</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="Zurich">
+            <span>Zurich Asuransi</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="Allianz">
+            <span>Allianz Utama</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="Autocillin">
+            <span>Autocillin</span>
+          </div>
+          <div class="slide">
+            <img src="https://placehold.co" alt="Tugu Insurance">
+            <span>Tugu Insurance</span>
+          </div>
+
         </div>
+      </div>
     </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Asuransi Mobil Mudah &bull; Rekanan Asuransi Kendaraan Bermotor
+  </footer>
 
 </body>
 </html>
