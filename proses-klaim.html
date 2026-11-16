@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proses &amp; Syarat Klaim</title>
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Proses &amp; Syarat Klaim</title>
+<link href="/favicon.png" rel="icon" type="image/png"/>
+<style>
     * {
       box-sizing: border-box;
       margin: 0;
@@ -322,165 +323,246 @@
       }
     }
   </style>
-</head>
-<body>
-
-    <!-- Menu Navigasi Sederhana -->
-<nav style="background-color: #1e293b; padding: 14px 20px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
-  <a href="/index" style="color: #ffffff; text-decoration: none; font-weight: bold; font-family: sans-serif;">Cek Premi</a>
-  <a href="/asuransi-rekanan" style="color: #ffffff; text-decoration: none; font-weight: bold; font-family: sans-serif;">Asuransi Rekanan</a>
-  <a href="/proses-klaim" style="color: #ffffff; text-decoration: none; font-weight: bold; font-family: sans-serif;">Proses Klaim</a>
+<style>
+/* Shared header and footer: same layout and visual rules as index.html */
+:root { --primary:#0F4C81; --primary-dark:#0A355C; --accent:#F59E0B; --bg-light:#F8FAFC; --text-dark:#1E293B; --text-muted:#64748B; --white:#FFFFFF; }
+body > header.site-header {
+  background: var(--white);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0;
+  text-align: left;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+body > header.site-header .container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+body > header.site-header .nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 75px;
+}
+body > header.site-header .logo {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+body > header.site-header .logo span { color: var(--accent); }
+body > header.site-header .nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+body > header.site-header .nav-links a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: inherit;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+body > header.site-header .nav-links a:hover { color: var(--primary); }
+body > footer {
+  background: #0F172A;
+  color: #CBD5E1;
+  padding: 50px 0 30px;
+  text-align: left;
+  font-size: inherit;
+  margin: 0;
+}
+body > footer .container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+body > footer .footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 35px;
+}
+body > footer .footer-grid h4 {
+  color: var(--white);
+  margin-bottom: 12px;
+}
+body > footer .footer-grid p {
+  color: #CBD5E1;
+}
+body > footer .footer-bottom {
+  text-align: center;
+  padding-top: 25px;
+  border-top: 1px solid #1E293B;
+  font-size: 0.85rem;
+}
+@media (max-width: 768px) {
+  body > header.site-header .nav-links { display: none; }
+  body > footer .footer-grid { grid-template-columns: 1fr; }
+}
+</style></head>
+<body><header class="site-header">
+<div class="container nav-wrapper">
+<a class="logo" href="#">Asuransi<span>MobilMudah</span></a>
+<nav class="nav-links">
+<a href="/"></a>
+<a href="/cek-premi">Cek Premi</a>
+<a href="/asuransi-rekanan">Asuransi Rekanan</a>
+<a href="/proses-klaim">Klaim</a>
 </nav>
-  
-  <!-- Header -->
-  <header class="page-header">
-    <h1>Panduan &amp; Syarat Pengajuan Klaim</h1>
-    <p>Persiapkan dokumen di bawah ini agar proses klaim asuransi kendaraan Anda berjalan cepat dan lancar.</p>
-  </header>
+</div>
+</header>
+<!-- Menu Navigasi Sederhana -->
 
-  <!-- Konten Utama & Sidebar -->
-  <div class="content-wrapper">
-    
-    <!-- Bagian Kiri: Daftar Syarat & Dokumen -->
-    <div class="main-column">
-      
-      <div class="alert-box">
-        <strong>Penting:</strong> Segera laporkan kejadian kecelakaan atau kehilangan maksimal <strong>5 x 24 jam (5 hari kalender)</strong> sejak kejadian berlangsung agar klaim tidak ditolak oleh pihak asuransi.
+<!-- Header -->
+<header class="page-header">
+<h1>Panduan &amp; Syarat Pengajuan Klaim</h1>
+<p>Persiapkan dokumen di bawah ini agar proses klaim asuransi kendaraan Anda berjalan cepat dan lancar.</p>
+</header>
+<!-- Konten Utama & Sidebar -->
+<div class="content-wrapper">
+<!-- Bagian Kiri: Daftar Syarat & Dokumen -->
+<div class="main-column">
+<div class="alert-box">
+<strong>Penting:</strong> Segera laporkan kejadian kecelakaan atau kehilangan maksimal <strong>5 x 24 jam (5 hari kalender)</strong> sejak kejadian berlangsung agar klaim tidak ditolak oleh pihak asuransi.
       </div>
-
-      <!-- Syarat 1 -->
-      <div class="doc-card">
-        <h2>1. Dokumen Standar (Klaim Kerusakan / Kecelakaan)</h2>
-        <ul class="doc-list">
-          <li>Fotokopi / Foto <strong>Polis Asuransi</strong> kendaraan yang masih aktif.</li>
-          <li>Fotokopi / Foto <strong>STNK</strong> kendaraan yang masih berlaku.</li>
-          <li>Fotokopi / Foto <strong>SIM pengemudi</strong> yang masih berlaku saat kejadian terjadi.</li>
-          <li>Fotokopi / Foto <strong>KTP tertanggung</strong> (pemilik polis).</li>
-          <li><strong>Formulir Laporan Klaim</strong> yang telah diisi lengkap dan ditandatangani / stempel jika atas nama perusahaan (mencakup kronologi kejadian).</li>
-          <li><strong>Foto bagian kendaraan yang rusak</strong> (tampak dekat dan tampak keseluruhan beserta pelat nomor).</li>
-        </ul>
-      </div>
-
-      <!-- Syarat 2 -->
-      <div class="doc-card">
-        <h2>2. Tambahan Dokumen (Kecelakaan Melibatkan Pihak Ketiga / TJH)</h2>
-        <ul class="doc-list">
-          <li><strong>Surat Keterangan Laporan Kepolisian</strong> dari Polsek/Polres setempat.</li>
-          <li>Fotokopi <strong>KTP, SIM, dan STNK milik pihak ketiga</strong> yang dirugikan.</li>
-          <li><strong>Surat Pernyataan Tuntutan Ganti Rugi</strong> dari pihak ketiga beserta rincian estimasi biaya perbaikan.</li>
-          <li>Foto kerusakan kendaraan/properti milik pihak ketiga di lokasi kejadian.</li>
-        </ul>
-      </div>
-
-      <!-- Syarat 3 -->
-      <div class="doc-card">
-        <h2>3. Tambahan Dokumen (Klaim Kehilangan / Pencurian - TLO)</h2>
-        <ul class="doc-list">
-          <li><strong>Surat Keterangan Laporan Kehilangan</strong> resmi dari Kepolisian (Polda/Polres).</li>
-          <li><strong>STNK Asli</strong> dan <strong>BPKB Asli</strong> (jika kendaraan berstatus kredit/leasing, dilampirkan surat keterangan dari pihak leasing).</li>
-          <li><strong>Kunci Kontak Asli</strong> kendaraan (minimal 2 buah / kunci utama dan cadangan).</li>
-          <li><strong>Surat Blokir STNK</strong> dari Samsat setempat.</li>
-          <li>Kuitansi kosong bermeterai yang ditandatangani tertanggung (untuk proses balik nama klaim).</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <!-- Bagian Samping (Desktop) / Bagian Bawah (Handphone) -->
-    <aside class="action-sidebar">
-      <h3>Butuh Bantuan Klaim?</h3>
-      <p>Laporkan insiden kendaraan Anda sekarang atau konsultasikan kelengkapan berkas langsung dengan admin kami.</p>
-      
-      <div class="btn-group">
-        <button type="button" class="btn btn-claim" onclick="bukaModal()">
+<!-- Syarat 1 -->
+<div class="doc-card">
+<h2>1. Dokumen Standar (Klaim Kerusakan / Kecelakaan)</h2>
+<ul class="doc-list">
+<li>Fotokopi / Foto <strong>Polis Asuransi</strong> kendaraan yang masih aktif.</li>
+<li>Fotokopi / Foto <strong>STNK</strong> kendaraan yang masih berlaku.</li>
+<li>Fotokopi / Foto <strong>SIM pengemudi</strong> yang masih berlaku saat kejadian terjadi.</li>
+<li>Fotokopi / Foto <strong>KTP tertanggung</strong> (pemilik polis).</li>
+<li><strong>Formulir Laporan Klaim</strong> yang telah diisi lengkap dan ditandatangani / stempel jika atas nama perusahaan (mencakup kronologi kejadian).</li>
+<li><strong>Foto bagian kendaraan yang rusak</strong> (tampak dekat dan tampak keseluruhan beserta pelat nomor).</li>
+</ul>
+</div>
+<!-- Syarat 2 -->
+<div class="doc-card">
+<h2>2. Tambahan Dokumen (Kecelakaan Melibatkan Pihak Ketiga / TJH)</h2>
+<ul class="doc-list">
+<li><strong>Surat Keterangan Laporan Kepolisian</strong> dari Polsek/Polres setempat.</li>
+<li>Fotokopi <strong>KTP, SIM, dan STNK milik pihak ketiga</strong> yang dirugikan.</li>
+<li><strong>Surat Pernyataan Tuntutan Ganti Rugi</strong> dari pihak ketiga beserta rincian estimasi biaya perbaikan.</li>
+<li>Foto kerusakan kendaraan/properti milik pihak ketiga di lokasi kejadian.</li>
+</ul>
+</div>
+<!-- Syarat 3 -->
+<div class="doc-card">
+<h2>3. Tambahan Dokumen (Klaim Kehilangan / Pencurian - TLO)</h2>
+<ul class="doc-list">
+<li><strong>Surat Keterangan Laporan Kehilangan</strong> resmi dari Kepolisian (Polda/Polres).</li>
+<li><strong>STNK Asli</strong> dan <strong>BPKB Asli</strong> (jika kendaraan berstatus kredit/leasing, dilampirkan surat keterangan dari pihak leasing).</li>
+<li><strong>Kunci Kontak Asli</strong> kendaraan (minimal 2 buah / kunci utama dan cadangan).</li>
+<li><strong>Surat Blokir STNK</strong> dari Samsat setempat.</li>
+<li>Kuitansi kosong bermeterai yang ditandatangani tertanggung (untuk proses balik nama klaim).</li>
+</ul>
+</div>
+</div>
+<!-- Bagian Samping (Desktop) / Bagian Bawah (Handphone) -->
+<aside class="action-sidebar">
+<h3>Butuh Bantuan Klaim?</h3>
+<p>Laporkan insiden kendaraan Anda sekarang atau konsultasikan kelengkapan berkas langsung dengan admin kami.</p>
+<div class="btn-group">
+<button class="btn btn-claim" onclick="bukaModal()" type="button">
           Lapor Klaim
         </button>
-
-        <a 
-          href="https://wa.me/6282121647215?text=Hallo%20Admin%2C%20saya%20ingin%20konsultasi%20dan%20dibantu%20untuk%20proses%20klaim%20asuransi%20mobil%20saya." 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="btn btn-wa"
-        >
+<a class="btn btn-wa" href="https://wa.me/6282121647215?text=Hallo%20Admin%2C%20saya%20ingin%20konsultasi%20dan%20dibantu%20untuk%20proses%20klaim%20asuransi%20mobil%20saya." rel="noopener noreferrer" target="_blank">
           WA Admin
         </a>
+</div>
+</aside>
+</div>
+<!-- Modal Popup Formulir Lapor Klaim -->
+<div class="modal-overlay" id="modalKlaim">
+<div class="modal-box">
+<div class="modal-header">
+<h3>Formulir Laporan Klaim Cepat</h3>
+<button class="close-btn" onclick="tutupModal()" type="button">×</button>
+</div>
+<form id="formLaporKlaim" onsubmit="kirimLaporanWA(event)">
+<div class="form-group">
+<label for="nama">Nama Tertanggung sesuai Polis *</label>
+<input id="nama" placeholder="Contoh: Hendrik Qin QQ Andi" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="nopol">Nomor Polisi Kendaraan *</label>
+<input id="nopol" placeholder="Contoh: B 1234 ABC" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="asuransi">Nama Perusahaan Asuransi *</label>
+<select id="asuransi" required="">
+<option value="AUS / TAP Ins. ">AUS / TAP Ins. </option>
+<option value="HARTA">HARTA</option>
+<option value="MPM">MPM</option>
+</select>
+</div>
+<div class="form-group">
+<label for="nopolis">Nomor Polis Asuransi *</label>
+<input id="nopolis" placeholder="" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="jenisKlaim">Jenis Pengajuan Klaim *</label>
+<select id="jenisKlaim" required="">
+<option value="Kerusakan Sebagian (Kecelakaan / Lecet)">Kerusakan Sebagian (Kecelakaan / Penyok / Lecet)</option>
+<option value="Kecelakaan Melibatkan Pihak Ketiga (TJH)">Kecelakaan Melibatkan Pihak Ketiga (TJH)</option>
+<option value="Kehilangan Kendaraan (TLO)">Kehilangan Kendaraan (TLO)</option>
+<option value="Bencana Alam (Banjir / Gempa)">Bencana Alam (Banjir / Gempa)</option>
+<option value="Huru Hara / Terorisme">Huru Hara / Terorisme</option>
+</select>
+</div>
+<div class="form-group">
+<label for="tglKejadian">Tanggal Kejadian *</label>
+<input id="tglKejadian" required="" type="date"/>
+</div>
+<div class="form-group">
+<label for="lokKejadian">Lokasi Kejadian *</label>
+<input id="lokKejadian" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="kronologi">Kronologi Singkat Kejadian *</label>
+<textarea id="kronologi" placeholder="Ceritakan kronologis kejadiannya dan bagian mobil yang terdampak..." required=""></textarea>
+</div>
+<button class="btn btn-claim" type="submit">Kirim Laporan ke WhatsApp Admin</button>
+</form>
+</div>
+</div>
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div>
+<h3 style="color: var(--white); margin-bottom: 10px;">Asuransi<span style="color: var(--accent);">MobilMudah</span></h3>
+<p style="font-size: 0.9rem;">Konsultan &amp; Agen Asuransi Kendaraan Bermotor. Melayani pembuatan polis baru, perpanjangan polis, dan konsultasi klaim.</p>
+</div>
+<div>
+<h4>Kontak Langsung</h4>
+<p style="font-size: 0.9rem;">WhatsApp 0821-2164-7215</p>
+<p style="font-size: 0.9rem;">Instagram @asuransimobilmudah</p>
+<p style="font-size: 0.9rem;">Jakarta, Bogor, Depok, Tangerang, Bekasi</p>
+</div>
+<div>
+<h4>Jam Layanan</h4>
+<p style="font-size: 0.9rem;">Senin - Jumat: 09.00 - 16.00 WIB</p>
+<p style="font-size: 0.9rem;">Sabtu: 09.00 - 14.00 WIB</p>
+<p style="font-size: 0.9rem;">Bantuan Darurat Klaim: 24 Jam</p>
+</div>
+</div>
+<div class="footer-bottom">
+        © 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.
       </div>
-    </aside>
-
-  </div>
-
-  <!-- Modal Popup Formulir Lapor Klaim -->
-  <div class="modal-overlay" id="modalKlaim">
-    <div class="modal-box">
-      <div class="modal-header">
-        <h3>Formulir Laporan Klaim Cepat</h3>
-        <button type="button" class="close-btn" onclick="tutupModal()">&times;</button>
-      </div>
-
-      <form id="formLaporKlaim" onsubmit="kirimLaporanWA(event)">
-        <div class="form-group">
-          <label for="nama">Nama Tertanggung sesuai Polis *</label>
-          <input type="text" id="nama" required placeholder="Contoh: Hendrik Qin QQ Andi">
-        </div>
-
-        <div class="form-group">
-          <label for="nopol">Nomor Polisi Kendaraan *</label>
-          <input type="text" id="nopol" required placeholder="Contoh: B 1234 ABC">
-        </div>
-
-        <div class="form-group">
-          <label for="asuransi">Nama Perusahaan Asuransi *</label>
-          <select id="asuransi" required>
-            <option value="AUS / TAP Ins. ">AUS / TAP Ins. </option>
-            <option value="HARTA">HARTA</option>
-            <option value="MPM">MPM</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="nopolis">Nomor Polis Asuransi *</label>
-          <input type="text" id="nopolis" required placeholder="">
-        </div>
-        
-        <div class="form-group">
-          <label for="jenisKlaim">Jenis Pengajuan Klaim *</label>
-          <select id="jenisKlaim" required>
-            <option value="Kerusakan Sebagian (Kecelakaan / Lecet)">Kerusakan Sebagian (Kecelakaan / Penyok / Lecet)</option>
-            <option value="Kecelakaan Melibatkan Pihak Ketiga (TJH)">Kecelakaan Melibatkan Pihak Ketiga (TJH)</option>
-            <option value="Kehilangan Kendaraan (TLO)">Kehilangan Kendaraan (TLO)</option>
-            <option value="Bencana Alam (Banjir / Gempa)">Bencana Alam (Banjir / Gempa)</option>
-            <option value="Huru Hara / Terorisme">Huru Hara / Terorisme</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="tglKejadian">Tanggal Kejadian *</label>
-          <input type="date" id="tglKejadian" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="lokKejadian">Lokasi Kejadian *</label>
-          <input type="text" id="lokKejadian" required>
-        </div>
-
-        
-        <div class="form-group">
-          <label for="kronologi">Kronologi Singkat Kejadian *</label>
-          <textarea id="kronologi" required placeholder="Ceritakan kronologis kejadiannya dan bagian mobil yang terdampak..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-claim">Kirim Laporan ke WhatsApp Admin</button>
-      </form>
-    </div>
-  </div>
-
-  <footer>
-      <div class="footer-bottom">
-        &copy; 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.
-      </div>
-  </footer>
-
-  <script>
+</div>
+</footer>
+<script>
     const NOMOR_WA_ADMIN = "6282121647215";
     const modal = document.getElementById("modalKlaim");
 
@@ -538,21 +620,18 @@
       tutupModal();
     }
   </script>
-
 <!-- Popup Peringatan Website Belum Siap 100% -->
 <div id="hq-dev-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 16px; font-family: sans-serif;">
-  <div style="background: #ffffff; max-width: 420px; width: 100%; border-radius: 12px; padding: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.25); border-top: 5px solid #f59e0b;">
-    <div style="font-size: 36px; margin-bottom: 10px;">🚧</div>
-    <h3 style="color: #0f172a; font-size: 19px; margin-bottom: 10px;">Halaman dalam Penyempurnaan</h3>
-    <p style="color: #475569; font-size: 14px; line-height: 1.5; margin-bottom: 20px;">
+<div style="background: #ffffff; max-width: 420px; width: 100%; border-radius: 12px; padding: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.25); border-top: 5px solid #f59e0b;">
+<div style="font-size: 36px; margin-bottom: 10px;">🚧</div>
+<h3 style="color: #0f172a; font-size: 19px; margin-bottom: 10px;">Halaman dalam Penyempurnaan</h3>
+<p style="color: #475569; font-size: 14px; line-height: 1.5; margin-bottom: 20px;">
       Mohon maaf atas ketidaknyamanannya. Halaman ini masih dalam tahap pengembangan dan belum siap 100%. Beberapa data atau fitur mungkin sedang diperbarui.
     </p>
-    <button onclick="document.getElementById('hq-dev-modal').style.display='none'" style="background-color: #0f172a; color: #ffffff; border: none; padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%;">
+<button onclick="document.getElementById('hq-dev-modal').style.display='none'" style="background-color: #0f172a; color: #ffffff; border: none; padding: 11px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%;">
       Saya Mengerti, Lanjutkan
     </button>
-  </div>
 </div>
-
-  
+</div>
 </body>
 </html>
