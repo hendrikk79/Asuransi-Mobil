@@ -1,11 +1,13 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asuransi Mobil Mudah</title>
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Asuransi Mobil Mudah</title>
+<link href="/favicon.png" rel="icon" type="image/png"/>
+<style>
     :root {
       --primary: #0f3d68;
       --primary-dark: #0a2947;
@@ -425,238 +427,283 @@
       padding: 1.5rem 1rem 2.5rem;
     }
   </style>
-</head>
-<body>
-
-  <!-- Menu Navigasi Sederhana -->
-<nav style="background-color: #1e293b; padding: 14px 20px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
-  <a href="/index" style="color: #ffffff; text-decoration: none; font-weight: bold; font-family: sans-serif;">Cek Premi</a>
-  <a href="/asuransi-rekanan" style="color: #ffffff; text-decoration: none; font-weight: bold; font-family: sans-serif;">Asuransi Rekanan</a>
-  <a href="/proses-klaim" style="color: #ffffff; text-decoration: none; font-weight: bold; font-family: sans-serif;">Proses Klaim</a>
+<style>
+/* Header and footer are intentionally matched to index.html. Scoped overrides
+   prevent each page's original form/content CSS from changing shared layout. */
+:root { --primary:#0F4C81; --primary-dark:#0A355C; --accent:#F59E0B; --white:#FFFFFF; --text-dark:#1E293B; }
+body > header.site-header {
+  display:block !important; position:sticky !important; top:0 !important; z-index:100 !important;
+  width:100% !important; height:auto !important; min-height:0 !important;
+  margin:0 !important; padding:0 !important; text-align:left !important;
+  color:var(--text-dark) !important; background:#FFFFFF !important;
+  background-image:none !important; box-shadow:0 2px 10px rgba(0,0,0,0.05) !important;
+  border:0 !important;
+}
+body > header.site-header > .container.nav-wrapper {
+  display:flex !important; width:100% !important; max-width:1140px !important;
+  height:75px !important; min-height:75px !important; margin:0 auto !important;
+  padding:0 20px !important; align-items:center !important; justify-content:space-between !important;
+  gap:0 !important; grid-template-columns:none !important; background:transparent !important;
+  border:0 !important; border-radius:0 !important; box-shadow:none !important;
+}
+body > header.site-header .logo {
+  display:inline-block !important; margin:0 !important; padding:0 !important;
+  color:#0F4C81 !important; font-family:inherit !important; font-size:1.35rem !important;
+  line-height:1.6 !important; font-weight:700 !important; text-decoration:none !important;
+  white-space:nowrap !important; background:transparent !important; border:0 !important;
+}
+body > header.site-header .logo span { color:#F59E0B !important; }
+body > header.site-header .nav-links {
+  display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important;
+  align-items:center !important; justify-content:flex-end !important; gap:28px !important;
+  margin:0 !important; padding:0 !important; background:transparent !important;
+  color:#1E293B !important; font-size:0.95rem !important; font-weight:500 !important;
+  border:0 !important; box-shadow:none !important;
+}
+body > header.site-header .nav-links a {
+  display:inline !important; margin:0 !important; padding:0 !important; color:#1E293B !important;
+  font-family:inherit !important; font-size:0.95rem !important; line-height:1.6 !important;
+  font-weight:500 !important; text-decoration:none !important; background:transparent !important;
+  border:0 !important; border-radius:0 !important; box-shadow:none !important;
+}
+body > header.site-header .nav-links a:hover { color:#0F4C81 !important; }
+body > footer {
+  display:block !important; width:100% !important; margin:0 !important; margin-top:0 !important;
+  padding:50px 0 30px !important; text-align:left !important; font-size:16px !important;
+  line-height:1.6 !important; color:#CBD5E1 !important; background:#0F172A !important;
+  background-image:none !important; border:0 !important; box-shadow:none !important;
+}
+body > footer > .container {
+  display:block !important; width:100% !important; max-width:1140px !important;
+  margin:0 auto !important; padding:0 20px !important; grid-template-columns:none !important;
+  gap:0 !important; background:transparent !important; border:0 !important;
+  border-radius:0 !important; box-shadow:none !important;
+}
+body > footer .footer-grid {
+  display:grid !important; grid-template-columns:1.5fr 1fr 1fr !important;
+  gap:30px !important; margin:0 0 35px !important; padding:0 !important;
+  background:transparent !important; border:0 !important;
+}
+body > footer .footer-grid > div { display:block !important; min-width:0 !important; }
+body > footer .footer-grid h3 { color:#FFFFFF !important; margin:0 0 10px !important; }
+body > footer .footer-grid h3 span { color:#F59E0B !important; }
+body > footer .footer-grid h4 { color:#FFFFFF !important; margin:0 0 12px !important; }
+body > footer .footer-grid p { color:#CBD5E1 !important; margin:0 0 0.6em !important; line-height:1.6 !important; }
+body > footer .footer-bottom {
+  display:block !important; text-align:center !important; margin:0 !important; padding:25px 0 0 !important;
+  border-top:1px solid #1E293B !important; font-size:0.85rem !important; color:#CBD5E1 !important;
+}
+@media (max-width:768px) {
+  body > header.site-header > .container.nav-wrapper { height:75px !important; min-height:75px !important; }
+  body > header.site-header .nav-links { display:none !important; }
+  body > footer .footer-grid { grid-template-columns:1fr !important; gap:24px !important; }
+}
+</style></head>
+<body><header class="site-header">
+<div class="container nav-wrapper">
+<a class="logo" href="#">Asuransi<span>MobilMudah</span></a>
+<nav class="nav-links">
+<a href="/"></a>
+<a href="/cek-premi">Cek Premi</a>
+<a href="/asuransi-rekanan">Asuransi Rekanan</a>
+<a href="/proses-klaim">Klaim</a>
 </nav>
+</div>
+</header>
+<!-- Menu Navigasi Sederhana -->
 
-  
-  <header>
-    <div class="badge-ojk">Mengacu Tarif Resmi OJK &bull; SEOJK No. 6/SEOJK.05/2017</div>
-    <h1>Simulasi Premi Asuransi Kendaraan Bermotor</h1>
-    <p>Hitung estimasi premi asuransi mobil pribadi, pickup/truk, maupun bus secara transparan dalam hitungan detik sesuai ketentuan batas bawah &amp; batas atas OJK.</p>
-  </header>
-
-  <main class="container">
-    <!-- FORM INPUT -->
-    <section class="card">
-      <div class="card-title">Data Pemohon &amp; Kendaraan</div>
-
-      <form id="premiForm" novalidate>
-        <div class="grid-2">
-          <div class="form-group">
-            <label for="namaPemohon">Nama Lengkap <span class="req">*</span></label>
-            <input type="text" id="namaPemohon" placeholder="Contoh: Hendrik Qin" required />
-          </div>
-
-          <div class="form-group">
-            <label for="noHp">Nomor HP / WhatsApp <span class="req">*</span></label>
-            <input type="tel" id="noHp" placeholder="Contoh: 082121647215" required />
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="form-group">
-            <label for="jenisKendaraan">Jenis / Kategori Kendaraan <span class="req">*</span></label>
-            <select id="jenisKendaraan">
-              <option value="PENUMPANG">Mobil Penumpang (Kategori 1 - 5)</option>
-              <option value="TRUK_PICKUP">Truk &amp; Pickup (Kategori 6)</option>
-              <option value="BUS">Bus (Kategori 7)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="tahunKendaraan">Tahun Pembuatan<span class="req">*</span></label>
-            <select id="tahunKendaraan"></select>
-          </div>
-        </div>
-
-        <div id="ageAlert" class="age-alert"></div>
-
-        <div class="grid-2">
-          <div class="form-group">
-            <label for="merkMobil">Merek &amp; Tipe Kendaraan <span class="req">*</span></label>
-            <input type="text" id="merkMobil" placeholder="Contoh: Toyota Avanza G / Hino Dutro / Mercedes Bus" required />
-          </div>
-
-          <div class="form-group">
-            <label for="wilayah">Wilayah Plat Nomor<span class="req">*</span></label>
-            <select id="wilayah">
-              <option value="W1">Wilayah 1 (Sumatera &amp; Kepulauan sekitarnya)</option>
-              <option value="W2" selected>Wilayah 2 (DKI Jakarta, Jawa Barat, Banten)</option>
-              <option value="W3">Wilayah 3 (Jawa Tengah, Jawa Timur, Bali, Kalimantan, Sulawesi, dll.)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="hargaPasaran">Harga Pasaran Kendaraan / Uang Pertanggungan (Rp) <span class="req">*</span></label>
-          <div class="input-prefix">
-            <span>Rp</span>
-            <input type="text" id="hargaPasaran" inputmode="numeric" placeholder="250.000.000" required />
-          </div>
-          <div class="hint" id="kategoriHint">Masukkan nilai pertanggungan sesuai harga pasar kendaraan saat ini.</div>
-        </div>
-
-        <div class="form-group">
-          <label>Jenis Perlindungan Utama<span class="req">*</span></label>
-          <div class="coverage-toggle">
-            <label class="coverage-option active" id="optComp">
-              <input type="radio" name="jenisPertanggungan" value="COMPREHENSIVE" checked />
-              <strong>Comprehensive (All Risk)</strong>
-              <span>Menanggung kerusakan ringan, berat, hingga kehilangan.</span>
-            </label>
-            <label class="coverage-option" id="optTlo">
-              <input type="radio" name="jenisPertanggungan" value="TLO" />
-              <strong>Total Loss Only (TLO)</strong>
-              <span>Menanggung kehilangan atau kerusakan &ge; 75% nilai kendaraan.</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Perluasan Jaminan Opsional (Tabel IV.B OJK)</label>
-          <div class="addon-list">
-            <label class="addon-item">
-              <input type="checkbox" id="extBanjir" />
-              <div class="addon-info">
-                <strong>Banjir termasuk Angin Topan (0,10%)</strong>
-                <small>Menanggung kerusakan akibat banjir, genangan air, badai, dan angin topan.</small>
-              </div>
-            </label>
-
-            <label class="addon-item">
-              <input type="checkbox" id="extGempa" />
-              <div class="addon-info">
-                <strong>Gempa Bumi, Tsunami (0,10%)</strong>
-                <small>Menanggung risiko gempa bumi, tsunami, dan letusan gunung berapi.</small>
-              </div>
-            </label>
-
-            <label class="addon-item">
-              <input type="checkbox" id="extSrcc" />
-              <div class="addon-info">
-                <strong>Huru-hara dan Kerusuhan / SRCC (<span id="rateSrccLabel">0,05%</span>)</strong>
-                <small>Menanggung kerusakan akibat kerusuhan, pemogokan, dan penghalangan kerja.</small>
-              </div>
-            </label>
-
-            <label class="addon-item">
-              <input type="checkbox" id="extTs" />
-              <div class="addon-info">
-                <strong>Terorisme dan Sabotase (<span id="rateTsLabel">0,05%</span>)</strong>
-                <small>Menanggung kerugian akibat tindakan terorisme dan sabotase.</small>
-              </div>
-            </label>
-
-            <div class="addon-item" style="flex-direction: column; align-items: stretch;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <strong style="font-size:0.86rem;">Tanggung Jawab Hukum (TJH) Pihak Ketiga</strong>
-                <small style="color:var(--muted);" id="tjhRateHint">Tarif Progresif Penumpang</small>
-              </div>
-              <select id="tjhLimit" style="margin-top:0.35rem;">
-                <option value="0">Tidak Perlu TJH Pihak Ketiga</option>
-                <option value="10000000">Limit Rp 10.000.000</option>
-                <option value="15000000">Limit Rp 15.000.000</option>
-                <option value="20000000">Limit Rp 20.000.000</option>
-                <option value="25000000">Limit Rp 25.000.000</option>
-                <option value="50000000">Limit Rp 50.000.000</option>
-                <option value="75000000">Limit Rp 75.000.000</option>
-                <option value="100000000">Limit Rp 100.000.000</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <button type="submit" class="btn-calc">Hitung Estimasi Premi Sekarang</button>
-      </form>
-    </section>
-
-    <!-- RESULT PANEL -->
-    <aside class="card result-box">
-      <div class="card-title">Hasil Simulasi Premi</div>
-
-      <div id="emptyState" class="empty-state">
+<header>
+<div class="badge-ojk">Mengacu Tarif Resmi OJK • SEOJK No. 6/SEOJK.05/2017</div>
+<h1>Simulasi Premi Asuransi Kendaraan Bermotor</h1>
+<p>Hitung estimasi premi asuransi mobil pribadi, pickup/truk, maupun bus secara transparan dalam hitungan detik sesuai ketentuan batas bawah &amp; batas atas OJK.</p>
+</header>
+<main class="container">
+<!-- FORM INPUT -->
+<section class="card">
+<div class="card-title">Data Pemohon &amp; Kendaraan</div>
+<form id="premiForm" novalidate="">
+<div class="grid-2">
+<div class="form-group">
+<label for="namaPemohon">Nama Lengkap <span class="req">*</span></label>
+<input id="namaPemohon" placeholder="Contoh: Hendrik Qin" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="noHp">Nomor HP / WhatsApp <span class="req">*</span></label>
+<input id="noHp" placeholder="Contoh: 082121647215" required="" type="tel"/>
+</div>
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label for="jenisKendaraan">Jenis / Kategori Kendaraan <span class="req">*</span></label>
+<select id="jenisKendaraan">
+<option value="PENUMPANG">Mobil Penumpang (Kategori 1 - 5)</option>
+<option value="TRUK_PICKUP">Truk &amp; Pickup (Kategori 6)</option>
+<option value="BUS">Bus (Kategori 7)</option>
+</select>
+</div>
+<div class="form-group">
+<label for="tahunKendaraan">Tahun Pembuatan<span class="req">*</span></label>
+<select id="tahunKendaraan"></select>
+</div>
+</div>
+<div class="age-alert" id="ageAlert"></div>
+<div class="grid-2">
+<div class="form-group">
+<label for="merkMobil">Merek &amp; Tipe Kendaraan <span class="req">*</span></label>
+<input id="merkMobil" placeholder="Contoh: Toyota Avanza G / Hino Dutro / Mercedes Bus" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="wilayah">Wilayah Plat Nomor<span class="req">*</span></label>
+<select id="wilayah">
+<option value="W1">Wilayah 1 (Sumatera &amp; Kepulauan sekitarnya)</option>
+<option selected="" value="W2">Wilayah 2 (DKI Jakarta, Jawa Barat, Banten)</option>
+<option value="W3">Wilayah 3 (Jawa Tengah, Jawa Timur, Bali, Kalimantan, Sulawesi, dll.)</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="hargaPasaran">Harga Pasaran Kendaraan / Uang Pertanggungan (Rp) <span class="req">*</span></label>
+<div class="input-prefix">
+<span>Rp</span>
+<input id="hargaPasaran" inputmode="numeric" placeholder="250.000.000" required="" type="text"/>
+</div>
+<div class="hint" id="kategoriHint">Masukkan nilai pertanggungan sesuai harga pasar kendaraan saat ini.</div>
+</div>
+<div class="form-group">
+<label>Jenis Perlindungan Utama<span class="req">*</span></label>
+<div class="coverage-toggle">
+<label class="coverage-option active" id="optComp">
+<input checked="" name="jenisPertanggungan" type="radio" value="COMPREHENSIVE"/>
+<strong>Comprehensive (All Risk)</strong>
+<span>Menanggung kerusakan ringan, berat, hingga kehilangan.</span>
+</label>
+<label class="coverage-option" id="optTlo">
+<input name="jenisPertanggungan" type="radio" value="TLO"/>
+<strong>Total Loss Only (TLO)</strong>
+<span>Menanggung kehilangan atau kerusakan ≥ 75% nilai kendaraan.</span>
+</label>
+</div>
+</div>
+<div class="form-group">
+<label>Perluasan Jaminan Opsional (Tabel IV.B OJK)</label>
+<div class="addon-list">
+<label class="addon-item">
+<input id="extBanjir" type="checkbox"/>
+<div class="addon-info">
+<strong>Banjir termasuk Angin Topan (0,10%)</strong>
+<small>Menanggung kerusakan akibat banjir, genangan air, badai, dan angin topan.</small>
+</div>
+</label>
+<label class="addon-item">
+<input id="extGempa" type="checkbox"/>
+<div class="addon-info">
+<strong>Gempa Bumi, Tsunami (0,10%)</strong>
+<small>Menanggung risiko gempa bumi, tsunami, dan letusan gunung berapi.</small>
+</div>
+</label>
+<label class="addon-item">
+<input id="extSrcc" type="checkbox"/>
+<div class="addon-info">
+<strong>Huru-hara dan Kerusuhan / SRCC (<span id="rateSrccLabel">0,05%</span>)</strong>
+<small>Menanggung kerusakan akibat kerusuhan, pemogokan, dan penghalangan kerja.</small>
+</div>
+</label>
+<label class="addon-item">
+<input id="extTs" type="checkbox"/>
+<div class="addon-info">
+<strong>Terorisme dan Sabotase (<span id="rateTsLabel">0,05%</span>)</strong>
+<small>Menanggung kerugian akibat tindakan terorisme dan sabotase.</small>
+</div>
+</label>
+<div class="addon-item" style="flex-direction: column; align-items: stretch;">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<strong style="font-size:0.86rem;">Tanggung Jawab Hukum (TJH) Pihak Ketiga</strong>
+<small id="tjhRateHint" style="color:var(--muted);">Tarif Progresif Penumpang</small>
+</div>
+<select id="tjhLimit" style="margin-top:0.35rem;">
+<option value="0">Tidak Perlu TJH Pihak Ketiga</option>
+<option value="10000000">Limit Rp 10.000.000</option>
+<option value="15000000">Limit Rp 15.000.000</option>
+<option value="20000000">Limit Rp 20.000.000</option>
+<option value="25000000">Limit Rp 25.000.000</option>
+<option value="50000000">Limit Rp 50.000.000</option>
+<option value="75000000">Limit Rp 75.000.000</option>
+<option value="100000000">Limit Rp 100.000.000</option>
+</select>
+</div>
+</div>
+</div>
+<button class="btn-calc" type="submit">Hitung Estimasi Premi Sekarang</button>
+</form>
+</section>
+<!-- RESULT PANEL -->
+<aside class="card result-box">
+<div class="card-title">Hasil Simulasi Premi</div>
+<div class="empty-state" id="emptyState">
         Lengkapi data pemohon, kendaraan, tahun pembuatan, dan harga pasaran terlebih dahulu, lalu klik <strong>Hitung Estimasi Premi Sekarang</strong> untuk melihat rincian biaya asuransi Anda.
       </div>
-
-      <div id="resultContent" class="result-content">
-        <div class="summary-pill">
-          <div><span>Nama Pemohon:</span><strong id="resNama">-</strong></div>
-          <div><span>No. HP / WA:</span><strong id="resHp">-</strong></div>
-          <div><span>Kendaraan:</span><strong id="resMobil">-</strong></div>
-          <div><span>Usia Kendaraan:</span><strong id="resUsia">-</strong></div>
-          <div><span>Kategori OJK:</span><strong id="resKategori">-</strong></div>
-          <div><span>Wilayah &amp; Jenis:</span><strong id="resJenis">-</strong></div>
-          <div><span>Nilai Pertanggungan:</span><strong id="resUp">-</strong></div>
+<div class="result-content" id="resultContent">
+<div class="summary-pill">
+<div><span>Nama Pemohon:</span><strong id="resNama">-</strong></div>
+<div><span>No. HP / WA:</span><strong id="resHp">-</strong></div>
+<div><span>Kendaraan:</span><strong id="resMobil">-</strong></div>
+<div><span>Usia Kendaraan:</span><strong id="resUsia">-</strong></div>
+<div><span>Kategori OJK:</span><strong id="resKategori">-</strong></div>
+<div><span>Wilayah &amp; Jenis:</span><strong id="resJenis">-</strong></div>
+<div><span>Nilai Pertanggungan:</span><strong id="resUp">-</strong></div>
+</div>
+<div class="price-highlight">
+<div class="label">Estimasi Total Premi Tahunan</div>
+<div class="amount" id="resTotalRange">Rp 0</div>
+<div class="sub" id="resRateInfo">Tarif dasar OJK: 0% - 0%</div>
+</div>
+<table class="breakdown-table">
+<tbody>
+<tr>
+<td>Premi Pokok (<span id="resBaseRate">0% - 0%</span>)</td>
+<td id="resPremiPokok">Rp 0</td>
+</tr>
+<tr id="rowLoading" style="display:none;">
+<td>Loading Rate Usia (<span id="resLoadingPct">+0%</span>)</td>
+<td id="resLoadingVal">Rp 0</td>
+</tr>
+<tr id="rowBanjir" style="display:none;">
+<td>Perluasan Banjir &amp; Angin Topan (0,10%)</td>
+<td id="resBanjir">Rp 0</td>
+</tr>
+<tr id="rowGempa" style="display:none;">
+<td>Perluasan Gempa Bumi &amp; Tsunami (0,10%)</td>
+<td id="resGempa">Rp 0</td>
+</tr>
+<tr id="rowSrcc" style="display:none;">
+<td>Perluasan SRCC (<span id="resSrccPct">0,05%</span>)</td>
+<td id="resSrcc">Rp 0</td>
+</tr>
+<tr id="rowTs" style="display:none;">
+<td>Perluasan Terorisme &amp; Sabotase (<span id="resTsPct">0,05%</span>)</td>
+<td id="resTs">Rp 0</td>
+</tr>
+<tr id="rowTjh" style="display:none;">
+<td>TJH Pihak Ketiga (<span id="resTjhLimit">Rp 0</span>)</td>
+<td id="resTjh">Rp 0</td>
+</tr>
+<tr class="total-row">
+<td>Total Estimasi Premi</td>
+<td id="resTotalBottom">Rp 0</td>
+</tr>
+</tbody>
+</table>
+<div class="note-box" id="resNote">
+<strong>Catatan Ketentuan OJK:</strong> Risiko Sendiri (Deductible) standar kendaraan roda 4 minimum Rp 300.000/kejadian. Belum termasuk biaya administrasi polis &amp; meterai.
         </div>
-
-        <div class="price-highlight">
-          <div class="label">Estimasi Total Premi Tahunan</div>
-          <div class="amount" id="resTotalRange">Rp 0</div>
-          <div class="sub" id="resRateInfo">Tarif dasar OJK: 0% - 0%</div>
-        </div>
-
-        <table class="breakdown-table">
-          <tbody>
-            <tr>
-              <td>Premi Pokok (<span id="resBaseRate">0% - 0%</span>)</td>
-              <td id="resPremiPokok">Rp 0</td>
-            </tr>
-            <tr id="rowLoading" style="display:none;">
-              <td>Loading Rate Usia (<span id="resLoadingPct">+0%</span>)</td>
-              <td id="resLoadingVal">Rp 0</td>
-            </tr>
-            <tr id="rowBanjir" style="display:none;">
-              <td>Perluasan Banjir &amp; Angin Topan (0,10%)</td>
-              <td id="resBanjir">Rp 0</td>
-            </tr>
-            <tr id="rowGempa" style="display:none;">
-              <td>Perluasan Gempa Bumi &amp; Tsunami (0,10%)</td>
-              <td id="resGempa">Rp 0</td>
-            </tr>
-            <tr id="rowSrcc" style="display:none;">
-              <td>Perluasan SRCC (<span id="resSrccPct">0,05%</span>)</td>
-              <td id="resSrcc">Rp 0</td>
-            </tr>
-            <tr id="rowTs" style="display:none;">
-              <td>Perluasan Terorisme &amp; Sabotase (<span id="resTsPct">0,05%</span>)</td>
-              <td id="resTs">Rp 0</td>
-            </tr>
-            <tr id="rowTjh" style="display:none;">
-              <td>TJH Pihak Ketiga (<span id="resTjhLimit">Rp 0</span>)</td>
-              <td id="resTjh">Rp 0</td>
-            </tr>
-            <tr class="total-row">
-              <td>Total Estimasi Premi</td>
-              <td id="resTotalBottom">Rp 0</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="note-box" id="resNote">
-          <strong>Catatan Ketentuan OJK:</strong> Risiko Sendiri (Deductible) standar kendaraan roda 4 minimum Rp 300.000/kejadian. Belum termasuk biaya administrasi polis &amp; meterai.
-        </div>
-
-        <a id="btnWa" href="#" target="_blank" rel="noopener" class="btn-wa">
+<a class="btn-wa" href="#" id="btnWa" rel="noopener" target="_blank">
           Hubungi Admin via WhatsApp
         </a>
-      </div>
-    </aside>
-  </main>
+</div>
+</aside>
+</main>
 
-  <footer>
-      <div class="footer-bottom">
-        &copy; 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.
-      </div>
-  </footer>
-
-  <script>
+<script>
     const CURRENT_YEAR = new Date().getFullYear();
     const ADMIN_WA = '6282121647215';
 
@@ -1040,8 +1087,7 @@
     // Initialize state
     evaluateVehicleAge();
   </script>
-
-  <!-- Floating Bubble WhatsApp & Instagram -->
+<!-- Floating Bubble WhatsApp & Instagram -->
 <style>
   .hq-floating-container {
     position: fixed;
@@ -1104,22 +1150,43 @@
     }
   }
 </style>
-
 <div class="hq-floating-container">
-  <!-- Tombol Instagram -->
-  <a href="https://instagram.com/asuransimobilmudah" target="_blank" rel="noopener noreferrer" class="hq-floating-btn hq-ig-btn" title="Instagram" aria-label="Instagram">
-    <svg viewBox="0 0 24 24">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-    </svg>
-  </a>
-
-  <!-- Tombol WhatsApp -->
-  <a href="https://wa.me/6282121647215?text=Hallo%20Admin%2C%20saya%20ingin%20konsultasi%20dan%20dibantu%20untuk%20cek%20premi%20asuransi%20mobil%20saya." target="_blank" rel="noopener noreferrer" class="hq-floating-btn hq-wa-btn" title="WhatsApp" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24">
-      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"/>
-    </svg>
-  </a>
+<!-- Tombol Instagram -->
+<a aria-label="Instagram" class="hq-floating-btn hq-ig-btn" href="https://instagram.com/asuransimobilmudah" rel="noopener noreferrer" target="_blank" title="Instagram">
+<svg viewbox="0 0 24 24">
+<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+</svg>
+</a>
+<!-- Tombol WhatsApp -->
+<a aria-label="WhatsApp" class="hq-floating-btn hq-wa-btn" href="https://wa.me/6282121647215?text=Hallo%20Admin%2C%20saya%20ingin%20konsultasi%20dan%20dibantu%20untuk%20cek%20premi%20asuransi%20mobil%20saya." rel="noopener noreferrer" target="_blank" title="WhatsApp">
+<svg viewbox="0 0 24 24">
+<path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"></path>
+</svg>
+</a>
 </div>
-  
-</body>
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div>
+<h3 style="color: var(--white); margin-bottom: 10px;">Asuransi<span style="color: var(--accent);">MobilMudah</span></h3>
+<p style="font-size: 0.9rem;">Konsultan &amp; Agen Asuransi Kendaraan Bermotor. Melayani pembuatan polis baru, perpanjangan polis, dan konsultasi klaim.</p>
+</div>
+<div>
+<h4>Kontak Langsung</h4>
+<p style="font-size: 0.9rem;">WhatsApp 0821-2164-7215</p>
+<p style="font-size: 0.9rem;">Instagram @asuransimobilmudah</p>
+<p style="font-size: 0.9rem;">Jakarta, Bogor, Depok, Tangerang, Bekasi</p>
+</div>
+<div>
+<h4>Jam Layanan</h4>
+<p style="font-size: 0.9rem;">Senin - Jumat: 09.00 - 16.00 WIB</p>
+<p style="font-size: 0.9rem;">Sabtu: 09.00 - 14.00 WIB</p>
+<p style="font-size: 0.9rem;">Bantuan Darurat Klaim: 24 Jam</p>
+</div>
+</div>
+<div class="footer-bottom">
+        © 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.
+      </div>
+</div>
+</footer></body>
 </html>
