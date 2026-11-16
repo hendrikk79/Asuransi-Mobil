@@ -498,7 +498,123 @@ body > footer .footer-bottom {
   body > header.site-header .nav-links { display:none !important; }
   body > footer .footer-grid { grid-template-columns:1fr !important; gap:24px !important; }
 }
-</style></head>
+</style>
+<style id="mobile-navigation-fix">
+/* Responsive navigation: applies ONLY to the shared top navigation header. */
+body > header.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  overflow: visible;
+}
+body > header.site-header > .container.nav-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 1140px;
+  min-height: 75px;
+  height: 75px;
+  margin: 0 auto;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+}
+body > header.site-header .logo {
+  display: inline-block;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+body > header.site-header .nav-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+}
+body > header.site-header .mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  padding: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e293b;
+  cursor: pointer;
+}
+body > header.site-header .mobile-nav-toggle .menu-icon,
+body > header.site-header .mobile-nav-toggle .menu-icon::before,
+body > header.site-header .mobile-nav-toggle .menu-icon::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  content: "";
+  position: relative;
+}
+body > header.site-header .mobile-nav-toggle .menu-icon::before {
+  position: absolute;
+  top: -6px;
+}
+body > header.site-header .mobile-nav-toggle .menu-icon::after {
+  position: absolute;
+  top: 6px;
+}
+@media (max-width: 768px) {
+  body > header.site-header > .container.nav-wrapper {
+    padding: 0 16px;
+  }
+  body > header.site-header .mobile-nav-toggle {
+    display: inline-flex;
+  }
+  body > header.site-header .nav-links {
+    display: none;
+  }
+  body > header.site-header .nav-links.is-open {
+    display: flex;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    margin: 0;
+    padding: 8px 16px 14px;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.10);
+    box-sizing: border-box;
+  }
+  body > header.site-header .nav-links.is-open a {
+    display: block;
+    width: 100%;
+    padding: 12px 4px;
+    color: #1e293b;
+    text-align: left;
+    text-decoration: none;
+    border-bottom: 1px solid #f1f5f9;
+    box-sizing: border-box;
+  }
+  body > header.site-header .nav-links.is-open a:first-child {
+    display: none;
+  }
+}
+</style>
+
+</head>
 <body>
 <header class="site-header">
         <div class="container nav-wrapper">
@@ -708,7 +824,7 @@ body > footer .footer-bottom {
     const CURRENT_YEAR = new Date().getFullYear();
     const ADMIN_WA = '6282121647215';
 
-    // Populate Year Dropdown (Current year down to 20 years ago)
+    // Populate Year Dropdown (Current year down to 15 years ago)
     const tahunSelect = document.getElementById('tahunKendaraan');
     for (let y = CURRENT_YEAR; y >= CURRENT_YEAR - 15; y--) {
       const opt = document.createElement('option');
@@ -1189,5 +1305,56 @@ body > footer .footer-bottom {
         © 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.
       </div>
 </div>
-</footer></body>
+</footer>
+<script id="mobile-navigation-script">
+(function () {
+  function setupMobileNavigation() {
+    var header = document.querySelector('body > header.site-header');
+    if (!header) return;
+    var nav = header.querySelector('.nav-links');
+    var wrapper = header.querySelector('.nav-wrapper');
+    if (!nav || !wrapper || wrapper.querySelector('.mobile-nav-toggle')) return;
+
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'mobile-nav-toggle';
+    button.setAttribute('aria-label', 'Buka menu navigasi');
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', 'mobile-site-navigation');
+    button.innerHTML = '<span class="menu-icon" aria-hidden="true"></span>';
+    nav.id = 'mobile-site-navigation';
+    wrapper.insertBefore(button, nav);
+
+    button.addEventListener('click', function () {
+      var opened = nav.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', opened ? 'true' : 'false');
+      button.setAttribute('aria-label', opened ? 'Tutup menu navigasi' : 'Buka menu navigasi');
+    });
+
+    nav.addEventListener('click', function (event) {
+      if (event.target.closest('a')) {
+        nav.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-label', 'Buka menu navigasi');
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!header.contains(event.target)) {
+        nav.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-label', 'Buka menu navigasi');
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMobileNavigation);
+  } else {
+    setupMobileNavigation();
+  }
+})();
+</script>
+
+</body>
 </html>
