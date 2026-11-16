@@ -222,7 +222,71 @@
     &copy; 2026 Asuransi Mobil Mudah &bull; Rekanan Asuransi Kendaraan Bermotor
   </footer>
 
-  <div class="hq-floating-container">
+  <!-- Floating Bubble WhatsApp & Instagram -->
+<style>
+  .hq-floating-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 9999;
+  }
+
+  .hq-floating-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .hq-floating-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .hq-floating-btn svg {
+    width: 30px;
+    height: 30px;
+    fill: currentColor;
+  }
+
+  /* Warna Khas Instagram */
+  .hq-ig-btn {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  }
+
+  /* Warna Khas WhatsApp */
+  .hq-wa-btn {
+    background-color: #25D366;
+  }
+
+  /* Penyesuaian layar HP */
+  @media (max-width: 600px) {
+    .hq-floating-container {
+      bottom: 16px;
+      right: 16px;
+      gap: 10px;
+    }
+    .hq-floating-btn {
+      width: 48px;
+      height: 48px;
+    }
+    .hq-floating-btn svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+</style>
+
+<div class="hq-floating-container">
   <!-- Tombol Instagram -->
   <a href="https://instagram.com/asuransimobilmudah" target="_blank" rel="noopener noreferrer" class="hq-floating-btn hq-ig-btn" title="Instagram" aria-label="Instagram">
     <svg viewBox="0 0 24 24">
@@ -237,7 +301,5 @@
     </svg>
   </a>
 </div>
-
-  
 </body>
 </html>
