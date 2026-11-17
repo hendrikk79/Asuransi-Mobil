@@ -426,7 +426,30 @@
       color: var(--muted);
       padding: 1.5rem 1rem 2.5rem;
     }
-  </style>
+
+    /* Perbaikan agar tombol hamburger & dropdown selalu di lapisan paling atas */
+body > header.site-header {
+  position: relative;
+  z-index: 9999;
+}
+
+body > header.site-header .mobile-nav-toggle {
+  position: relative;
+  z-index: 10001;
+  touch-action: manipulation;
+}
+
+body > header.site-header .mobile-nav-toggle .menu-icon {
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  body > header.site-header .nav-links.is-open {
+    z-index: 10000;
+    top: 100%;
+  }
+}
+</style>
 <style>
 /* Header and footer are intentionally matched to index.html. Scoped overrides
    prevent each page's original form/content CSS from changing shared layout. */
@@ -1356,5 +1379,28 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 })();
 </script>
 
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.querySelector('header.site-header .mobile-nav-toggle');
+    const navLinks = document.querySelector('header.site-header .nav-links');
+
+    if (toggleBtn && navLinks) {
+      toggleBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const isOpen = navLinks.classList.toggle('is-open');
+        toggleBtn.setAttribute('aria-expanded', isOpen);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!navLinks.contains(e.target) && !toggleBtn.contains(e.target)) {
+          navLinks.classList.remove('is-open');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  });
+</script>
+
+    
 </body>
 </html>
