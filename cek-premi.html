@@ -420,6 +420,15 @@
       background: var(--whatsapp-dark);
     }
 
+    .btn-download-pdf {
+      display:flex; align-items:center; justify-content:center; width:100%;
+      padding:.85rem; margin-top:.65rem; border:0; border-radius:10px;
+      background:var(--primary); color:#fff; font-size:.96rem;
+      font-weight:700; cursor:pointer; transition:background .2s;
+    }
+    .btn-download-pdf:hover { background:var(--primary-dark); }
+    .btn-download-pdf:disabled { opacity:.65; cursor:wait; }
+
     footer {
       text-align: center;
       font-size: 0.78rem;
@@ -644,7 +653,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 }
 </style>
 
-</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>\n</head>
 <body>
 <header class="site-header">
         <div class="container nav-wrapper">
@@ -845,6 +854,10 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <td>TJH Pihak Ketiga (<span id="resTjhLimit">Rp 0</span>)</td>
 <td id="resTjh">Rp 0</td>
 </tr>
+<tr id="rowAdminFee">
+<td>Biaya Administrasi</td>
+<td id="resAdminFee">Rp 100.000</td>
+</tr>
 <tr class="total-row">
 <td>Total Estimasi Premi</td>
 <td id="resTotalBottom">Rp 0</td>
@@ -857,6 +870,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <a class="btn-wa" href="#" id="btnWa" rel="noopener" target="_blank">
           Hubungi Admin via WhatsApp
         </a>
+<button class="btn-download-pdf" type="button" id="btnDownloadPdf">Unduh Rincian Estimasi Premi</button>
 </div>
 </aside>
 </main>
@@ -864,6 +878,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <script>
     const CURRENT_YEAR = new Date().getFullYear();
     const ADMIN_WA = '6282121647215';
+    const BIAYA_ADMINISTRASI = 100000;
 
     // Populate Year Dropdown (Current year down to 15 years ago)
     const tahunSelect = document.getElementById('tahunKendaraan');
@@ -1130,8 +1145,9 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       const premiTjh = calcTjhPremi(tjhLimit, isNiaga);
 
       const totalExt = premiBanjir + premiGempa + premiSrcc + premiTs + premiBr + premiTjh;
-      const totalLow = baseLow + loadingLow + totalExt;
-      const totalHigh = baseHigh + loadingHigh + totalExt;
+      // Biaya administrasi tetap ditambahkan pada kedua batas estimasi.
+      const totalLow = baseLow + loadingLow + totalExt + BIAYA_ADMINISTRASI;
+      const totalHigh = baseHigh + loadingHigh + totalExt + BIAYA_ADMINISTRASI;
 
       // Update Summary UI
       const wilayahLabel = wilayah === 'W1' ? 'Wilayah 1' : wilayah === 'W2' ? 'Wilayah 2' : 'Wilayah 3';
@@ -1196,7 +1212,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       if (age > 10) {
         noteHtml += ' Kendaraan usia &gt; 10 tahun otomatis dialihkan ke perlindungan TLO.';
       }
-      noteHtml += ' Belum termasuk biaya administrasi polis &amp; meterai.';
+      noteHtml += ' Biaya Administrasi Rp 100.000 sudah termasuk dalam total estimasi. Biaya meterai (jika berlaku) belum termasuk.';
       document.getElementById('resNote').innerHTML = noteHtml;
 
       // Build WhatsApp Message
@@ -1237,6 +1253,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         waLines.push(`• Perluasan Jaminan: Tidak ada`);
       }
 
+      waLines.push(`• Biaya Administrasi: ${formatRp(BIAYA_ADMINISTRASI)}`);
       waLines.push(``);
       waLines.push(`*Total Estimasi Premi: ${rangeText}*`);
       waLines.push(`Mohon dibantu untuk proses penawaran resminya. Terima kasih.`);
@@ -1247,6 +1264,125 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       // Show Result
       document.getElementById('emptyState').style.display = 'none';
       document.getElementById('resultContent').style.display = 'block';
+    });
+
+
+    // Simpan rincian hasil hitung terakhir untuk dokumen PDF.
+    let lastPremiumDetails = null;
+    document.getElementById('premiForm').addEventListener('submit', function () {
+      setTimeout(function () {
+        const val = id => (document.getElementById(id)?.textContent || '').trim();
+        if (document.getElementById('resultContent').style.display === 'none') return;
+        lastPremiumDetails = {
+          nama: val('resNama'), hp: val('resHp'), kendaraan: val('resMobil'),
+          usia: val('resUsia'), kategori: val('resKategori'),
+          wilayahJenis: val('resJenis'), up: val('resUp'),
+          total: val('resTotalBottom'), premiPokok: val('resPremiPokok'),
+          ratePokok: val('resBaseRate'),
+          loading: document.getElementById('rowLoading').style.display !== 'none' ? val('resLoadingVal') + ' (+' + val('resLoadingPct') + ')' : null,
+          banjir: document.getElementById('rowBanjir').style.display !== 'none' ? val('resBanjir') : null,
+          gempa: document.getElementById('rowGempa').style.display !== 'none' ? val('resGempa') : null,
+          srcc: document.getElementById('rowSrcc').style.display !== 'none' ? val('resSrcc') + ' (' + val('resSrccPct') + ')' : null,
+          terorisme: document.getElementById('rowTs').style.display !== 'none' ? val('resTs') + ' (' + val('resTsPct') + ')' : null,
+          bengkel: document.getElementById('rowBr').style.display !== 'none' ? val('resBr') + ' (' + val('resBrPct') + ')' : null,
+          tjh: document.getElementById('rowTjh').style.display !== 'none' ? val('resTjh') + ' (Limit ' + val('resTjhLimit') + ')' : null,
+          administrasi: formatRp(BIAYA_ADMINISTRASI),
+          tanggal: new Date().toLocaleDateString('id-ID', {day:'2-digit', month:'long', year:'numeric'})
+        };
+      }, 0);
+    });
+
+    document.getElementById('btnDownloadPdf').addEventListener('click', function () {
+      const btn = this;
+      if (!lastPremiumDetails) {
+        alert('Silakan hitung estimasi premi terlebih dahulu sebelum mengunduh rincian PDF.');
+        return;
+      }
+      if (!window.jspdf || !window.jspdf.jsPDF) {
+        alert('Fitur PDF memerlukan koneksi internet untuk memuat pustaka PDF. Silakan periksa koneksi lalu coba kembali.');
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Menyiapkan PDF...';
+      try {
+        const d = lastPremiumDetails;
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({orientation:'portrait', unit:'mm', format:'a4'});
+        const W = pdf.internal.pageSize.getWidth();
+        const L = 18, R = W - 18;
+        let y = 18;
+
+        // Kop atas berupa nama AsuransiMobilMudah saja.
+        pdf.setFont('helvetica','bold'); pdf.setFontSize(18);
+        pdf.setTextColor(15,76,129);
+        pdf.text('AsuransiMobilMudah', L, y);
+        y += 8;
+        pdf.setDrawColor(15,76,129); pdf.setLineWidth(.6);
+        pdf.line(L,y,R,y); y += 10;
+
+        const section = title => {
+          pdf.setFont('helvetica','bold'); pdf.setFontSize(11);
+          pdf.setTextColor(15,76,129); pdf.text(title,L,y); y += 6;
+        };
+        const row = (label,value,bold=false) => {
+          const lines = pdf.splitTextToSize(String(value || '-'), 88);
+          pdf.setFont('helvetica',bold?'bold':'normal'); pdf.setFontSize(9.5);
+          pdf.setTextColor(35,45,58); pdf.text(label,L,y);
+          pdf.text(lines,R,y,{align:'right'});
+          y += Math.max(6,lines.length*4.5);
+        };
+        section('DATA PEMOHON');
+        row('Nama Lengkap',d.nama); row('Nomor HP / WhatsApp',d.hp);
+        y += 2;
+        section('DATA KENDARAAN');
+        row('Merek / Tipe / Tahun',d.kendaraan); row('Usia Kendaraan',d.usia);
+        row('Kategori OJK',d.kategori); row('Wilayah & Jenis Perlindungan',d.wilayahJenis);
+        row('Nilai Pertanggungan',d.up);
+        y += 2;
+        section('RINCIAN ESTIMASI PREMI');
+        row('Premi Pokok ('+d.ratePokok+')',d.premiPokok);
+        if(d.loading) row('Loading Rate Usia',d.loading);
+        if(d.banjir) row('Perluasan Banjir & Angin Topan',d.banjir);
+        if(d.gempa) row('Perluasan Gempa Bumi & Tsunami',d.gempa);
+        if(d.srcc) row('Perluasan Huru-hara / SRCC',d.srcc);
+        if(d.terorisme) row('Perluasan Terorisme & Sabotase',d.terorisme);
+        if(d.bengkel) row('Bengkel Resmi (Authorized)',d.bengkel);
+        if(d.tjh) row('TJH Pihak Ketiga',d.tjh);
+        row('Biaya Administrasi',d.administrasi);
+        y += 1;
+        pdf.setDrawColor(160,174,192); pdf.setLineWidth(.4); pdf.line(L,y,R,y); y += 7;
+        pdf.setFont('helvetica','bold'); pdf.setFontSize(11); pdf.setTextColor(15,76,129);
+        pdf.text('TOTAL ESTIMASI PREMI',L,y);
+        pdf.text(d.total,R,y,{align:'right'}); y += 9;
+
+        pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(100,116,139);
+        const note = 'Catatan: Estimasi ini merupakan simulasi awal dan bukan polis atau penawaran resmi. Ketentuan akhir mengikuti perusahaan asuransi. Biaya administrasi Rp 100.000 telah termasuk dalam total estimasi.';
+        const noteLines = pdf.splitTextToSize(note,R-L);
+        pdf.text(noteLines,L,y); y += noteLines.length*4 + 12;
+
+        // Tanggal dibuat dan bagian tanda tangan.
+        pdf.setFont('helvetica','normal'); pdf.setFontSize(9.5); pdf.setTextColor(35,45,58);
+        pdf.text('Jakarta, ' + d.tanggal,R,y,{align:'right'}); y += 7;
+        pdf.text('Hormat kami,',R,y,{align:'right'}); y += 18;
+        pdf.setFont('helvetica','bold'); pdf.text('Asuransi Mobil Mudah',R,y,{align:'right'});
+
+        // Footer mengikuti informasi footer halaman, tanpa background warna.
+        const FY = 276;
+        pdf.setDrawColor(210,218,228); pdf.setLineWidth(.25); pdf.line(L,FY-5,R,FY-5);
+        pdf.setFont('helvetica','normal'); pdf.setFontSize(7.2); pdf.setTextColor(100,116,139);
+        pdf.text('AsuransiMobilMudah | Konsultan & Agen Asuransi Kendaraan Bermotor',W/2,FY,{align:'center'});
+        pdf.text('WhatsApp 0821-2164-7215 | Instagram @asuransimobilmudah',W/2,FY+4,{align:'center'});
+        pdf.text('Jakarta, Bogor, Depok, Tangerang, Bekasi | Senin-Jumat 09.00-16.00 WIB | Sabtu 09.00-14.00 WIB',W/2,FY+8,{align:'center'});
+        pdf.text('© 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.',W/2,FY+12,{align:'center'});
+        const filename = 'Rincian_Estimasi_Premi_' + (d.nama || 'Pemohon').replace(/[^a-z0-9_-]/gi,'_') + '.pdf';
+        pdf.save(filename);
+      } catch(err) {
+        console.error('Gagal membuat PDF:',err);
+        alert('PDF belum berhasil dibuat. Silakan coba kembali.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Unduh Rincian Estimasi Premi';
+      }
     });
 
     // Initialize state
