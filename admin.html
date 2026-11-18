@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hitungan Final Premi | Asuransi Mobil Mudah</title>
+<link href="/favicon.png" rel="icon" type="image/png"/>
+<style>
+    :root {
+      --primary: #0f3d68;
+      --primary-dark: #0a2947;
+      --accent: #e67e22;
+      --accent-hover: #d35400;
+      --whatsapp: #25d366;
+      --whatsapp-dark: #1ebe57;
+      --bg: #f4f7fa;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+      --warn-text: #92400e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      padding: 2.25rem 1.25rem 3.5rem;
+      text-align: center;
+    }
+
+    .badge-ojk {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      margin-bottom: 0.75rem;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+
+    .container {
+      max-width: 1060px;
+      margin: -2rem auto 3rem;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.07), 0 4px 10px -6px rgba(15, 23, 42, 0.05);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+
+    @media (max-width: 540px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: #334155;
+    }
+
+    .req {
+      color: #dc2626;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.94rem;
+      color: var(--text);
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 61, 104, 0.12);
+    }
+
+    .input-prefix {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-prefix span {
+      position: absolute;
+      left: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .input-prefix input {
+      padding-left: 2.35rem;
+      font-weight: 600;
+    }
+
+    .hint {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .age-alert {
+      display: none;
+      margin-top: 0.45rem;
+      padding: 0.55rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-text);
+    }
+
+    .coverage-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .coverage-option {
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .coverage-option input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .coverage-option.active {
+      border-color: var(--primary);
+      background: #f0f7ff;
+    }
+
+    .coverage-option.disabled {
+      opacity: 0.48;
+      cursor: not-allowed;
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .coverage-option strong {
+      display: block;
+      font-size: 0.92rem;
+      color: var(--primary);
+    }
+
+    .coverage-option span {
+      font-size: 0.76rem;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    .addon-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .addon-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.6rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #f8fafc;
+      cursor: pointer;
+    }
+
+    .addon-item input[type="checkbox"] {
+      margin-top: 0.2rem;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .addon-info {
+      flex: 1;
+    }
+
+    .addon-info strong {
+      font-size: 0.86rem;
+      display: block;
+      color: #1e293b;
+    }
+
+    .addon-info small {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .btn-calc {
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .btn-calc:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Result Panel */
+    .result-box {
+      position: sticky;
+      top: 1.25rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2.2rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .result-content {
+      display: none;
+    }
+
+    .summary-pill {
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.83rem;
+      margin-bottom: 1rem;
+    }
+
+    .summary-pill div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+      gap: 0.5rem;
+    }
+
+    .summary-pill div:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary-pill span:last-child {
+      text-align: right;
+    }
+
+    .price-highlight {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .price-highlight .label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #065f46;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .price-highlight .amount {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #047857;
+      margin: 0.25rem 0;
+    }
+
+    .price-highlight .sub {
+      font-size: 0.76rem;
+      color: #065f46;
+    }
+
+    .breakdown-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      margin-bottom: 1rem;
+    }
+
+    .breakdown-table td {
+      padding: 0.45rem 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .breakdown-table td:last-child {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    .breakdown-table tr.total-row td {
+      border-top: 2px solid #cbd5e1;
+      border-bottom: none;
+      padding-top: 0.65rem;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.92rem;
+    }
+
+    .note-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 0.7rem 0.85rem;
+      font-size: 0.76rem;
+      color: #92400e;
+      margin-bottom: 1rem;
+    }
+
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--whatsapp);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.96rem;
+      transition: background 0.2s;
+    }
+
+    .btn-wa:hover {
+      background: var(--whatsapp-dark);
+    }
+
+    .btn-download-pdf {
+      display:flex; align-items:center; justify-content:center; width:100%;
+      padding:.85rem; margin-top:.65rem; border:0; border-radius:10px;
+      background:var(--primary); color:#fff; font-size:.96rem;
+      font-weight:700; cursor:pointer; transition:background .2s;
+    }
+    .btn-download-pdf:hover { background:var(--primary-dark); }
+    .btn-download-pdf:disabled { opacity:.65; cursor:wait; }
+
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding: 1.5rem 1rem 2.5rem;
+    }
+
+    /* Perbaikan agar tombol hamburger & dropdown selalu di lapisan paling atas */
+body > header.site-header {
+  position: relative;
+  z-index: 9999;
+}
+
+body > header.site-header .mobile-nav-toggle {
+  position: relative;
+  z-index: 10001;
+  touch-action: manipulation;
+}
+
+body > header.site-header .mobile-nav-toggle .menu-icon {
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  body > header.site-header .nav-links.is-open {
+    z-index: 10000;
+    top: 100%;
+  }
+}
+</style>
+<style>
+/* Header and footer are intentionally matched to index.html. Scoped overrides
+   prevent each page's original form/content CSS from changing shared layout. */
+:root { --primary:#0F4C81; --primary-dark:#0A355C; --accent:#F59E0B; --white:#FFFFFF; --text-dark:#1E293B; }
+body > header.site-header {
+  display:block !important; position:sticky !important; top:0 !important; z-index:100 !important;
+  width:100% !important; height:auto !important; min-height:0 !important;
+  margin:0 !important; padding:0 !important; text-align:left !important;
+  color:var(--text-dark) !important; background:#FFFFFF !important;
+  background-image:none !important; box-shadow:0 2px 10px rgba(0,0,0,0.05) !important;
+  border:0 !important;
+}
+body > header.site-header > .container.nav-wrapper {
+  display:flex !important; width:100% !important; max-width:1140px !important;
+  height:75px !important; min-height:75px !important; margin:0 auto !important;
+  padding:0 20px !important; align-items:center !important; justify-content:space-between !important;
+  gap:0 !important; grid-template-columns:none !important; background:transparent !important;
+  border:0 !important; border-radius:0 !important; box-shadow:none !important;
+}
+body > header.site-header .logo {
+  display:inline-block !important; margin:0 !important; padding:0 !important;
+  color:#0F4C81 !important; font-family:inherit !important; font-size:1.35rem !important;
+  line-height:1.6 !important; font-weight:700 !important; text-decoration:none !important;
+  white-space:nowrap !important; background:transparent !important; border:0 !important;
+}
+body > header.site-header .logo span { color:#F59E0B !important; }
+body > header.site-header .nav-links {
+  display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important;
+  align-items:center !important; justify-content:flex-end !important; gap:28px !important;
+  margin:0 !important; padding:0 !important; background:transparent !important;
+  color:#1E293B !important; font-size:0.95rem !important; font-weight:500 !important;
+  border:0 !important; box-shadow:none !important;
+}
+body > header.site-header .nav-links a {
+  display:inline !important; margin:0 !important; padding:0 !important; color:#1E293B !important;
+  font-family:inherit !important; font-size:0.95rem !important; line-height:1.6 !important;
+  font-weight:500 !important; text-decoration:none !important; background:transparent !important;
+  border:0 !important; border-radius:0 !important; box-shadow:none !important;
+}
+body > header.site-header .nav-links a:hover { color:#0F4C81 !important; }
+body > footer {
+  display:block !important; width:100% !important; margin:0 !important; margin-top:0 !important;
+  padding:50px 0 30px !important; text-align:left !important; font-size:16px !important;
+  line-height:1.6 !important; color:#CBD5E1 !important; background:#0F172A !important;
+  background-image:none !important; border:0 !important; box-shadow:none !important;
+}
+body > footer > .container {
+  display:block !important; width:100% !important; max-width:1140px !important;
+  margin:0 auto !important; padding:0 20px !important; grid-template-columns:none !important;
+  gap:0 !important; background:transparent !important; border:0 !important;
+  border-radius:0 !important; box-shadow:none !important;
+}
+body > footer .footer-grid {
+  display:grid !important; grid-template-columns:1.5fr 1fr 1fr !important;
+  gap:30px !important; margin:0 0 35px !important; padding:0 !important;
+  background:transparent !important; border:0 !important;
+}
+body > footer .footer-grid > div { display:block !important; min-width:0 !important; }
+body > footer .footer-grid h3 { color:#FFFFFF !important; margin:0 0 10px !important; }
+body > footer .footer-grid h3 span { color:#F59E0B !important; }
+body > footer .footer-grid h4 { color:#FFFFFF !important; margin:0 0 12px !important; }
+body > footer .footer-grid p { color:#CBD5E1 !important; margin:0 0 0.6em !important; line-height:1.6 !important; }
+body > footer .footer-bottom {
+  display:block !important; text-align:center !important; margin:0 !important; padding:25px 0 0 !important;
+  border-top:1px solid #1E293B !important; font-size:0.85rem !important; color:#CBD5E1 !important;
+}
+@media (max-width:768px) {
+  body > header.site-header > .container.nav-wrapper { height:75px !important; min-height:75px !important; }
+  body > header.site-header .nav-links { display:none !important; }
+  body > footer .footer-grid { grid-template-columns:1fr !important; gap:24px !important; }
+}
+</style>
+<style id="mobile-navigation-fix">
+/* Responsive navigation: applies ONLY to the shared top navigation header. */
+body > header.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+body > header.site-header > .container.nav-wrapper {
+  position: relative !important;
+  display: flex !important;
+  width: 100% !important;
+  max-width: 1140px !important;
+  min-height: 75px !important;
+  height: 75px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  box-sizing: border-box !important;
+}
+body > header.site-header .logo {
+  display: inline-block !important;
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+}
+body > header.site-header .nav-links {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 28px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body > header.site-header .mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  padding: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e293b;
+  cursor: pointer;
+  position: relative;
+  z-index: 1002;
+  touch-action: manipulation;
+}
+body > header.site-header .mobile-nav-toggle .menu-icon {
+  pointer-events: none;
+}
+body > header.site-header .mobile-nav-toggle .menu-icon,
+body > header.site-header .mobile-nav-toggle .menu-icon::before,
+body > header.site-header .mobile-nav-toggle .menu-icon::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  content: "";
+  position: relative;
+}
+body > header.site-header .mobile-nav-toggle .menu-icon::before {
+  position: absolute;
+  top: -6px;
+}
+body > header.site-header .mobile-nav-toggle .menu-icon::after {
+  position: absolute;
+  top: 6px;
+}
+@media (max-width: 768px) {
+  body > header.site-header > .container.nav-wrapper {
+    padding: 0 16px !important;
+  }
+  body > header.site-header .mobile-nav-toggle {
+    display: inline-flex !important;
+  }
+  body > header.site-header .nav-links {
+    display: none !important;
+  }
+  body > header.site-header .nav-links.is-open {
+    display: flex !important;
+    position: absolute !important;
+    top: 75px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1001 !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 8px 16px 14px !important;
+    background: #ffffff !important;
+    border-top: 1px solid #e2e8f0 !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.10) !important;
+    box-sizing: border-box !important;
+  }
+  body > header.site-header .nav-links.is-open a {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 4px !important;
+    color: #1e293b !important;
+    text-align: left !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    box-sizing: border-box !important;
+  }
+  body > header.site-header .nav-links.is-open a:first-child {
+    display: none !important;
+  }
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>\n</head>
+<body>
+<header class="site-header">
+        <div class="container nav-wrapper">
+            <a class="logo" href="/">Asuransi<span>MobilMudah</span></a>
+            <nav class="nav-links">
+            <a href="/"></a>
+            <a href="/cek-premi">Cek Premi</a>
+            <a href="/asuransi-rekanan">Asuransi Rekanan</a>
+            <a href="/proses-klaim">Klaim</a>
+        </nav>
+    </div>
+</header>
+<!-- Menu Navigasi Sederhana -->
+
+<header>
+<div class="badge-ojk">Mengacu Tarif Resmi OJK • SEOJK No. 6/SEOJK.05/2017</div>
+<h1>Simulasi Premi Asuransi Kendaraan Bermotor</h1>
+<p>Hitung estimasi premi asuransi mobil pribadi, pickup/truk, maupun bus secara transparan dalam hitungan detik sesuai ketentuan batas bawah &amp; batas atas OJK.</p>
+</header>
+<main class="container">
+<!-- FORM INPUT -->
+<section class="card">
+<div class="card-title">Data Pemohon &amp; Kendaraan</div>
+<form id="premiForm" novalidate="">
+<div class="grid-2">
+<div class="form-group">
+<label for="namaPemohon">Nama Lengkap <span class="req">*</span></label>
+<input id="namaPemohon" placeholder="Contoh: Hendrik Qin" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="noHp">Nomor HP / WhatsApp <span class="req">*</span></label>
+<input id="noHp" placeholder="Contoh: 082121647215" required="" type="tel"/>
+</div>
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label for="jenisKendaraan">Jenis / Kategori Kendaraan <span class="req">*</span></label>
+<select id="jenisKendaraan">
+<option value="PENUMPANG">Mobil Penumpang (Kategori 1 - 5)</option>
+<option value="TRUK_PICKUP">Truk &amp; Pickup (Kategori 6)</option>
+<option value="BUS">Bus (Kategori 7)</option>
+</select>
+</div>
+<div class="form-group">
+<label for="tahunKendaraan">Tahun Pembuatan<span class="req">*</span></label>
+<select id="tahunKendaraan"></select>
+</div>
+</div>
+<div class="age-alert" id="ageAlert"></div>
+<div class="grid-2">
+<div class="form-group">
+<label for="merkMobil">Merek &amp; Tipe Kendaraan <span class="req">*</span></label>
+<input id="merkMobil" placeholder="Contoh: Toyota Avanza G / Hino Dutro / Mercedes Bus" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="wilayah">Wilayah Plat Nomor<span class="req">*</span></label>
+<select id="wilayah">
+<option value="W1">Wilayah 1 (Sumatera &amp; Kepulauan sekitarnya)</option>
+<option selected="" value="W2">Wilayah 2 (DKI Jakarta, Jawa Barat, Banten)</option>
+<option value="W3">Wilayah 3 (Jawa Tengah, Jawa Timur, Bali, Kalimantan, Sulawesi, dll.)</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="hargaPasaran">Harga Pasaran Kendaraan / Uang Pertanggungan (Rp) <span class="req">*</span></label>
+<div class="input-prefix">
+<span>Rp</span>
+<input id="hargaPasaran" inputmode="numeric" placeholder="250.000.000" required="" type="text"/>
+</div>
+<div class="hint" id="kategoriHint">Masukkan nilai pertanggungan sesuai harga pasar kendaraan saat ini.</div>
+</div>
+<div class="grid-2">
+<div class="form-group">
+<label for="pilihanTarif">Pilihan Tarif Premi</label>
+<select id="pilihanTarif"><option value="low">Batas Bawah OJK</option><option value="high">Batas Atas OJK</option></select>
+<div class="hint">Pilih satu tarif untuk menghasilkan satu nilai premi final.</div>
+</div>
+<div class="form-group">
+<label for="jenisDiskon">Jenis Diskon</label>
+<select id="jenisDiskon"><option value="rupiah">Nominal Rupiah (Rp)</option><option value="persen">Persentase (%)</option></select>
+</div>
+</div>
+<div class="form-group">
+<label for="nilaiDiskon">Nilai Diskon</label>
+<input id="nilaiDiskon" type="number" min="0" step="any" inputmode="decimal" placeholder="Masukkan nominal diskon atau persen" value="0">
+<div class="hint">Diskon dihitung dari premi sebelum biaya administrasi. Biaya administrasi Rp100.000 ditambahkan setelah diskon.</div>
+</div>
+<div class="form-group">
+<label>Jenis Perlindungan Utama<span class="req">*</span></label>
+<div class="coverage-toggle">
+<label class="coverage-option active" id="optComp">
+<input checked="" name="jenisPertanggungan" type="radio" value="COMPREHENSIVE"/>
+<strong>Comprehensive (All Risk)</strong>
+<span>Menanggung kerusakan ringan, berat, hingga kehilangan.</span>
+</label>
+<label class="coverage-option" id="optTlo">
+<input name="jenisPertanggungan" type="radio" value="TLO"/>
+<strong>Total Loss Only (TLO)</strong>
+<span>Menanggung kehilangan atau kerusakan ≥ 75% nilai kendaraan.</span>
+</label>
+</div>
+</div>
+<div class="form-group">
+<label>Perluasan Jaminan Opsional (Tabel IV.B OJK)</label>
+<div class="addon-list">
+<label class="addon-item">
+<input id="extBanjir" type="checkbox"/>
+<div class="addon-info">
+<strong>Banjir termasuk Angin Topan (0,10%)</strong>
+<small>Menanggung kerusakan akibat banjir, genangan air, badai, dan angin topan.</small>
+</div>
+</label>
+<label class="addon-item">
+<input id="extGempa" type="checkbox"/>
+<div class="addon-info">
+<strong>Gempa Bumi, Tsunami (0,10%)</strong>
+<small>Menanggung risiko gempa bumi, tsunami, dan letusan gunung berapi.</small>
+</div>
+</label>
+<label class="addon-item">
+<input id="extSrcc" type="checkbox"/>
+<div class="addon-info">
+<strong>Huru-hara dan Kerusuhan / SRCC (<span id="rateSrccLabel">0,05%</span>)</strong>
+<small>Menanggung kerusakan akibat kerusuhan, pemogokan, dan penghalangan kerja.</small>
+</div>
+</label>
+<label class="addon-item">
+<input id="extTs" type="checkbox"/>
+<div class="addon-info">
+<strong>Terorisme dan Sabotase (<span id="rateTsLabel">0,05%</span>)</strong>
+<small>Menanggung kerugian akibat tindakan terorisme dan sabotase.</small>
+</div>
+</label>
+<label class="addon-item">
+<input id="extBr" type="checkbox"/>
+<div class="addon-info">
+<strong>Bengkel Resmi (Authorized) (<span id="rateBrLabel">0,10%</span>)</strong>
+<small>Perbaikan mobil di Bengkel Resmi Rekanan.</small>
+</div>
+</label>
+<div class="addon-item" style="flex-direction: column; align-items: stretch;">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<strong style="font-size:0.86rem;">Tanggung Jawab Hukum (TJH) Pihak Ketiga</strong>
+<small id="tjhRateHint" style="color:var(--muted);">Tarif Progresif Penumpang</small>
+</div>
+<select id="tjhLimit" style="margin-top:0.35rem;">
+<option value="0">Tidak Perlu TJH Pihak Ketiga</option>
+<option value="10000000">Limit Rp 10.000.000</option>
+<option value="15000000">Limit Rp 15.000.000</option>
+<option value="20000000">Limit Rp 20.000.000</option>
+<option value="25000000">Limit Rp 25.000.000</option>
+<option value="50000000">Limit Rp 50.000.000</option>
+<option value="75000000">Limit Rp 75.000.000</option>
+<option value="100000000">Limit Rp 100.000.000</option>
+</select>
+</div>
+</div>
+</div>
+<button class="btn-calc" type="submit">Hitung Estimasi Premi Sekarang</button>
+</form>
+</section>
+<!-- RESULT PANEL -->
+<aside class="card result-box">
+<div class="card-title">Hasil Simulasi Premi</div>
+<div class="empty-state" id="emptyState">
+        Lengkapi data pemohon, kendaraan, tahun pembuatan, dan harga pasaran terlebih dahulu, lalu klik <strong>Hitung Estimasi Premi Sekarang</strong> untuk melihat rincian biaya asuransi Anda.
+      </div>
+<div class="result-content" id="resultContent">
+<div class="summary-pill">
+<div><span>Nama Pemohon:</span><strong id="resNama">-</strong></div>
+<div><span>No. HP / WA:</span><strong id="resHp">-</strong></div>
+<div><span>Kendaraan:</span><strong id="resMobil">-</strong></div>
+<div><span>Usia Kendaraan:</span><strong id="resUsia">-</strong></div>
+<div><span>Kategori OJK:</span><strong id="resKategori">-</strong></div>
+<div><span>Wilayah &amp; Jenis:</span><strong id="resJenis">-</strong></div>
+<div><span>Nilai Pertanggungan:</span><strong id="resUp">-</strong></div>
+</div>
+<div class="price-highlight">
+<div class="label">Total Premi Final Tahunan</div>
+<div class="amount" id="resTotalRange">Rp 0</div>
+<div class="sub" id="resRateInfo">Tarif dasar OJK terpilih: 0%</div>
+</div>
+<table class="breakdown-table">
+<tbody>
+<tr>
+<td>Premi Pokok (<span id="resBaseRate">0% - 0%</span>)</td>
+<td id="resPremiPokok">Rp 0</td>
+</tr>
+<tr id="rowLoading" style="display:none;">
+<td>Loading Rate Usia (<span id="resLoadingPct">+0%</span>)</td>
+<td id="resLoadingVal">Rp 0</td>
+</tr>
+<tr id="rowBanjir" style="display:none;">
+<td>Perluasan Banjir &amp; Angin Topan (0,10%)</td>
+<td id="resBanjir">Rp 0</td>
+</tr>
+<tr id="rowGempa" style="display:none;">
+<td>Perluasan Gempa Bumi &amp; Tsunami (0,10%)</td>
+<td id="resGempa">Rp 0</td>
+</tr>
+<tr id="rowSrcc" style="display:none;">
+<td>Perluasan SRCC (<span id="resSrccPct">0,05%</span>)</td>
+<td id="resSrcc">Rp 0</td>
+</tr>
+<tr id="rowTs" style="display:none;">
+<td>Perluasan Terorisme &amp; Sabotase (<span id="resTsPct">0,05%</span>)</td>
+<td id="resTs">Rp 0</td>
+</tr>
+<tr id="rowBr" style="display:none;">
+<td>Bengkel Resmi (Authorized) (<span id="resBrPct">0,10%</span>)</td>
+<td id="resBr">Rp 0</td>
+</tr>
+<tr id="rowTjh" style="display:none;">
+<td>TJH Pihak Ketiga (<span id="resTjhLimit">Rp 0</span>)</td>
+<td id="resTjh">Rp 0</td>
+</tr>
+<tr>
+<td>Subtotal Sebelum Diskon</td>
+<td id="resSubtotal">Rp 0</td>
+</tr>
+<tr id="rowDiscount">
+<td>Diskon (<span id="resDiscountLabel">Rp</span>)</td>
+<td id="resDiscount">Rp 0</td>
+</tr>
+<tr id="rowAdminFee">
+<td>Biaya Administrasi</td>
+<td id="resAdminFee">Rp 100.000</td>
+</tr>
+<tr class="total-row">
+<td>Total Estimasi Premi</td>
+<td id="resTotalBottom">Rp 0</td>
+</tr>
+</tbody>
+</table>
+<div class="note-box" id="resNote">
+<strong>Catatan Ketentuan OJK:</strong> Risiko Sendiri (Deductible) standar kendaraan roda 4 minimum Rp 300.000/kejadian. Belum termasuk biaya administrasi polis &amp; meterai.
+        </div>
+<a class="btn-wa" href="#" id="btnWa" rel="noopener" target="_blank">
+          Hubungi Admin via WhatsApp
+        </a>
+<button class="btn-download-pdf" type="button" id="btnDownloadPdf">Unduh Rincian Premi Final</button>
+</div>
+</aside>
+</main>
+
+<script>
+    const CURRENT_YEAR = new Date().getFullYear();
+    const ADMIN_WA = '6282121647215';
+    const BIAYA_ADMINISTRASI = 100000;
+
+    // Populate Year Dropdown (Current year down to 15 years ago)
+    const tahunSelect = document.getElementById('tahunKendaraan');
+    for (let y = CURRENT_YEAR; y >= CURRENT_YEAR - 15; y--) {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y;
+      tahunSelect.appendChild(opt);
+    }
+
+    // Format Rupiah Input
+    const hargaInput = document.getElementById('hargaPasaran');
+    hargaInput.addEventListener('input', function () {
+      const raw = this.value.replace(/[^0-9]/g, '');
+      this.value = raw ? parseInt(raw, 10).toLocaleString('id-ID') : '';
+    });
+
+    function formatRp(num) {
+      return 'Rp ' + Math.round(num).toLocaleString('id-ID');
+    }
+
+    function formatPct(dec) {
+      return (dec * 100).toFixed(2).replace('.', ',') + '%';
+    }
+
+    // Coverage Radio Styling & Logic
+    const optComp = document.getElementById('optComp');
+    const optTlo = document.getElementById('optTlo');
+    const radioComp = optComp.querySelector('input');
+    const radioTlo = optTlo.querySelector('input');
+
+    function syncCoverageUI() {
+      const isTlo = radioTlo.checked;
+      optComp.classList.toggle('active', !isTlo);
+      optTlo.classList.toggle('active', isTlo);
+
+      const srccRateText = isTlo ? '0,035%' : '0,05%';
+      document.getElementById('rateSrccLabel').textContent = srccRateText;
+      document.getElementById('rateTsLabel').textContent = srccRateText;
+    }
+
+    radioComp.addEventListener('change', syncCoverageUI);
+    radioTlo.addEventListener('change', syncCoverageUI);
+
+    // Check Vehicle Age Rules:
+    // > 5 years: loading rate +5% per year from base premium (Year 6 = +5%, Year 7 = +10%, etc.)
+    // > 10 years: only TLO allowed (Comprehensive disabled)
+    function evaluateVehicleAge() {
+      const selectedYear = parseInt(tahunSelect.value, 10);
+      const age = CURRENT_YEAR - selectedYear;
+      const ageAlert = document.getElementById('ageAlert');
+
+      if (age > 10) {
+        // Force TLO & disable Comprehensive
+        radioComp.disabled = true;
+        optComp.classList.add('disabled');
+        radioTlo.checked = true;
+        syncCoverageUI();
+
+        const loadingPct = (age - 5) * 5;
+        ageAlert.style.display = 'block';
+        ageAlert.innerHTML = `Usia kendaraan <strong>${age} tahun</strong> (&gt; 10 tahun dari tahun berjalan ${CURRENT_YEAR}). Sesuai ketentuan underwriting, perlindungan hanya tersedia untuk kategori <strong>Total Loss Only (TLO)</strong> dengan loading rate usia sebesar <strong>+${loadingPct}%</strong> dari premi dasar.`;
+      } else if (age > 5) {
+        radioComp.disabled = false;
+        optComp.classList.remove('disabled');
+
+        const loadingPct = (age - 5) * 5;
+        ageAlert.style.display = 'block';
+        ageAlert.innerHTML = `Usia kendaraan <strong>${age} tahun</strong> (&gt; 5 tahun dari tahun berjalan ${CURRENT_YEAR}). Dikenakan tambahan <strong>Loading Rate Usia sebesar +${loadingPct}%</strong> dari nilai premi dasar.`;
+      } else {
+        radioComp.disabled = false;
+        optComp.classList.remove('disabled');
+        ageAlert.style.display = 'none';
+      }
+
+      return age;
+    }
+
+    tahunSelect.addEventListener('change', evaluateVehicleAge);
+
+    // Update TJH hint when vehicle category changes
+    const jenisKendaraanSelect = document.getElementById('jenisKendaraan');
+    jenisKendaraanSelect.addEventListener('change', function () {
+      const isNiaga = this.value === 'TRUK_PICKUP' || this.value === 'BUS';
+      document.getElementById('tjhRateHint').textContent = isNiaga
+        ? 'Tarif Progresif Niaga/Truk/Bus'
+        : 'Tarif Progresif Penumpang';
+    });
+
+    // Tariff Lookup Table IV.A SEOJK No. 6/SEOJK.05/2017
+    function getBaseRate(jenisKendaraan, up, wilayah, jenisPertanggungan) {
+      if (jenisKendaraan === 'TRUK_PICKUP') {
+        const rates = {
+          COMPREHENSIVE: {
+            W1: [0.0242, 0.0267],
+            W2: [0.0239, 0.0263],
+            W3: [0.0223, 0.0246]
+          },
+          TLO: {
+            W1: [0.0088, 0.0107],
+            W2: [0.0168, 0.0202],
+            W3: [0.0081, 0.0098]
+          }
+        };
+        return {
+          kategori: 'Kategori 6 (Truk & Pickup)',
+          range: rates[jenisPertanggungan][wilayah]
+        };
+      }
+
+      if (jenisKendaraan === 'BUS') {
+        const rates = {
+          COMPREHENSIVE: {
+            W1: [0.0104, 0.0114],
+            W2: [0.0104, 0.0114],
+            W3: [0.0088, 0.0097]
+          },
+          TLO: {
+            W1: [0.0023, 0.0029],
+            W2: [0.0023, 0.0029],
+            W3: [0.0018, 0.0022]
+          }
+        };
+        return {
+          kategori: 'Kategori 7 (Bus)',
+          range: rates[jenisPertanggungan][wilayah]
+        };
+      }
+
+      // Mobil Penumpang (Kategori 1 - 5)
+      let katIndex = 0;
+      let katLabel = 'Kategori 1 (UP s.d. Rp 125 Juta)';
+      if (up <= 125000000) {
+        katIndex = 0;
+        katLabel = 'Kategori 1 (UP s.d. Rp 125 Juta)';
+      } else if (up <= 200000000) {
+        katIndex = 1;
+        katLabel = 'Kategori 2 (UP > Rp 125 Juta - 200 Juta)';
+      } else if (up <= 400000000) {
+        katIndex = 2;
+        katLabel = 'Kategori 3 (UP > Rp 200 Juta - 400 Juta)';
+      } else if (up <= 800000000) {
+        katIndex = 3;
+        katLabel = 'Kategori 4 (UP > Rp 400 Juta - 800 Juta)';
+      } else {
+        katIndex = 4;
+        katLabel = 'Kategori 5 (UP > Rp 800 Juta)';
+      }
+
+      const passengerRates = {
+        COMPREHENSIVE: [
+          { W1: [0.0382, 0.0420], W2: [0.0326, 0.0359], W3: [0.0253, 0.0278] },
+          { W1: [0.0267, 0.0294], W2: [0.0247, 0.0272], W3: [0.0269, 0.0296] },
+          { W1: [0.0218, 0.0240], W2: [0.0208, 0.0229], W3: [0.0179, 0.0197] },
+          { W1: [0.0120, 0.0132], W2: [0.0120, 0.0132], W3: [0.0114, 0.0125] },
+          { W1: [0.0105, 0.0116], W2: [0.0105, 0.0116], W3: [0.0105, 0.0116] }
+        ],
+        TLO: [
+          { W1: [0.0047, 0.0056], W2: [0.0065, 0.0078], W3: [0.0051, 0.0056] },
+          { W1: [0.0063, 0.0069], W2: [0.0044, 0.0053], W3: [0.0044, 0.0048] },
+          { W1: [0.0041, 0.0046], W2: [0.0038, 0.0042], W3: [0.0029, 0.0035] },
+          { W1: [0.0025, 0.0030], W2: [0.0025, 0.0030], W3: [0.0023, 0.0027] },
+          { W1: [0.0020, 0.0024], W2: [0.0020, 0.0024], W3: [0.0020, 0.0024] }
+        ]
+      };
+
+      return {
+        kategori: katLabel,
+        range: passengerRates[jenisPertanggungan][katIndex][wilayah]
+      };
+    }
+
+    // Progressive TJH Pihak Ketiga (Tabel IV.B No. 5)
+    function calcTjhPremi(limit, isNiaga) {
+      if (limit <= 0) return 0;
+      const r1 = isNiaga ? 0.015 : 0.01;
+      const r2 = isNiaga ? 0.0075 : 0.005;
+      const r3 = isNiaga ? 0.00375 : 0.0025;
+
+      let premi = 0;
+      const tier1 = Math.min(limit, 25000000);
+      premi += tier1 * r1;
+
+      if (limit > 25000000) {
+        const tier2 = Math.min(limit - 25000000, 25000000);
+        premi += tier2 * r2;
+      }
+
+      if (limit > 50000000) {
+        const tier3 = Math.min(limit - 50000000, 50000000);
+        premi += tier3 * r3;
+      }
+
+      return premi;
+    }
+
+    // Form Submission & Calculation
+    document.getElementById('premiForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const namaPemohon = document.getElementById('namaPemohon').value.trim();
+      const noHp = document.getElementById('noHp').value.trim();
+      const jenisKendaraan = jenisKendaraanSelect.value;
+      const tahun = parseInt(tahunSelect.value, 10);
+      const merkMobil = document.getElementById('merkMobil').value.trim();
+      const wilayah = document.getElementById('wilayah').value;
+      const upRaw = hargaInput.value.replace(/[^0-9]/g, '');
+      const up = upRaw ? parseInt(upRaw, 10) : 0;
+
+      if (!namaPemohon) {
+        alert('Silakan masukkan Nama Lengkap Anda.');
+        document.getElementById('namaPemohon').focus();
+        return;
+      }
+      if (!noHp) {
+        alert('Silakan masukkan Nomor HP / WhatsApp Anda.');
+        document.getElementById('noHp').focus();
+        return;
+      }
+      if (!merkMobil) {
+        alert('Silakan masukkan Merek & Tipe Kendaraan.');
+        document.getElementById('merkMobil').focus();
+        return;
+      }
+      if (up <= 0) {
+        alert('Silakan masukkan Harga Pasaran Kendaraan yang valid.');
+        hargaInput.focus();
+        return;
+      }
+
+      const age = evaluateVehicleAge();
+      const jenisPertanggungan = radioTlo.checked ? 'TLO' : 'COMPREHENSIVE';
+      const isTlo = jenisPertanggungan === 'TLO';
+      const isNiaga = jenisKendaraan === 'TRUK_PICKUP' || jenisKendaraan === 'BUS';
+
+      // Base Premium
+      const baseInfo = getBaseRate(jenisKendaraan, up, wilayah, jenisPertanggungan);
+      const [rateLow, rateHigh] = baseInfo.range;
+      const pilihanTarif = document.getElementById('pilihanTarif').value;
+      const selectedRate = pilihanTarif === 'high' ? rateHigh : rateLow;
+      const selectedRateLabel = pilihanTarif === 'high' ? 'Batas Atas OJK' : 'Batas Bawah OJK';
+      const basePremium = up * selectedRate;
+
+      // Age Loading Rate (> 5 years: +5% per year from base premium)
+      const loadingFactor = age > 5 ? (age - 5) * 0.05 : 0;
+      const loadingPctDisplay = age > 5 ? (age - 5) * 5 : 0;
+      const loadingPremium = basePremium * loadingFactor;
+
+      // Extensions
+      const useBanjir = document.getElementById('extBanjir').checked;
+      const useGempa = document.getElementById('extGempa').checked;
+      const useSrcc = document.getElementById('extSrcc').checked;
+      const useTs = document.getElementById('extTs').checked;
+      const useBr = document.getElementById('extBr').checked;
+      const tjhLimit = parseInt(document.getElementById('tjhLimit').value, 10);
+
+      const rateSrcc = isTlo ? 0.00035 : 0.0005;
+      const rateTs = isTlo ? 0.00035 : 0.0005;
+
+      const premiBanjir = useBanjir ? up * 0.001 : 0;
+      const premiGempa = useGempa ? up * 0.001 : 0;
+      const premiSrcc = useSrcc ? up * rateSrcc : 0;
+      const premiTs = useTs ? up * rateTs : 0;
+      const premiBr = useBr ? up * 0.001 : 0;
+      const premiTjh = calcTjhPremi(tjhLimit, isNiaga);
+
+      const totalExt = premiBanjir + premiGempa + premiSrcc + premiTs + premiBr + premiTjh;
+      // Diskon memotong premi sebelum biaya administrasi.
+      const subtotalBeforeDiscount = basePremium + loadingPremium + totalExt;
+      const discountType = document.getElementById('jenisDiskon').value;
+      const discountInput = Math.max(0, Number(document.getElementById('nilaiDiskon').value) || 0);
+      const discountRaw = discountType === 'persen' ? subtotalBeforeDiscount * discountInput / 100 : discountInput;
+      const discountAmount = Math.min(subtotalBeforeDiscount, discountRaw);
+      const premiumAfterDiscount = subtotalBeforeDiscount - discountAmount;
+      const finalTotal = premiumAfterDiscount + BIAYA_ADMINISTRASI;
+
+      // Update Summary UI
+      const wilayahLabel = wilayah === 'W1' ? 'Wilayah 1' : wilayah === 'W2' ? 'Wilayah 2' : 'Wilayah 3';
+      const jenisLabel = isTlo ? 'Total Loss Only (TLO)' : 'Comprehensive';
+
+      document.getElementById('resNama').textContent = namaPemohon;
+      document.getElementById('resHp').textContent = noHp;
+      document.getElementById('resMobil').textContent = `${merkMobil} (${tahun})`;
+      document.getElementById('resUsia').textContent = age === 0 ? 'Baru (< 1 Tahun)' : `${age} Tahun`;
+      document.getElementById('resKategori').textContent = baseInfo.kategori;
+      document.getElementById('resJenis').textContent = `${wilayahLabel} - ${jenisLabel}`;
+      document.getElementById('resUp').textContent = formatRp(up);
+
+      const totalText = formatRp(finalTotal);
+      const baseText = formatRp(basePremium);
+
+      document.getElementById('resTotalRange').textContent = totalText;
+      document.getElementById('resRateInfo').textContent = `${selectedRateLabel}: ${formatPct(selectedRate)}`;
+      document.getElementById('resBaseRate').textContent = formatPct(selectedRate);
+      document.getElementById('resPremiPokok').textContent = baseText;
+      document.getElementById('resSubtotal').textContent = formatRp(subtotalBeforeDiscount);
+      document.getElementById('resDiscountLabel').textContent = discountType === 'persen' ? `${discountInput}%` : 'Rupiah';
+      document.getElementById('resDiscount').textContent = '− ' + formatRp(discountAmount);
+
+      // Loading Row
+      const rowLoading = document.getElementById('rowLoading');
+      if (loadingFactor > 0) {
+        rowLoading.style.display = 'table-row';
+        document.getElementById('resLoadingPct').textContent = `+${loadingPctDisplay}%`;
+        document.getElementById('resLoadingVal').textContent = formatRp(loadingPremium);
+      } else {
+        rowLoading.style.display = 'none';
+      }
+
+      // Extension Rows
+      document.getElementById('rowBanjir').style.display = useBanjir ? 'table-row' : 'none';
+      document.getElementById('resBanjir').textContent = formatRp(premiBanjir);
+
+      document.getElementById('rowGempa').style.display = useGempa ? 'table-row' : 'none';
+      document.getElementById('resGempa').textContent = formatRp(premiGempa);
+
+      document.getElementById('rowSrcc').style.display = useSrcc ? 'table-row' : 'none';
+      document.getElementById('resSrccPct').textContent = isTlo ? '0,035%' : '0,05%';
+      document.getElementById('resSrcc').textContent = formatRp(premiSrcc);
+
+      document.getElementById('rowTs').style.display = useTs ? 'table-row' : 'none';
+      document.getElementById('resTsPct').textContent = isTlo ? '0,035%' : '0,05%';
+      document.getElementById('resTs').textContent = formatRp(premiTs);
+
+      document.getElementById('rowBr').style.display = useBr ? 'table-row' : 'none';
+      document.getElementById('resBrPct').textContent = '0,10%';
+      document.getElementById('resBr').textContent = formatRp(premiBr);
+
+      document.getElementById('rowTjh').style.display = tjhLimit > 0 ? 'table-row' : 'none';
+      document.getElementById('resTjhLimit').textContent = formatRp(tjhLimit);
+      document.getElementById('resTjh').textContent = formatRp(premiTjh);
+
+      document.getElementById('resTotalBottom').textContent = totalText;
+
+      // Dynamic Note
+      let noteHtml = '<strong>Catatan Ketentuan OJK:</strong> Risiko Sendiri (Deductible) standar kendaraan roda 4 minimum Rp 300.000/kejadian.';
+      if (useBanjir || useGempa) {
+        noteHtml += ' Untuk risiko Banjir/Angin Topan &amp; Gempa Bumi/Tsunami berlaku risiko sendiri 10% dari klaim disetujui (minimum Rp 500.000/kejadian).';
+      }
+      if (age > 10) {
+        noteHtml += ' Kendaraan usia &gt; 10 tahun otomatis dialihkan ke perlindungan TLO.';
+      }
+      noteHtml += ' Diskon mengurangi premi sebelum biaya administrasi. Biaya Administrasi Rp 100.000 ditambahkan setelah diskon. Biaya meterai (jika berlaku) belum termasuk.';
+      document.getElementById('resNote').innerHTML = noteHtml;
+
+      // Build WhatsApp Message
+      let extList = [];
+      if (useBanjir) extList.push(`- Banjir & Angin Topan (0,100%): ${formatRp(premiBanjir)}`);
+      if (useGempa) extList.push(`- Gempa Bumi & Tsunami (0,100%): ${formatRp(premiGempa)}`);
+      if (useSrcc) extList.push(`- SRCC (${isTlo ? '0,035%' : '0,05%'}): ${formatRp(premiSrcc)}`);
+      if (useTs) extList.push(`- Terorisme & Sabotase (${isTlo ? '0,035%' : '0,05%'}): ${formatRp(premiTs)}`);
+      if (useBr) extList.push(`- Bengkel Resmi (Authorized) (0,10%): ${formatRp(premiBr)}`);
+      if (tjhLimit > 0) extList.push(`- TJH Pihak Ketiga (Limit ${formatRp(tjhLimit)}): ${formatRp(premiTjh)}`);
+
+      const waLines = [
+        `Halo Admin, saya ingin mengajukan penawaran Asuransi Kendaraan dengan rincian simulasi berikut:`,
+        ``,
+        `*DATA PEMOHON*`,
+        `• Nama: ${namaPemohon}`,
+        `• No. HP/WA: ${noHp}`,
+        ``,
+        `*DATA KENDARAAN*`,
+        `• Kategori OJK: ${baseInfo.kategori}`,
+        `• Merek/Tipe: ${merkMobil}`,
+        `• Tahun Pembuatan: ${tahun} (Usia ${age} tahun)`,
+        `• Wilayah: ${wilayahLabel}`,
+        `• Harga Pertanggungan: ${formatRp(up)}`,
+        `• Perlindungan: ${jenisLabel}`,
+        ``,
+        `*RINCIAN ESTIMASI PREMI*`,
+        `• Pilihan Tarif: ${selectedRateLabel} (${formatPct(selectedRate)})`,
+        `• Premi Pokok: ${baseText}`
+      ];
+
+      if (loadingFactor > 0) {
+        waLines.push(`• Loading Rate Usia (+${loadingPctDisplay}%): ${formatRp(loadingPremium)}`);
+      }
+      if (extList.length > 0) {
+        waLines.push(`• Perluasan Jaminan:`);
+        waLines.push(...extList);
+      } else {
+        waLines.push(`• Perluasan Jaminan: Tidak ada`);
+      }
+
+      waLines.push(`• Subtotal sebelum diskon: ${formatRp(subtotalBeforeDiscount)}`);
+      waLines.push(`• Diskon: − ${formatRp(discountAmount)}`);
+      waLines.push(`• Biaya Administrasi: ${formatRp(BIAYA_ADMINISTRASI)}`);
+      waLines.push(``);
+      waLines.push(`*Total Premi Final: ${totalText}*`);
+      waLines.push(`Mohon dibantu untuk proses penawaran resminya. Terima kasih.`);
+
+      const waUrl = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(waLines.join('\n'))}`;
+      document.getElementById('btnWa').href = waUrl;
+
+      // Show Result
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('resultContent').style.display = 'block';
+    });
+
+
+    // Simpan rincian hasil hitung terakhir untuk dokumen PDF.
+    let lastPremiumDetails = null;
+    document.getElementById('premiForm').addEventListener('submit', function () {
+      setTimeout(function () {
+        const val = id => (document.getElementById(id)?.textContent || '').trim();
+        if (document.getElementById('resultContent').style.display === 'none') return;
+        lastPremiumDetails = {
+          nama: val('resNama'), hp: val('resHp'), kendaraan: val('resMobil'),
+          usia: val('resUsia'), kategori: val('resKategori'),
+          wilayahJenis: val('resJenis'), up: val('resUp'),
+          total: val('resTotalBottom'), premiPokok: val('resPremiPokok'),
+          ratePokok: val('resBaseRate'), pilihanTarif: val('resRateInfo'),
+          diskon: val('resDiscount'), diskonLabel: val('resDiscountLabel'), subtotal: val('resSubtotal'),
+          loading: document.getElementById('rowLoading').style.display !== 'none' ? val('resLoadingVal') + ' (+' + val('resLoadingPct') + ')' : null,
+          banjir: document.getElementById('rowBanjir').style.display !== 'none' ? val('resBanjir') : null,
+          gempa: document.getElementById('rowGempa').style.display !== 'none' ? val('resGempa') : null,
+          srcc: document.getElementById('rowSrcc').style.display !== 'none' ? val('resSrcc') + ' (' + val('resSrccPct') + ')' : null,
+          terorisme: document.getElementById('rowTs').style.display !== 'none' ? val('resTs') + ' (' + val('resTsPct') + ')' : null,
+          bengkel: document.getElementById('rowBr').style.display !== 'none' ? val('resBr') + ' (' + val('resBrPct') + ')' : null,
+          tjh: document.getElementById('rowTjh').style.display !== 'none' ? val('resTjh') + ' (Limit ' + val('resTjhLimit') + ')' : null,
+          administrasi: formatRp(BIAYA_ADMINISTRASI),
+          tanggal: new Date().toLocaleDateString('id-ID', {day:'2-digit', month:'long', year:'numeric'})
+        };
+      }, 0);
+    });
+
+    document.getElementById('btnDownloadPdf').addEventListener('click', function () {
+      const btn = this;
+      if (!lastPremiumDetails) {
+        alert('Silakan hitung estimasi premi terlebih dahulu sebelum mengunduh rincian PDF.');
+        return;
+      }
+      if (!window.jspdf || !window.jspdf.jsPDF) {
+        alert('Fitur PDF memerlukan koneksi internet untuk memuat pustaka PDF. Silakan periksa koneksi lalu coba kembali.');
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Menyiapkan PDF...';
+      try {
+        const d = lastPremiumDetails;
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({orientation:'portrait', unit:'mm', format:'a4'});
+        const W = pdf.internal.pageSize.getWidth();
+        const L = 18, R = W - 18;
+        let y = 18;
+
+        // Kop atas berupa nama AsuransiMobilMudah saja.
+        pdf.setFont('helvetica','bold'); pdf.setFontSize(18);
+        pdf.setTextColor(15,76,129);
+        pdf.text('AsuransiMobilMudah', L, y);
+        y += 8;
+        pdf.setDrawColor(15,76,129); pdf.setLineWidth(.6);
+        pdf.line(L,y,R,y); y += 10;
+
+        const section = title => {
+          pdf.setFont('helvetica','bold'); pdf.setFontSize(11);
+          pdf.setTextColor(15,76,129); pdf.text(title,L,y); y += 6;
+        };
+        const row = (label,value,bold=false) => {
+          const lines = pdf.splitTextToSize(String(value || '-'), 88);
+          pdf.setFont('helvetica',bold?'bold':'normal'); pdf.setFontSize(9.5);
+          pdf.setTextColor(35,45,58); pdf.text(label,L,y);
+          pdf.text(lines,R,y,{align:'right'});
+          y += Math.max(6,lines.length*4.5);
+        };
+        section('DATA PEMOHON');
+        row('Nama Lengkap',d.nama); row('Nomor HP / WhatsApp',d.hp);
+        y += 2;
+        section('DATA KENDARAAN');
+        row('Merek / Tipe / Tahun',d.kendaraan); row('Usia Kendaraan',d.usia);
+        row('Kategori OJK',d.kategori); row('Wilayah & Jenis Perlindungan',d.wilayahJenis);
+        row('Nilai Pertanggungan',d.up);
+        y += 2;
+        section('RINCIAN ESTIMASI PREMI');
+        row('Pilihan Tarif',d.pilihanTarif);
+        row('Premi Pokok ('+d.ratePokok+')',d.premiPokok);
+        if(d.loading) row('Loading Rate Usia',d.loading);
+        if(d.banjir) row('Perluasan Banjir & Angin Topan',d.banjir);
+        if(d.gempa) row('Perluasan Gempa Bumi & Tsunami',d.gempa);
+        if(d.srcc) row('Perluasan Huru-hara / SRCC',d.srcc);
+        if(d.terorisme) row('Perluasan Terorisme & Sabotase',d.terorisme);
+        if(d.bengkel) row('Bengkel Resmi (Authorized)',d.bengkel);
+        if(d.tjh) row('TJH Pihak Ketiga',d.tjh);
+        row('Subtotal Sebelum Diskon',d.subtotal);
+        row('Diskon ('+d.diskonLabel+')',d.diskon);
+        row('Biaya Administrasi (setelah diskon)',d.administrasi);
+        y += 1;
+        pdf.setDrawColor(160,174,192); pdf.setLineWidth(.4); pdf.line(L,y,R,y); y += 7;
+        pdf.setFont('helvetica','bold'); pdf.setFontSize(11); pdf.setTextColor(15,76,129);
+        pdf.text('TOTAL ESTIMASI PREMI',L,y);
+        pdf.text(d.total,R,y,{align:'right'}); y += 9;
+
+        pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(100,116,139);
+        const note = 'Catatan: Estimasi ini merupakan simulasi awal dan bukan polis atau penawaran resmi. Ketentuan akhir mengikuti perusahaan asuransi. Diskon mengurangi premi sebelum biaya administrasi Rp 100.000.';
+        const noteLines = pdf.splitTextToSize(note,R-L);
+        pdf.text(noteLines,L,y); y += noteLines.length*4 + 12;
+
+        // Tanggal dibuat dan bagian tanda tangan.
+        pdf.setFont('helvetica','normal'); pdf.setFontSize(9.5); pdf.setTextColor(35,45,58);
+        pdf.text('Jakarta, ' + d.tanggal,R,y,{align:'right'}); y += 7;
+        pdf.text('Hormat kami,',R,y,{align:'right'}); y += 18;
+        pdf.setFont('helvetica','bold'); pdf.text('Asuransi Mobil Mudah',R,y,{align:'right'});
+
+        // Footer mengikuti informasi footer halaman, tanpa background warna.
+        const FY = 276;
+        pdf.setDrawColor(210,218,228); pdf.setLineWidth(.25); pdf.line(L,FY-5,R,FY-5);
+        pdf.setFont('helvetica','normal'); pdf.setFontSize(7.2); pdf.setTextColor(100,116,139);
+        pdf.text('AsuransiMobilMudah | Konsultan & Agen Asuransi Kendaraan Bermotor',W/2,FY,{align:'center'});
+        pdf.text('WhatsApp 0821-2164-7215 | Instagram @asuransimobilmudah',W/2,FY+4,{align:'center'});
+        pdf.text('Jakarta, Bogor, Depok, Tangerang, Bekasi | Senin-Jumat 09.00-16.00 WIB | Sabtu 09.00-14.00 WIB',W/2,FY+8,{align:'center'});
+        pdf.text('© 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.',W/2,FY+12,{align:'center'});
+        const filename = 'Rincian_Estimasi_Premi_' + (d.nama || 'Pemohon').replace(/[^a-z0-9_-]/gi,'_') + '.pdf';
+        pdf.save(filename);
+      } catch(err) {
+        console.error('Gagal membuat PDF:',err);
+        alert('PDF belum berhasil dibuat. Silakan coba kembali.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Unduh Rincian Premi Final';
+      }
+    });
+
+    // Initialize state
+    evaluateVehicleAge();
+  </script>
+<!-- Floating Bubble WhatsApp & Instagram -->
+<style>
+  .hq-floating-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 9999;
+  }
+
+  .hq-floating-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .hq-floating-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .hq-floating-btn svg {
+    width: 30px;
+    height: 30px;
+    fill: currentColor;
+  }
+
+  /* Warna Khas Instagram */
+  .hq-ig-btn {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  }
+
+  /* Warna Khas WhatsApp */
+  .hq-wa-btn {
+    background-color: #25D366;
+  }
+
+  /* Penyesuaian layar HP */
+  @media (max-width: 600px) {
+    .hq-floating-container {
+      bottom: 16px;
+      right: 16px;
+      gap: 10px;
+    }
+    .hq-floating-btn {
+      width: 48px;
+      height: 48px;
+    }
+    .hq-floating-btn svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+</style>
+<div class="hq-floating-container">
+<!-- Tombol Instagram -->
+<a aria-label="Instagram" class="hq-floating-btn hq-ig-btn" href="https://instagram.com/asuransimobilmudah" rel="noopener noreferrer" target="_blank" title="Instagram">
+<svg viewbox="0 0 24 24">
+<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+</svg>
+</a>
+<!-- Tombol WhatsApp -->
+<a aria-label="WhatsApp" class="hq-floating-btn hq-wa-btn" href="https://wa.me/6282121647215?text=Hallo%20Admin%2C%20saya%20ingin%20konsultasi%20dan%20dibantu%20untuk%20cek%20premi%20asuransi%20mobil%20saya." rel="noopener noreferrer" target="_blank" title="WhatsApp">
+<svg viewbox="0 0 24 24">
+<path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"></path>
+</svg>
+</a>
+</div>
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div>
+<h3 style="color: var(--white); margin-bottom: 10px;">Asuransi<span style="color: var(--accent);">MobilMudah</span></h3>
+<p style="font-size: 0.9rem;">Konsultan &amp; Agen Asuransi Kendaraan Bermotor. Melayani pembuatan polis baru, perpanjangan polis, dan konsultasi klaim.</p>
+</div>
+<div>
+<h4>Kontak Langsung</h4>
+<p style="font-size: 0.9rem;">WhatsApp 0821-2164-7215</p>
+<p style="font-size: 0.9rem;">Instagram @asuransimobilmudah</p>
+<p style="font-size: 0.9rem;">Jakarta, Bogor, Depok, Tangerang, Bekasi</p>
+</div>
+<div>
+<h4>Jam Layanan</h4>
+<p style="font-size: 0.9rem;">Senin - Jumat: 09.00 - 16.00 WIB</p>
+<p style="font-size: 0.9rem;">Sabtu: 09.00 - 14.00 WIB</p>
+<p style="font-size: 0.9rem;">Bantuan Darurat Klaim: 24 Jam</p>
+</div>
+</div>
+<div class="footer-bottom">
+        © 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.
+      </div>
+</div>
+</footer>
+<script id="mobile-navigation-script">
+(function () {
+  function setupMobileNavigation() {
+    var header = document.querySelector('body > header.site-header');
+    if (!header) return;
+    var nav = header.querySelector('.nav-links');
+    var wrapper = header.querySelector('.nav-wrapper');
+    if (!nav || !wrapper || wrapper.querySelector('.mobile-nav-toggle')) return;
+
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'mobile-nav-toggle';
+    button.setAttribute('aria-label', 'Buka menu navigasi');
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', 'mobile-site-navigation');
+    button.innerHTML = '<span class="menu-icon" aria-hidden="true"></span>';
+    nav.id = 'mobile-site-navigation';
+    wrapper.insertBefore(button, nav);
+
+    button.addEventListener('click', function () {
+      var opened = nav.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', opened ? 'true' : 'false');
+      button.setAttribute('aria-label', opened ? 'Tutup menu navigasi' : 'Buka menu navigasi');
+    });
+
+    nav.addEventListener('click', function (event) {
+      if (event.target.closest('a')) {
+        nav.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-label', 'Buka menu navigasi');
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!header.contains(event.target)) {
+        nav.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-label', 'Buka menu navigasi');
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMobileNavigation);
+  } else {
+    setupMobileNavigation();
+  }
+})();
+</script>
+<script id="mobile-navigation-script">
+(function () {
+  function setupMobileNavigation() {
+    document.querySelectorAll('body > header.site-header').forEach(function (header) {
+      var nav = header.querySelector('.nav-links');
+      var wrapper = header.querySelector('.nav-wrapper');
+      if (!nav || !wrapper || wrapper.querySelector('.mobile-nav-toggle')) return;
+
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'mobile-nav-toggle';
+      button.setAttribute('aria-label', 'Buka menu navigasi');
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-controls', 'mobile-site-navigation');
+      button.innerHTML = '<span class="menu-icon" aria-hidden="true"></span>';
+      nav.id = 'mobile-site-navigation';
+      wrapper.insertBefore(button, nav);
+
+      button.addEventListener('click', function () {
+        var opened = nav.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', opened ? 'true' : 'false');
+        button.setAttribute('aria-label', opened ? 'Tutup menu navigasi' : 'Buka menu navigasi');
+      });
+
+      nav.addEventListener('click', function (event) {
+        if (event.target.closest('a')) {
+          nav.classList.remove('is-open');
+          button.setAttribute('aria-expanded', 'false');
+          button.setAttribute('aria-label', 'Buka menu navigasi');
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        if (!header.contains(event.target)) {
+          nav.classList.remove('is-open');
+          button.setAttribute('aria-expanded', 'false');
+          button.setAttribute('aria-label', 'Buka menu navigasi');
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMobileNavigation);
+  } else {
+    setupMobileNavigation();
+  }
+})();
+</script>
+    
+</body>
+</html>
