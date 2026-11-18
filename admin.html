@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Hitungan Final Premi | Asuransi Mobil Mudah</title>
+<title>Portal Admin | Asuransi Mobil Mudah</title>
 <link href="/favicon.png" rel="icon" type="image/png"/>
 <style>
     :root {
@@ -673,33 +673,29 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         <div class="container nav-wrapper">
             <a class="logo" href="/">Asuransi<span>MobilMudah</span></a>
             <nav class="nav-links">
-            <a href="/"></a>
-            <a href="/cek-premi">Cek Premi</a>
-            <a href="/asuransi-rekanan">Asuransi Rekanan</a>
-            <a href="/proses-klaim">Klaim</a>
-        </nav>
+            </nav>
     </div>
 </header>
 <!-- Menu Navigasi Sederhana -->
 
 <header>
 <div class="badge-ojk">Mengacu Tarif Resmi OJK • SEOJK No. 6/SEOJK.05/2017</div>
-<h1>Simulasi Premi Asuransi Kendaraan Bermotor</h1>
-<p>Hitung estimasi premi asuransi mobil pribadi, pickup/truk, maupun bus secara transparan dalam hitungan detik sesuai ketentuan batas bawah &amp; batas atas OJK.</p>
+<h1>Kalkulator Penawaran Premi Asuransi Mobil</h1>
+<p>Hitung Premi Mobil Nasabah dengan hitungan yang dikirimkan nasabah. Cek harga pasaran dan pilih batas sesuai dengan kondisi dan resiko yang tampak.</p>
 </header>
 <main class="container">
 <!-- FORM INPUT -->
 <section class="card">
-<div class="card-title">Data Pemohon &amp; Kendaraan</div>
+<div class="card-title">Data Nasabah &amp; Kendaraan</div>
 <form id="premiForm" novalidate="">
 <div class="grid-2">
 <div class="form-group">
 <label for="namaPemohon">Nama Lengkap <span class="req">*</span></label>
-<input id="namaPemohon" placeholder="Contoh: Hendrik Qin" required="" type="text"/>
+<input id="namaPemohon" placeholder="" required="" type="text"/>
 </div>
 <div class="form-group">
 <label for="noHp">Nomor HP / WhatsApp <span class="req">*</span></label>
-<input id="noHp" placeholder="Contoh: 082121647215" required="" type="tel"/>
+<input id="noHp" placeholder="" required="" type="tel"/>
 </div>
 </div>
 <div class="grid-2">
@@ -720,7 +716,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <div class="grid-2">
 <div class="form-group">
 <label for="merkMobil">Merek &amp; Tipe Kendaraan <span class="req">*</span></label>
-<input id="merkMobil" placeholder="Contoh: Toyota Avanza G / Hino Dutro / Mercedes Bus" required="" type="text"/>
+<input id="merkMobil" placeholder="Contoh: TOYOTA AVANZA G / HINO DUTRO / MERCEDES BUS" required="" type="text"/>
 </div>
 <div class="form-group">
 <label for="wilayah">Wilayah Plat Nomor<span class="req">*</span></label>
@@ -732,7 +728,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 </div>
 </div>
 <div class="form-group">
-<label for="hargaPasaran">Harga Pasaran Kendaraan / Uang Pertanggungan (Rp) <span class="req">*</span></label>
+<label for="hargaPasaran">Uang Pertanggungan (Rp) <span class="req">*</span></label>
 <div class="input-prefix">
 <span>Rp</span>
 <input id="hargaPasaran" inputmode="numeric" placeholder="250.000.000" required="" type="text"/>
@@ -742,17 +738,17 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <div class="grid-3">
 <div class="form-group">
 <label for="pilihanTarif">Pilihan Tarif Premi</label>
-<select id="pilihanTarif"><option value="low">Batas Bawah OJK</option><option value="high">Batas Atas OJK</option></select>
+<select id="pilihanTarif"><option value="low">Batas Bawah</option><option value="high">Batas Atas</option></select>
 <div class="hint">Pilih satu tarif untuk menghasilkan satu nilai premi final.</div>
 </div>
 <div class="form-group">
 <label for="jenisDiskon">Jenis Diskon</label>
-<select id="jenisDiskon"><option value="rupiah">Nominal Rupiah (Rp)</option><option value="persen">Persentase (%)</option></select>
+<select id="jenisDiskon"><option value="rupiah">Nominal</option><option value="persen">Persentase</option></select>
 </div>
 <div class="form-group">
 <label for="nilaiDiskon">Nilai Diskon</label>
 <input id="nilaiDiskon" type="number" min="0" step="any" inputmode="decimal" placeholder="Masukkan nilai diskon" value="0">
-<div class="hint">Diskon memotong premi sebelum biaya administrasi Rp100.000.</div>
+<div class="hint">Diskon memotong premi sebelum biaya administrasi.</div>
 </div>
 </div>
 <div class="form-group">
@@ -771,7 +767,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 </div>
 </div>
 <div class="form-group">
-<label>Perluasan Jaminan Opsional (Tabel IV.B OJK)</label>
+<label>Perluasan Jaminan Opsional</label>
 <div class="addon-list">
 <label class="addon-item">
 <input id="extBanjir" type="checkbox"/>
@@ -826,14 +822,14 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 </div>
 </div>
 </div>
-<button class="btn-calc" type="submit">Hitung Estimasi Premi Sekarang</button>
+<button class="btn-calc" type="submit">Hitung Premi</button>
 </form>
 </section>
 <!-- RESULT PANEL -->
 <aside class="card result-box">
-<div class="card-title">Hasil Simulasi Premi</div>
+<div class="card-title">Hasil Premi</div>
 <div class="empty-state" id="emptyState">
-        Lengkapi data pemohon, kendaraan, tahun pembuatan, dan harga pasaran terlebih dahulu, lalu klik <strong>Hitung Estimasi Premi Sekarang</strong> untuk melihat rincian biaya asuransi Anda.
+        Lengkapi data pemohon, kendaraan, tahun pembuatan, dan harga pasaran terlebih dahulu, lalu klik <strong>Hitung Premi</strong> untuk melihat rincian biaya asuransi Anda.
       </div>
 <div class="result-content" id="resultContent">
 <div class="summary-pill">
@@ -848,7 +844,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <div class="price-highlight">
 <div class="label">Total Premi Final Tahunan</div>
 <div class="amount" id="resTotalRange">Rp 0</div>
-<div class="sub" id="resRateInfo">Tarif dasar OJK terpilih: 0%</div>
+<div class="sub" id="resRateInfo">Tarif OJK: 0%</div>
 </div>
 <table class="breakdown-table">
 <tbody>
@@ -897,17 +893,14 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <td id="resAdminFee">Rp 100.000</td>
 </tr>
 <tr class="total-row">
-<td>Total Estimasi Premi</td>
+<td>Total Premi yang Harus Dibayar</td>
 <td id="resTotalBottom">Rp 0</td>
 </tr>
 </tbody>
 </table>
 <div class="note-box" id="resNote">
-<strong>Catatan Ketentuan OJK:</strong> Risiko Sendiri (Deductible) standar kendaraan roda 4 minimum Rp 300.000/kejadian. Belum termasuk biaya administrasi polis &amp; meterai.
-        </div>
+<strong>Catatan Ketentuan OJK:</strong> Risiko Sendiri (Deductible) standar kendaraan roda 4 minimum Rp 300.000/kejadian.</div>
 <a class="btn-wa" href="#" id="btnWa" rel="noopener" target="_blank">
-          Hubungi Admin via WhatsApp
-        </a>
 <button class="btn-download-pdf" type="button" id="btnDownloadPdf">Unduh Rincian Premi Final</button>
 </div>
 </aside>
@@ -1382,35 +1375,57 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
           pdf.text(lines,R,y,{align:'right'});
           y += Math.max(6,lines.length*4.5);
         };
-        section('DATA PEMOHON');
-        row('Nama Lengkap',d.nama); row('Nomor HP / WhatsApp',d.hp);
-        y += 2;
-        section('DATA KENDARAAN');
-        row('Merek / Tipe / Tahun',d.kendaraan); row('Usia Kendaraan',d.usia);
-        row('Kategori OJK',d.kategori); row('Wilayah & Jenis Perlindungan',d.wilayahJenis);
-        row('Nilai Pertanggungan',d.up);
-        y += 2;
-        section('RINCIAN ESTIMASI PREMI');
-        row('Pilihan Tarif',d.pilihanTarif);
-        row('Premi Pokok ('+d.ratePokok+')',d.premiPokok);
-        if(d.loading) row('Loading Rate Usia',d.loading);
-        if(d.banjir) row('Perluasan Banjir & Angin Topan',d.banjir);
-        if(d.gempa) row('Perluasan Gempa Bumi & Tsunami',d.gempa);
-        if(d.srcc) row('Perluasan Huru-hara / SRCC',d.srcc);
-        if(d.terorisme) row('Perluasan Terorisme & Sabotase',d.terorisme);
-        if(d.bengkel) row('Bengkel Resmi (Authorized)',d.bengkel);
-        if(d.tjh) row('TJH Pihak Ketiga',d.tjh);
-        row('Subtotal Sebelum Diskon',d.subtotal);
-        row('Diskon ('+d.diskonLabel+')',d.diskon);
-        row('Biaya Administrasi (setelah diskon)',d.administrasi);
-        y += 1;
-        pdf.setDrawColor(160,174,192); pdf.setLineWidth(.4); pdf.line(L,y,R,y); y += 7;
-        pdf.setFont('helvetica','bold'); pdf.setFontSize(11); pdf.setTextColor(15,76,129);
-        pdf.text('TOTAL ESTIMASI PREMI',L,y);
-        pdf.text(d.total,R,y,{align:'right'}); y += 9;
+        section('RINCIAN PREMI');
+            row('Premi Pokok ('+d.ratePokok+')',d.premiPokok);
+            if(d.loading) row('Loading Rate Usia',d.loading);
+            if(d.banjir) row('Perluasan Banjir & Angin Topan',d.banjir);
+            if(d.gempa) row('Perluasan Gempa Bumi & Tsunami',d.gempa);
+            if(d.srcc) row('Perluasan Huru-hara / SRCC',d.srcc);
+            if(d.terorisme) row('Perluasan Terorisme & Sabotase',d.terorisme);
+            if(d.bengkel) row('Bengkel Resmi (Authorized)',d.bengkel);
+            if(d.tjh) row('TJH Pihak Ketiga',d.tjh);
 
+// Garis penuh di atas subtotal
+            pdf.setDrawColor(0,0,0);
+            pdf.setLineWidth(0.6);
+            pdf.line(L,y,R,y);
+            y += 5;
+
+// Subtotal hitam tebal
+            pdf.setFont('helvetica','bold');
+            pdf.setFontSize(9);
+            pdf.setTextColor(0,0,0);
+            pdf.text('Subtotal Sebelum Diskon',L,y);
+            pdf.text(d.subtotal,R,y,{align:'right'});
+            y += 6;
+
+// Diskon merah tebal
+            pdf.setFont('helvetica','bold');
+            pdf.setFontSize(9);
+            pdf.setTextColor(220,0,0);
+            pdf.text('Diskon ('+d.diskonLabel+')',L,y);
+            pdf.text(d.diskon,R,y,{align:'right'});
+            y += 6;
+
+// Kembalikan warna dan font agar bagian berikutnya tetap seperti semula
+            pdf.setFont('helvetica','normal');
+            pdf.setTextColor(0,0,0);
+            row('Biaya Administrasi (setelah diskon)',d.administrasi);
+
+            y += 1;
+            pdf.setDrawColor(160,174,192);
+            pdf.setLineWidth(.4);
+            pdf.line(L,y,R,y);
+            y += 7;
+
+            pdf.setFont('helvetica','bold');
+            pdf.setFontSize(11);
+            pdf.setTextColor(15,76,129);
+            pdf.text('TOTAL PREMI YANG DIBAYAR',L,y);
+            pdf.text(d.total,R,y,{align:'right'});
+            y += 9;
         pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.setTextColor(100,116,139);
-        const note = 'Catatan: Estimasi ini merupakan simulasi awal dan bukan polis atau penawaran resmi. Ketentuan akhir mengikuti perusahaan asuransi. Diskon mengurangi premi sebelum biaya administrasi Rp 100.000.';
+        const note = 'Catatan: Hitungan ini merupakan penawaran awal dan bukan polis atau penawaran pihak asuransi resmi. Ketentuan akhir mengikuti perusahaan asuransi.;
         const noteLines = pdf.splitTextToSize(note,R-L);
         pdf.text(noteLines,L,y); y += noteLines.length*4 + 12;
 
