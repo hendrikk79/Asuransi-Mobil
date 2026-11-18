@@ -114,6 +114,19 @@
       gap: 0.9rem;
     }
 
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 540px) {
       .grid-2 {
         grid-template-columns: 1fr;
@@ -138,6 +151,7 @@
 
     input[type="text"],
     input[type="tel"],
+    input[type="number"],
     select {
       width: 100%;
       padding: 0.65rem 0.8rem;
@@ -725,7 +739,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 </div>
 <div class="hint" id="kategoriHint">Masukkan nilai pertanggungan sesuai harga pasar kendaraan saat ini.</div>
 </div>
-<div class="grid-2">
+<div class="grid-3">
 <div class="form-group">
 <label for="pilihanTarif">Pilihan Tarif Premi</label>
 <select id="pilihanTarif"><option value="low">Batas Bawah OJK</option><option value="high">Batas Atas OJK</option></select>
@@ -735,11 +749,11 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <label for="jenisDiskon">Jenis Diskon</label>
 <select id="jenisDiskon"><option value="rupiah">Nominal Rupiah (Rp)</option><option value="persen">Persentase (%)</option></select>
 </div>
-</div>
 <div class="form-group">
 <label for="nilaiDiskon">Nilai Diskon</label>
-<input id="nilaiDiskon" type="number" min="0" step="any" inputmode="decimal" placeholder="Masukkan nominal diskon atau persen" value="0">
-<div class="hint">Diskon dihitung dari premi sebelum biaya administrasi. Biaya administrasi Rp100.000 ditambahkan setelah diskon.</div>
+<input id="nilaiDiskon" type="number" min="0" step="any" inputmode="decimal" placeholder="Masukkan nilai diskon" value="0">
+<div class="hint">Diskon memotong premi sebelum biaya administrasi Rp100.000.</div>
+</div>
 </div>
 <div class="form-group">
 <label>Jenis Perlindungan Utama<span class="req">*</span></label>
