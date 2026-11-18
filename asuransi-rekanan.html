@@ -161,6 +161,57 @@
       }
     }
 
+    /* Khusus mobile: logo bergerak vertikal dari atas ke bawah.
+       Tampilan desktop tetap menggunakan slider horizontal. */
+    @keyframes scrollVertical {
+      0% {
+        transform: translateY(-50%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .slider {
+        height: 420px;
+        padding: 10px 0;
+      }
+
+      .slider::before,
+      .slider::after {
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 48px;
+      }
+
+      .slider::before {
+        top: 0;
+        bottom: auto;
+        background: linear-gradient(to bottom, #f1f5f9, transparent);
+      }
+
+      .slider::after {
+        top: auto;
+        bottom: 0;
+        background: linear-gradient(to top, #f1f5f9, transparent);
+      }
+
+      .slide-track {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        animation: scrollVertical 45s linear infinite;
+      }
+
+      .slide {
+        width: min(280px, calc(100% - 30px));
+        height: 100px;
+        margin: 10px auto;
+      }
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -438,7 +489,6 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <div class="slide">
 <img alt="FPG" src="fpg.png"/>
 <span>Asuransi FPG Indonesia</span>
-</div>
 </div>
 </div>
 </div>
