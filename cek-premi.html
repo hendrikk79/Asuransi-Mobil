@@ -1257,8 +1257,6 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       waLines.push(``);
       waLines.push(`*Total Estimasi Premi: ${rangeText}*`);
       waLines.push(`Mohon dibantu untuk proses penawaran resminya. Terima kasih.`);
-      waLines.push(``);
-      waLines.push(`Saya juga akan melampirkan file PDF \"Rincian Estimasi Premi\" yang sudah saya unduh melalui website ini sebagai dokumen pendukung.`);
 
       const waUrl = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(waLines.join('\n'))}`;
       document.getElementById('btnWa').href = waUrl;
@@ -1271,12 +1269,10 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 
     // Simpan rincian hasil hitung terakhir untuk dokumen PDF.
     let lastPremiumDetails = null;
-    let pdfDownloaded = false;
     document.getElementById('premiForm').addEventListener('submit', function () {
       setTimeout(function () {
         const val = id => (document.getElementById(id)?.textContent || '').trim();
         if (document.getElementById('resultContent').style.display === 'none') return;
-        pdfDownloaded = false;
         lastPremiumDetails = {
           nama: val('resNama'), hp: val('resHp'), kendaraan: val('resMobil'),
           usia: val('resUsia'), kategori: val('resKategori'),
@@ -1380,26 +1376,12 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         pdf.text('© 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.',W/2,FY+12,{align:'center'});
         const filename = 'Rincian_Estimasi_Premi_' + (d.nama || 'Pemohon').replace(/[^a-z0-9_-]/gi,'_') + '.pdf';
         pdf.save(filename);
-        pdfDownloaded = true;
       } catch(err) {
         console.error('Gagal membuat PDF:',err);
         alert('PDF belum berhasil dibuat. Silakan coba kembali.');
       } finally {
         btn.disabled = false;
         btn.textContent = 'Unduh Rincian Estimasi Premi';
-      }
-    });
-
-    // Pastikan PDF diunduh terlebih dahulu sebelum membuka WhatsApp.
-    document.getElementById('btnWa').addEventListener('click', function (event) {
-      if (!lastPremiumDetails) {
-        event.preventDefault();
-        alert('Silakan hitung estimasi premi terlebih dahulu.');
-        return;
-      }
-      if (!pdfDownloaded) {
-        event.preventDefault();
-        alert('Silakan klik tombol “Unduh Rincian Estimasi Premi” terlebih dahulu. Setelah PDF berhasil diunduh, klik tombol WhatsApp dan lampirkan file PDF tersebut pada percakapan Admin.');
       }
     });
 
