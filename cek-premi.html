@@ -763,9 +763,9 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 </div>
 </label>
 <label class="addon-item">
-<input id="extSrcc" type="checkbox"/>
+<input id="extBr" type="checkbox"/>
 <div class="addon-info">
-<strong>Bengkel Resmi (Authorized) (<span id="rateSrccLabel">0,10%</span>)</strong>
+<strong>Bengkel Resmi (Authorized) (<span id="rateBrLabel">0,10%</span>)</strong>
 <small>Perbaikan mobil di Bengkel Resmi Rekanan.</small>
 </div>
 </label>
@@ -837,8 +837,8 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <td>Perluasan Terorisme &amp; Sabotase (<span id="resTsPct">0,05%</span>)</td>
 <td id="resTs">Rp 0</td>
 </tr>
-<tr id="rowTs" style="display:none;">
-<td>Bengkel Resmi (Autorized) (<span id="resBrPct">0,10%%</span>)</td>
+<tr id="rowBr" style="display:none;">
+<td>Bengkel Resmi (Authorized) (<span id="resBrPct">0,10%</span>)</td>
 <td id="resBr">Rp 0</td>
 </tr>
 <tr id="rowTjh" style="display:none;">
@@ -1116,7 +1116,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       const useGempa = document.getElementById('extGempa').checked;
       const useSrcc = document.getElementById('extSrcc').checked;
       const useTs = document.getElementById('extTs').checked;
-      const useBr = documen.getElementbyId('extBr').checked;
+      const useBr = document.getElementById('extBr').checked;
       const tjhLimit = parseInt(document.getElementById('tjhLimit').value, 10);
 
       const rateSrcc = isTlo ? 0.00035 : 0.0005;
@@ -1129,7 +1129,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       const premiBr = useBr ? up * 0.001 : 0;
       const premiTjh = calcTjhPremi(tjhLimit, isNiaga);
 
-      const totalExt = premiBanjir + premiGempa + premiSrcc + premiTs + premiTjh;
+      const totalExt = premiBanjir + premiGempa + premiSrcc + premiTs + premiBr + premiTjh;
       const totalLow = baseLow + loadingLow + totalExt;
       const totalHigh = baseHigh + loadingHigh + totalExt;
 
@@ -1179,6 +1179,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       document.getElementById('resTs').textContent = formatRp(premiTs);
 
       document.getElementById('rowBr').style.display = useBr ? 'table-row' : 'none';
+      document.getElementById('resBrPct').textContent = '0,10%';
       document.getElementById('resBr').textContent = formatRp(premiBr);
 
       document.getElementById('rowTjh').style.display = tjhLimit > 0 ? 'table-row' : 'none';
@@ -1204,7 +1205,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       if (useGempa) extList.push(`- Gempa Bumi & Tsunami (0,100%): ${formatRp(premiGempa)}`);
       if (useSrcc) extList.push(`- SRCC (${isTlo ? '0,035%' : '0,05%'}): ${formatRp(premiSrcc)}`);
       if (useTs) extList.push(`- Terorisme & Sabotase (${isTlo ? '0,035%' : '0,05%'}): ${formatRp(premiTs)}`);
-      if (useBr) extList.push(`- Bengkel Resmi (Autorized) (0,100%): ${formatRp(premiBr)}`);
+      if (useBr) extList.push(`- Bengkel Resmi (Authorized) (0,10%): ${formatRp(premiBr)}`);
       if (tjhLimit > 0) extList.push(`- TJH Pihak Ketiga (Limit ${formatRp(tjhLimit)}): ${formatRp(premiTjh)}`);
 
       const waLines = [
