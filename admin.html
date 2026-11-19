@@ -692,10 +692,12 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <label for="providerAsuransi">Provider Mitra Asuransi <span class="req">*</span></label>
 <select id="providerAsuransi" required>
 <option value="">Pilih Provider Mitra Asuransi</option>
-<option value="MPM">MPM</option>
-<option value="HARTA">HARTA</option>
+<option value="MPM">Asuransi Mitra Pelindung Mustika</option>
+<option value="HARTA">Asuransi Harta Aman Pratama</option>
+<option value="AUS">Asuransi Untuk Semua</option>
+<option value="FPG">Asuransi FPG Indonesia</option>
 </select>
-<div class="hint">Pilih perusahaan asuransi rekanan untuk ditampilkan pada kop PDF.</div>
+<div class="hint">Pilih perusahaan asuransi rekanan.</div>
 </div>
 <div class="card-title">Data Nasabah &amp; Kendaraan</div>
 <form id="premiForm" novalidate="">
@@ -896,7 +898,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <td id="resTjh">Rp 0</td>
 </tr>
 <tr>
-<td>Subtotal Sebelum Diskon</td>
+<td>Subtotal</td>
 <td id="resSubtotal">Rp 0</td>
 </tr>
 <tr id="rowDiscount">
@@ -929,8 +931,10 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
     const LOGO_PDF = {
       brand: 'assets/logo-asuransimobilmudah.png',
       providers: {
-        MPM: 'assets/logo-mpm.png',
-        HARTA: 'assets/logo-harta.png'
+        MPM: 'mpm.png',
+        HARTA: 'harta.png'
+        AUS: 'aus.png'
+        FPG: 'pfg.png'
       }
     };
 
