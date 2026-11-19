@@ -1589,7 +1589,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         // Total dibuat ringkas, tanpa bidang latar biru.
         y+=1; const totalW=94,totalX=R-totalW; pdf.setDrawColor(...primary); pdf.setLineWidth(.45); pdf.line(totalX,y,R,y); y+=6;
         pdf.setFont('helvetica','bold'); pdf.setFontSize(9); pdf.setTextColor(...ink); pdf.text(isReceipt?'TOTAL DIBAYARKAN':'TOTAL TAGIHAN PREMI',totalX,y);
-        pdf.setFontSize(12); pdf.setTextColor(...primary); pdf.text(d.total,R,y+6,{align:'right'}); y+=13;
+        pdf.setFontSize(12); pdf.setTextColor(...primary); pdf.text(d.total,R,y,{align:'right'}); y+=13;
         ensureSpace(35); section('INFORMASI PEMBAYARAN BANK');
         pdf.setFont('helvetica','normal'); pdf.setFontSize(8.7); pdf.setTextColor(...ink);
         pdf.text('Nama Bank: '+(bankName||'________________________________'),L,y); y+=5;
