@@ -1567,7 +1567,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         addLogo(partnerLogo,d.provider || 'Mitra Asuransi',L+60,43,12);
         y += 17; pdf.setDrawColor(...primary); pdf.setLineWidth(.55); pdf.line(L,y,R,y); y += 8;
         pdf.setFont('helvetica','bold'); pdf.setFontSize(16); pdf.setTextColor(...primary);
-        pdf.text(isReceipt ? 'KUITANSI PEMBAYARAN' : 'INVOICE TAGIHAN PREMI',L,y);
+        pdf.text(isReceipt ? 'INVOICE PEMBAYARAN PREMI' : 'INVOICE TAGIHAN PREMI',L,y);
         pdf.setFont('helvetica','normal'); pdf.setFontSize(8.5); pdf.setTextColor(...muted);
         pdf.text('Tanggal: '+(isReceipt ? receiptDate : d.tanggal),R,y,{align:'right'}); y += 8;
         const section = title => { pdf.setFont('helvetica','bold'); pdf.setFontSize(9.5); pdf.setTextColor(...primary); pdf.text(title,L,y); y+=5; };
@@ -1613,7 +1613,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         const pages=pdf.getNumberOfPages();
         for(let page=1;page<=pages;page++){pdf.setPage(page);pdf.setDrawColor(210,218,228);pdf.setLineWidth(.2);pdf.line(L,H-12,R,H-12);pdf.setFont('helvetica','normal');pdf.setFontSize(7);pdf.setTextColor(...muted);pdf.text('AsuransiMobilMudah | WhatsApp 0821-2164-7215 | Instagram @asuransimobilmudah',W/2,H-7,{align:'center'});}
         const safeName=(d.nama||'Nasabah').replace(/[^a-z0-9_-]/gi,'_');
-        pdf.save((isReceipt?'Invoice_Lunas_':'Invoice_AMM_')+safeName+'.pdf');
+        pdf.save((isReceipt?'Invoice_Lunas_':'Invoice_Tagihan_')+safeName+'.pdf');
       } catch(err){console.error('Gagal membuat dokumen PDF:',err);alert('PDF belum berhasil dibuat. Silakan periksa kembali data dan coba ulang.');}
       finally{btn.disabled=false;btn.textContent=originalLabel;}
     }
