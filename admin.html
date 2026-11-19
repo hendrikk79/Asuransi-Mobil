@@ -739,6 +739,10 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 </div>
 </div>
 <div class="form-group">
+<label for="noPolisi">Nomor Polisi / Plat Nomor <span class="req">*</span></label>
+<input id="noPolisi" type="text" placeholder="Contoh: B 1234 ABC" required="" autocomplete="off" />
+</div>
+<div class="form-group">
 <label for="hargaPasaran">Uang Pertanggungan (Rp) <span class="req">*</span></label>
 <div class="input-prefix">
 <span>Rp</span>
@@ -911,7 +915,6 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 </table>
 <div class="note-box" id="resNote">
 <strong>Catatan Ketentuan OJK:</strong> Risiko Sendiri (Deductible) standar kendaraan roda 4 minimum Rp 300.000/kejadian.</div>
-<a class="btn-wa" href="#" id="btnWa" rel="noopener" target="_blank">Kirim Rincian via WhatsApp</a>
 <button class="btn-download-pdf" type="button" id="btnDownloadPdf">Unduh Rincian Premi Final</button>
 </div>
 </aside>
@@ -1155,6 +1158,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       }
       const merkMobil = document.getElementById('merkMobil').value.trim();
       const wilayah = document.getElementById('wilayah').value;
+      const noPolisi = document.getElementById('noPolisi').value.trim();
       const upRaw = hargaInput.value.replace(/[^0-9]/g, '');
       const up = upRaw ? parseInt(upRaw, 10) : 0;
 
@@ -1171,6 +1175,11 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       if (!merkMobil) {
         alert('Silakan masukkan Merek & Tipe Kendaraan.');
         document.getElementById('merkMobil').focus();
+        return;
+      }
+      if (!noPolisi) {
+        alert('Silakan masukkan Nomor Polisi / Plat Nomor.');
+        document.getElementById('noPolisi').focus();
         return;
       }
       if (up <= 0) {
@@ -1309,7 +1318,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
           provider: document.getElementById('providerAsuransi').value,
           nama: val('resNama'), hp: val('resHp'), kendaraan: val('resMobil'),
           usia: val('resUsia'), kategori: val('resKategori'),
-          wilayahJenis: val('resJenis'), up: val('resUp'),
+          wilayahJenis: val('resJenis'), noPolisi: document.getElementById('noPolisi').value.trim(), up: val('resUp'),
           total: val('resTotalBottom'), premiPokok: val('resPremiPokok'),
           ratePokok: val('resBaseRate'), pilihanTarif: val('resRateInfo'),
           diskon: val('resDiscount').replace(/^[−–-]\s*/, ''), diskonLabel: val('resDiscountLabel'), diskonAktif: (Number(val('resDiscount').replace(/[^0-9]/g, '')) || 0) > 0, subtotal: val('resSubtotal'),
@@ -1374,22 +1383,23 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         ]);
         const logoY = y;
         const logoMaxW = 43, logoMaxH = 16;
-        const addLogoOrFallback = (logo, fallback, centerX) => {
+        const brandX = L, crossX = L + 49, partnerX = L + 59;
+        const addLogoOrFallback = (logo, fallback, x) => {
           if (logo) {
             const ratio = Math.min(logoMaxW / logo.width, logoMaxH / logo.height);
             const w = logo.width * ratio, h = logo.height * ratio;
-            pdf.addImage(logo.data, 'PNG', centerX - w / 2, logoY + (logoMaxH - h) / 2, w, h);
+            pdf.addImage(logo.data, 'PNG', x, logoY + (logoMaxH - h) / 2, w, h);
           } else {
             pdf.setFont('helvetica', 'bold'); pdf.setFontSize(10);
-            pdf.setTextColor(15, 76, 129); pdf.text(fallback, centerX, logoY + 10, {align:'center'});
+            pdf.setTextColor(15, 76, 129); pdf.text(fallback, x, logoY + 10);
           }
         };
-        addLogoOrFallback(brandLogo, 'AsuransiMobilMudah', W * 0.27);
-        addLogoOrFallback(partnerLogo, d.provider || 'Mitra Asuransi', W * 0.73);
-        pdf.setFont('helvetica','bold'); pdf.setFontSize(16);
-        pdf.setTextColor(15,76,129); pdf.text('×', W / 2, logoY + 10, {align:'center'});
-        y += 21;
+        addLogoOrFallback(brandLogo, 'AsuransiMobilMudah', brandX);
         pdf.setFont('helvetica','bold'); pdf.setFontSize(14);
+        pdf.setTextColor(15,76,129); pdf.text('×', crossX, logoY + 10);
+        addLogoOrFallback(partnerLogo, d.provider || 'Mitra Asuransi', partnerX);
+        y += 21;
+        pdf.setFont('helvetica','bold'); pdf.setFontSize(12);
         pdf.setTextColor(15,76,129);
         pdf.text('Rincian Penawaran Premi', W / 2, y, {align:'center'});
         y += 6;
@@ -1409,7 +1419,6 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         };
         // Data tertanggung
         section('DATA TERTANGGUNG');
-        row('Provider Mitra Asuransi', d.provider);
         row('Nama Lengkap', d.nama);
         row('Nomor HP / WhatsApp', d.hp);
         y += 2;
@@ -1420,6 +1429,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         row('Usia Kendaraan', d.usia);
         row('Kategori OJK', d.kategori);
         row('Wilayah & Jenis Perlindungan', d.wilayahJenis);
+        row('Nomor Polisi / Plat Nomor', d.noPolisi);
         row('Nilai Pertanggungan', d.up);
         y += 2;
 
