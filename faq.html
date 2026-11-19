@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pusat Bantuan & QnA</title>
+    <title>FAQ | Asuransi Mobil Mudah</title>
+	<link href="/favicon.png" rel="icon" type="image/png"/>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -67,6 +68,39 @@
         #noResult { text-align: center; color: #888; display: none; margin-top: 20px; }
     </style>
 
+<style id="shared-index-header-color-and-links">
+:root {
+  --primary: #0F4C81;
+  --primary-dark: #0A355C;
+  --accent: #F59E0B;
+  --accent-hover: #D97706;
+  --white: #FFFFFF;
+}
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
+a:visited,
+a:hover,
+a:active,
+a:focus {
+  text-decoration: none !important;
+}
+body > header.site-header {
+  background: #FFFFFF !important;
+}
+body > header.site-header .logo {
+  color: #0F4C81 !important;
+  text-decoration: none !important;
+}
+body > header.site-header .logo span {
+  color: #F59E0B !important;
+}
+body > header.site-header .nav-links a {
+  text-decoration: none !important;
+}
+</style>
+
 <style id="shared-index-header-footer">
     .container {
       max-width: 1140px;
@@ -74,7 +108,7 @@
       padding: 0 20px;
     }
     header {
-      background: #ffffff !important;
+      background: var(--white);
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
       position: sticky;
       top: 0;
@@ -246,7 +280,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
     color: #1e293b !important;
     text-align: left !important;
     text-decoration: none !important;
-    border-bottom: 1px solid #f1f5f9 !important;
+    border-bottom: 0 !important;
     box-sizing: border-box !important;
   }
   body > header.site-header .nav-links.is-open a:last-child {
@@ -408,7 +442,18 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 </style>
 </style>
 
-<style id="faq-solid-white-header-fix">body > header.site-header { background-color: #ffffff !important; background: #ffffff !important; }</style>
+
+<style id="navigation-no-underline">
+body > header.site-header .nav-links a,
+body > header.site-header .nav-links a:link,
+body > header.site-header .nav-links a:visited,
+body > header.site-header .nav-links a:hover,
+body > header.site-header .nav-links a:active,
+body > header.site-header .nav-links a:focus {
+  text-decoration: none !important;
+}
+</style>
+
 </head>
 <body>
 <header class="site-header">
@@ -419,11 +464,12 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         <a href="/cek-premi">Cek Premi</a>
         <a href="/asuransi-rekanan">Asuransi Rekanan</a>
         <a href="/proses-klaim">Klaim</a>
+	<a href="/faq">FAQ</a>
       </nav>
     </div>
   </header>
     <main class="faq-content">
-    <h1>Pertanyaan yang Sering Diajukan (Q&A)</h1>
+    <h1>Pertanyaan yang Sering Diajukan</h1>
     <p class="subtitle">Ketik kata kunci di bawah atau klik pertanyaan untuk melihat jawaban.</p>
 
     <!-- Input Pencarian -->
@@ -432,23 +478,72 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
     <!-- Daftar QnA -->
     <div id="qnaContainer">
         <details class="qna-item">
-            <summary>Bagaimana cara memesan layanan atau produk?</summary>
-            <p>Anda dapat memesan langsung melalui tombol WhatsApp yang tersedia di halaman utama atau mengisi formulir pemesanan online.</p>
+            <summary>Apa itu asuransi mobil?</summary>
+            <p>Asuransi mobil adalah produk perlindungan finansial yang menanggung risiko kerugian, kerusakan, atau kehilangan kendaraan akibat kejadian tak terduga seperti kecelakaan atau pencurian, dengan imbalan pembayaran premi.</p>
         </details>
 
         <details class="qna-item">
-            <summary>Berapa lama proses pengiriman barang?</summary>
-            <p>Untuk wilayah Jabodetabek memakan waktu 1–2 hari kerja, sedangkan luar pulau Jawa sekitar 3–5 hari kerja.</p>
+            <summary>Jenis Perlindungan All Risk / Komprehensif</summary>
+            <p>Asuransi mobil All Risk (Komprehensif) adalah jenis perlindungan yang menanggung hampir semua tingkat kerusakan pada mobil—mulai dari lecet ringan, penyok, tabrakan parah, hingga kehilangan akibat pencurian—sesuai dengan syarat dan ketentuan dalam polis.</p>
+		<h3>Apa Saja yang Ditanggung?</h3>
+		<ul>
+		<li><strong>Kerusakan ringan hingga berat:</strong> Biaya perbaikan bodi atau mesin akibat tabrakan, benturan, tergelincir, atau terperosok.</li>
+		<li><strong>Perbuatan jahat orang lain:</strong> Kerusakan yang disebabkan oleh tindakan vandalisme atau perusakan disengaja oleh pihak lain.</li>
+		<li><strong>Pencurian:</strong> Kehilangan kendaraan beserta perlengkapan standarnya akibat pencurian (termasuk pencurian dengan kekerasan).</li>
+		<li><strong>Kebakaran:</strong> Kerusakan atau kehancuran mobil akibat sambaran petir, kebakaran pada mobil itu sendiri, atau kebakaran dari benda di sekitarnya.</li>
+		</ul>
+	</p>
         </details>
 
         <details class="qna-item">
-            <summary>Metode pembayaran apa saja yang diterima?</summary>
-            <p>Kami menerima pembayaran melalui transfer bank (BCA, Mandiri, BRI), QRIS, serta e-wallet seperti GoPay, OVO, dan DANA.</p>
+            <summary>Jenis Perlindungan Total Loss Only (TLO)</summary>
+            <p>Asuransi mobil Total Loss Only (TLO) adalah jenis perlindungan kendaraan yang hanya memberikan ganti rugi apabila mobil mengalami kerusakan total (biaya perbaikannya mencapai 75% atau lebih dari harga pasar mobil saat itu) atau hilang akibat pencurian.</p>
+		<h3>Apa Saja yang Ditanggung?</h3>
+		<ul>
+		<li><strong>Kerusakan parah (Constructive Total Loss)</strong>: Kecelakaan berat (tabrakan, benturan, tergelincir, atau terbakar) yang membuat kondisi mobil rusak parah hingga biaya perbaikannya menyentuh minimal 75% dari nilai kendaraan sebelum kejadian.</li>
+		<li><strong>Kehilangan akibat pencurian</strong>: Mobil dicuri (baik pencurian biasa maupun dengan kekerasan/perampasan) dan tidak ditemukan dalam batas waktu yang ditentukan dalam polis (biasanya 60 hari).</li>
+		</ul>
+		</p>
         </details>
 
         <details class="qna-item">
-            <summary>Apakah produk memiliki garansi resmi?</summary>
-            <p>Ya, seluruh produk yang kami jual dilengkapi dengan garansi resmi selama 1 tahun sejak tanggal pembelian.</p>
+            <summary>Hal yang Tidak Ditanggung oleh Asuransi Mobil</summary>
+            <p>
+		<h3>1. Pelanggaran Hukum dan Kelalaian Pengemudi</h3>
+		<ul>
+		<li>Tidak memiliki SIM sah: Kecelakaan terjadi saat pengemudi tidak memiliki SIM atau SIM sudah kedaluwarsa.</li>
+		<li>Pengaruh alkohol atau narkoba: Mengemudi dalam keadaan mabuk atau di bawah pengaruh obat-obatan terlarang.</li>
+		<li>Melanggar aturan lalu lintas: Kecelakaan akibat sengaja menerobos lampu merah, melawan arus, atau melanggar rambu lalu lintas lainnya.</li>
+		<li>Kelebihan muatan: Kerusakan akibat mengangkut penumpang atau barang melebihi kapasitas maksimal kendaraan.</li>
+		</ul>
+
+		<h3>2. Bencana Alam dan Kekacauan Sosial (Kecuali Ada Perluasan)</h3>
+		<ul>
+		<p>Secara standar (polis dasar tanpa perluasan/rider), asuransi tidak menanggung kerusakan akibat:</p>
+		<li>Bencana alam: Banjir, genangan air (water hammer), angin topan, badai, tanah longsor, gempa bumi, atau letusan gunung berapi.</li>
+		<li>Kerusuhan & terorisme: Huru-hara, pemogokan, kerusuhan massa, sabotase, hingga tindakan terorisme.</li>
+		</ul>
+
+		<h3>3. Penyalahgunaan Fungsi Kendaraan</h3>
+		<ul>
+		<li>Komersial tanpa izin: Menggunakan mobil pribadi untuk angkutan umum, taksi online, atau disewakan (rental) tanpa melaporkannya ke pihak asuransi.</li>
+		<li>Balapan & uji coba: Kerusakan akibat dipakai balapan, reli, latihan mengemudi, atau karnaval.</li>
+		<li>Tindak kejahatan: Kendaraan digunakan untuk melakukan tindak kriminal atau melarikan diri dari kejaran hukum.</li>
+		</ul>
+
+		<h3>4. Kondisi Teknis dan Keausan Alami</h3>
+		<ul>
+		<li>Keausan pemakaian: Komponen yang habis atau rusak karena usia pakai normal (misalnya ban botak, kampas rem habis, kopling aus, atau aki soak).</li>
+		<li>Kerusakan mekanis internal: Kerusakan mesin atau kelistrikan yang muncul tiba-tiba tanpa didahului kecelakaan (seperti mesin overheat karena lupa mengisi air radiator).</li>
+		<li>Modifikasi tidak terdaftar: Aksesori tambahan (seperti velg racing, audio custom, atau body kit) yang dipasang setelah pembelian mobil tetapi tidak dilaporkan dalam polis.</li>
+		</ul>
+
+		<h3>5. Penggelapan dan Kesengajaan</h3>
+		<ul>
+		<li>Penggelapan kendaraan: Mobil dibawa kabur oleh orang yang dikenal, penyewa, atau sopir pribadi sendiri (berbeda dengan pencurian oleh orang asing).</li>
+		<li>Tindakan disengaja: Kerusakan yang sengaja dibuat oleh pemilik, keluarga serumah, atau orang suruhan demi mencairkan klaim.</li>
+		</ul>
+	</p>
         </details>
     </div>
 
