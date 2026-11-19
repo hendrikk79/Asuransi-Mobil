@@ -1458,7 +1458,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         pdf.setFont('helvetica', 'bold');
         pdf.setFontSize(9);
         pdf.setTextColor(0, 0, 0);
-        pdf.text('Subtotal Sebelum Diskon', L, y);
+        pdf.text('Subtotal', L, y);
         pdf.text(d.subtotal, R, y, {align: 'right'});
         y += 6;
 
@@ -1476,7 +1476,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         pdf.setFont('helvetica', 'normal');
         pdf.setFontSize(9.5);
         pdf.setTextColor(35, 45, 58);
-        row('Biaya Administrasi (setelah diskon)', d.administrasi);
+        row('Biaya Administrasi', d.administrasi);
 
         y += 1;
         pdf.setDrawColor(160, 174, 192);
