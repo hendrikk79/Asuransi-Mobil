@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Bantuan & QnA</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .faq-content { max-width: 720px; margin: 40px auto; padding: 0 20px; }
+        h1 { text-align: center; color: #1a202c; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; }
+        
+        /* Kotak Pencarian */
+        #searchBox {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 16px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #searchBox:focus { border-color: #2563eb; }
+
+        /* Kartu QnA */
+        details {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        summary {
+            font-weight: 600;
+            font-size: 1.05em;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: "+";
+            font-size: 1.4em;
+            color: #2563eb;
+            font-weight: bold;
+        }
+        details[open] summary::after { content: "−"; }
+        details[open] summary {
+            color: #2563eb;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        p { margin: 0; color: #475569; }
+        #noResult { text-align: center; color: #888; display: none; margin-top: 20px; }
+    </style>
+
+<style id="shared-index-header-footer">
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    header {
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 75px;
+    }
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .logo span {
+      color: var(--accent);
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    .btn-nav {
+      background: var(--primary);
+      color: var(--white) !important;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-nav:hover {
+      background: var(--primary-dark);
+    }
+    footer {
+      background: #0F172A;
+      color: #CBD5E1;
+      padding: 50px 0 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 35px;
+    }
+    .footer-grid h4 {
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 25px;
+      border-top: 1px solid #1E293B;
+      font-size: 0.85rem;
+    }
+<style id="mobile-navigation-fix">
+/* Responsive navigation shared by all pages */
+body > header.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+body > header.site-header > .container.nav-wrapper {
+  position: relative !important;
+  display: flex !important;
+  width: 100% !important;
+  max-width: 1140px !important;
+  min-height: 75px !important;
+  height: 75px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  box-sizing: border-box !important;
+}
+body > header.site-header .logo {
+  display: inline-block !important;
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+}
+body > header.site-header .nav-links {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 28px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body > header.site-header .mobile-nav-toggle {
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 42px !important;
+  height: 42px !important;
+  flex: 0 0 42px !important;
+  padding: 0 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  color: #1e293b !important;
+  cursor: pointer !important;
+}
+body > header.site-header .mobile-nav-toggle .menu-icon,
+body > header.site-header .mobile-nav-toggle .menu-icon::before,
+body > header.site-header .mobile-nav-toggle .menu-icon::after {
+  display: block !important;
+  width: 20px !important;
+  height: 2px !important;
+  background: currentColor !important;
+  border-radius: 2px !important;
+  content: "" !important;
+  position: relative !important;
+}
+body > header.site-header .mobile-nav-toggle .menu-icon::before {
+  position: absolute !important;
+  top: -6px !important;
+}
+body > header.site-header .mobile-nav-toggle .menu-icon::after {
+  position: absolute !important;
+  top: 6px !important;
+}
+@media (max-width: 768px) {
+  body > header.site-header > .container.nav-wrapper {
+    padding: 0 16px !important;
+  }
+  body > header.site-header .mobile-nav-toggle {
+    display: inline-flex !important;
+  }
+  body > header.site-header .nav-links,
+  body > header.site-header .nav-links[hidden] {
+    display: none !important;
+  }
+  body > header.site-header .nav-links.is-open {
+    display: flex !important;
+    position: absolute !important;
+    top: 75px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 8px 16px 14px !important;
+    background: #ffffff !important;
+    border-top: 1px solid #e2e8f0 !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.10) !important;
+    box-sizing: border-box !important;
+  }
+  body > header.site-header .nav-links.is-open a {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 4px !important;
+    color: #1e293b !important;
+    text-align: left !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    box-sizing: border-box !important;
+  }
+  body > header.site-header .nav-links.is-open a:last-child {
+    border-bottom: 0 !important;
+  }
+  body > header.site-header .nav-links.is-open a:first-child {
+    display: none !important;
+  }
+}
+  .banner-tengah {
+  width: 100%;
+  max-width: 1060px; /* Menyamakan lebar maksimal dengan container Anda */
+  margin: 1.5rem auto; /* Membuat posisi kotak tepat di tengah halaman */
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.banner-tengah img {
+  display: inline-block;
+  max-width: 100%; /* Agar gambar tidak terpotong di layar HP */
+  height: auto;    /* Menjaga proporsi tinggi gambar tetap presisi */
+  border-radius: 12px; /* Opsional: membuat sudut banner sedikit melengkung */
+}
+  .hero-banner {
+  background: linear-gradient(135deg, #0b4f8a 0%, #083b68 100%);
+  color: #ffffff;
+  padding: 4rem 1.25rem;
+  overflow: hidden;
+}
+
+.hero-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #e2e8f0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1.1rem;
+}
+
+.hero-content h1 {
+  font-size: 2.35rem;
+  font-weight: 800;
+  line-height: 1.22;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #dbeafe;
+  margin-bottom: 1.75rem;
+  max-width: 520px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.btn-primary {
+  background-color: #f59e0b;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #d97706;
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Pengaturan Gambar Sisi Kanan */
+.hero-visual {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hero-visual img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  display: block;
+  border-radius: 0;
+  /* Opsi tambahan jika gambar masih berlatar putih agar sudutnya menyatu rapi */
+  box-shadow: none;
+
+  background: transparent;}
+
+/* Tampilan Responsif di Tablet & HP */
+@media (max-width: 860px) {
+  .hero-banner {
+    padding: 2.75rem 1.25rem;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .hero-content h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero-content p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    justify-content: center;
+  }
+
+  .hero-visual img {
+    max-width: 420px;
+  }
+}
+
+
+    footer p { color: #CBD5E1; }
+</style>
+</style>
+
+</head>
+<body>
+<header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="logo">Asuransi<span>MobilMudah</span></a>
+      <nav class="nav-links">
+        <a href="/"></a>
+        <a href="/cek-premi">Cek Premi</a>
+        <a href="/asuransi-rekanan">Asuransi Rekanan</a>
+        <a href="/proses-klaim">Klaim</a>
+	<a href="/faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+    <main class="faq-content">
+    <h1>Pertanyaan yang Sering Diajukan</h1>
+    <p class="subtitle">Ketik kata kunci di bawah atau klik pertanyaan untuk melihat jawaban.</p>
+
+    <!-- Input Pencarian -->
+    <input type="text" id="searchBox" placeholder="Cari pertanyaan atau kata kunci..." onkeyup="filterQnA()">
+
+    <!-- Daftar QnA -->
+    <div id="qnaContainer">
+        <details class="qna-item">
+            <summary>Apa itu asuransi mobil?</summary>
+            <p>Asuransi mobil adalah produk perlindungan finansial yang menanggung risiko kerugian, kerusakan, atau kehilangan kendaraan akibat kejadian tak terduga seperti kecelakaan atau pencurian, dengan imbalan pembayaran premi.</p>
+        </details>
+
+        <details class="qna-item">
+            <summary>Jenis Perlindungan All Risk / Komprehensif</summary>
+            <p>Asuransi mobil All Risk (Komprehensif) adalah jenis perlindungan yang menanggung hampir semua tingkat kerusakan pada mobil—mulai dari lecet ringan, penyok, tabrakan parah, hingga kehilangan akibat pencurian—sesuai dengan syarat dan ketentuan dalam polis.
+
+Apa Saja yang Ditanggung?
+
+• Kerusakan ringan hingga berat: Biaya perbaikan bodi atau mesin akibat tabrakan, benturan, tergelincir, atau terperosok.
+• Perbuatan jahat orang lain: Kerusakan yang disebabkan oleh tindakan vandalisme atau perusakan disengaja oleh pihak lain.
+• Pencurian: Kehilangan kendaraan beserta perlengkapan standarnya akibat pencurian (termasuk pencurian dengan kekerasan).
+• Kebakaran: Kerusakan atau kehancuran mobil akibat sambaran petir, kebakaran pada mobil itu sendiri, atau kebakaran dari benda di sekitarnya.
+</p>
+        </details>
+
+        <details class="qna-item">
+            <summary>Jenis Perlindungan Total Loss Only (TLO)</summary>
+            <p>Asuransi mobil Total Loss Only (TLO) adalah jenis perlindungan kendaraan yang hanya memberikan ganti rugi apabila mobil mengalami kerusakan total (biaya perbaikannya mencapai 75% atau lebih dari harga pasar mobil saat itu) atau hilang akibat pencurian.
+
+Apa Saja yang Ditanggung?
+
+• Kerusakan parah (Constructive Total Loss): Kecelakaan berat (tabrakan, benturan, tergelincir, atau terbakar) yang membuat kondisi mobil rusak parah hingga biaya perbaikannya menyentuh minimal 75% dari nilai kendaraan sebelum kejadian.
+• Kehilangan akibat pencurian: Mobil dicuri (baik pencurian biasa maupun dengan kekerasan/perampasan) dan tidak ditemukan dalam batas waktu yang ditentukan dalam polis (biasanya 60 hari).</p>
+        </details>
+
+        <details class="qna-item">
+            <summary>hal yang Tidak Ditanggung oleh Asuransi Mobil</summary>
+            <p>
+1. Pelanggaran Hukum & Kelalaian Pengemudi
+
+• Tidak memiliki SIM sah: Kecelakaan terjadi saat pengemudi tidak memiliki SIM atau SIM sudah kedaluwarsa.
+• Pengaruh alkohol atau narkoba: Mengemudi dalam keadaan mabuk atau di bawah pengaruh obat-obatan terlarang.
+• Melanggar aturan lalu lintas: Kecelakaan akibat sengaja menerobos lampu merah, melawan arus, atau melanggar rambu lalu lintas lainnya.
+• Kelebihan muatan: Kerusakan akibat mengangkut penumpang atau barang melebihi kapasitas maksimal kendaraan.
+
+2. Bencana Alam & Kekacauan Sosial (Kecuali Ada Perluasan)
+
+Secara standar (polis dasar tanpa perluasan/rider), asuransi tidak menanggung kerusakan akibat:
+• Bencana alam: Banjir, genangan air (water hammer), angin topan, badai, tanah longsor, gempa bumi, atau letusan gunung berapi.
+• Kerusuhan & terorisme: Huru-hara, pemogokan, kerusuhan massa, sabotase, hingga tindakan terorisme.
+
+3. Penyalahgunaan Fungsi Kendaraan
+
+• Komersial tanpa izin: Menggunakan mobil pribadi untuk angkutan umum, taksi online, atau disewakan (rental) tanpa melaporkannya ke pihak asuransi.
+• Balapan & uji coba: Kerusakan akibat dipakai balapan, reli, latihan mengemudi, atau karnaval.
+• Tindak kejahatan: Kendaraan digunakan untuk melakukan tindak kriminal atau melarikan diri dari kejaran hukum.
+
+4. Kondisi Teknis & Keausan Alami
+
+• Keausan pemakaian: Komponen yang habis atau rusak karena usia pakai normal (misalnya ban botak, kampas rem habis, kopling aus, atau aki soak).
+• Kerusakan mekanis internal: Kerusakan mesin atau kelistrikan yang muncul tiba-tiba tanpa didahului kecelakaan (seperti mesin overheat karena lupa mengisi air radiator).
+• Modifikasi tidak terdaftar: Aksesori tambahan (seperti velg racing, audio custom, atau body kit) yang dipasang setelah pembelian mobil tetapi tidak dilaporkan dalam polis.
+
+5. Penggelapan & Kesengajaan
+
+• Penggelapan kendaraan: Mobil dibawa kabur oleh orang yang dikenal, penyewa, atau sopir pribadi sendiri (berbeda dengan pencurian oleh orang asing).
+• Tindakan disengaja: Kerusakan yang sengaja dibuat oleh pemilik, keluarga serumah, atau orang suruhan demi mencairkan klaim.
+</p>
+        </details>
+    </div>
+
+    <p id="noResult">Maaf, pertanyaan yang Anda cari tidak ditemukan.</p>
+
+    <!-- Script Pencarian Otomatis -->
+    <script>
+        function filterQnA() {
+            const keyword = document.getElementById('searchBox').value.toLowerCase();
+            const items = document.getElementsByClassName('qna-item');
+            let visibleCount = 0;
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].textContent.toLowerCase();
+                if (text.includes(keyword)) {
+                    items[i].style.display = "";
+                    visibleCount++;
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+
+            document.getElementById('noResult').style.display = visibleCount === 0 ? "block" : "none";
+        }
+    </script>
+    </main>
+
+<footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3 style="color: var(--white); margin-bottom: 10px;">Asuransi<span style="color: var(--accent);">MobilMudah</span></h3>
+          <p style="font-size: 0.9rem;">Konsultan &amp; Agen Asuransi Kendaraan Bermotor. Melayani pembuatan polis baru, perpanjangan polis, dan konsultasi klaim.</p>
+        </div>
+        <div>
+          <h4>Kontak Langsung</h4>
+          <p style="font-size: 0.9rem;">WhatsApp 0821-2164-7215</p>
+          <p style="font-size: 0.9rem;">Instagram @asuransimobilmudah</p>
+          <p style="font-size: 0.9rem;">Jakarta, Bogor, Depok, Tangerang, Bekasi</p>
+        </div>
+        <div>
+          <h4>Jam Layanan</h4>
+          <p style="font-size: 0.9rem;">Senin - Jumat: 09.00 - 16.00 WIB</p>
+          <p style="font-size: 0.9rem;">Sabtu: 09.00 - 14.00 WIB</p>
+          <p style="font-size: 0.9rem;">Bantuan Darurat Klaim: 24 Jam</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.
+      </div>
+    </div>
+  </footer>
+<script id="mobile-navigation-script">
+(function () {
+  function setupMobileNavigation() {
+    document.querySelectorAll('body > header.site-header').forEach(function (header) {
+      var nav = header.querySelector('.nav-links');
+      var wrapper = header.querySelector('.nav-wrapper');
+      if (!nav || !wrapper || wrapper.querySelector('.mobile-nav-toggle')) return;
+
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'mobile-nav-toggle';
+      button.setAttribute('aria-label', 'Buka menu navigasi');
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-controls', 'mobile-site-navigation');
+      button.innerHTML = '<span class="menu-icon" aria-hidden="true"></span>';
+      nav.id = 'mobile-site-navigation';
+      wrapper.insertBefore(button, nav);
+
+      button.addEventListener('click', function () {
+        var opened = nav.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', opened ? 'true' : 'false');
+        button.setAttribute('aria-label', opened ? 'Tutup menu navigasi' : 'Buka menu navigasi');
+      });
+
+      nav.addEventListener('click', function (event) {
+        if (event.target.closest('a')) {
+          nav.classList.remove('is-open');
+          button.setAttribute('aria-expanded', 'false');
+          button.setAttribute('aria-label', 'Buka menu navigasi');
+        }
+      });
+
+      document.addEventListener('click', function (event) {
+        if (!header.contains(event.target)) {
+          nav.classList.remove('is-open');
+          button.setAttribute('aria-expanded', 'false');
+          button.setAttribute('aria-label', 'Buka menu navigasi');
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMobileNavigation);
+  } else {
+    setupMobileNavigation();
+  }
+})();
+</script>
+</body>
+</html>
