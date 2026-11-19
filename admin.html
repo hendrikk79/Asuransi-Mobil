@@ -1322,7 +1322,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
           wilayahJenis: val('resJenis'), up: val('resUp'),
           total: val('resTotalBottom'), premiPokok: val('resPremiPokok'),
           ratePokok: val('resBaseRate'), pilihanTarif: val('resRateInfo'),
-          diskon: val('resDiscount').replace(/^[−–-]\s*/, ''), diskonLabel: val('resDiscountLabel'), subtotal: val('resSubtotal'),
+          diskon: val('resDiscount').replace(/^[−–-]\s*/, ''), diskonLabel: val('resDiscountLabel'), diskonAktif: (Number(val('resDiscount').replace(/[^0-9]/g, '')) || 0) > 0, subtotal: val('resSubtotal'),
           loading: document.getElementById('rowLoading').style.display !== 'none' ? val('resLoadingVal') + ' (+' + val('resLoadingPct') + ')' : null,
           banjir: document.getElementById('rowBanjir').style.display !== 'none' ? val('resBanjir') : null,
           gempa: document.getElementById('rowGempa').style.display !== 'none' ? val('resGempa') : null,
@@ -1415,13 +1415,15 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         pdf.text(d.subtotal, R, y, {align: 'right'});
         y += 6;
 
-        // Diskon merah tebal; gunakan tanda minus ASCII agar kompatibel dengan font PDF.
-        pdf.setFont('helvetica', 'bold');
-        pdf.setFontSize(9);
-        pdf.setTextColor(220, 0, 0);
-        pdf.text('Diskon (' + d.diskonLabel + ')', L, y);
-        pdf.text('- ' + d.diskon, R, y, {align: 'right'});
-        y += 6;
+        // Section diskon hanya ditampilkan jika diskon benar-benar lebih dari Rp0.
+        if (d.diskonAktif) {
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(9);
+          pdf.setTextColor(220, 0, 0);
+          pdf.text('Diskon (' + d.diskonLabel + ')', L, y);
+          pdf.text('- ' + d.diskon, R, y, {align: 'right'});
+          y += 6;
+        }
 
         // Biaya administrasi tetap seperti semula
         pdf.setFont('helvetica', 'normal');
