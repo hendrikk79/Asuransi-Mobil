@@ -688,6 +688,15 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 <main class="container">
 <!-- FORM INPUT -->
 <section class="card">
+<div class="form-group">
+<label for="providerAsuransi">Provider Mitra Asuransi <span class="req">*</span></label>
+<select id="providerAsuransi" required>
+<option value="">Pilih Provider Mitra Asuransi</option>
+<option value="MPM">MPM</option>
+<option value="HARTA">HARTA</option>
+</select>
+<div class="hint">Pilih perusahaan asuransi rekanan untuk ditampilkan pada kop PDF.</div>
+</div>
 <div class="card-title">Data Nasabah &amp; Kendaraan</div>
 <form id="premiForm" novalidate="">
 <div class="grid-2">
@@ -711,7 +720,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 </div>
 <div class="form-group">
 <label for="tahunKendaraan">Tahun Pembuatan<span class="req">*</span></label>
-<select id="tahunKendaraan"></select>
+<select id="tahunKendaraan" required><option value="">Pilih Tahun Pembuatan</option></select>
 </div>
 </div>
 <div class="age-alert" id="ageAlert"></div>
@@ -913,7 +922,17 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
     const ADMIN_WA = '6282121647215';
     const BIAYA_ADMINISTRASI = 100000;
 
-    // Populate Year Dropdown (Current year down to 15 years ago)
+    // Ganti path berikut sesuai lokasi file logo (PNG/JPG) di website.
+    const LOGO_PDF = {
+      brand: 'assets/logo-asuransimobilmudah.png',
+      providers: {
+        MPM: 'assets/logo-mpm.png',
+        HARTA: 'assets/logo-harta.png'
+      }
+    };
+
+    // Populate Year Dropdown (Current year down to 15 years ago).
+    // Placeholder tetap ada agar pengguna diminta memilih tahun secara eksplisit.
     const tahunSelect = document.getElementById('tahunKendaraan');
     for (let y = CURRENT_YEAR; y >= CURRENT_YEAR - 15; y--) {
       const opt = document.createElement('option');
@@ -961,8 +980,14 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
     // > 10 years: only TLO allowed (Comprehensive disabled)
     function evaluateVehicleAge() {
       const selectedYear = parseInt(tahunSelect.value, 10);
-      const age = CURRENT_YEAR - selectedYear;
       const ageAlert = document.getElementById('ageAlert');
+      if (!Number.isFinite(selectedYear)) {
+        radioComp.disabled = false;
+        optComp.classList.remove('disabled');
+        ageAlert.style.display = 'none';
+        return null;
+      }
+      const age = CURRENT_YEAR - selectedYear;
 
       if (age > 10) {
         // Force TLO & disable Comprehensive
@@ -1112,10 +1137,22 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
     document.getElementById('premiForm').addEventListener('submit', function (e) {
       e.preventDefault();
 
+      const providerAsuransi = document.getElementById('providerAsuransi').value;
       const namaPemohon = document.getElementById('namaPemohon').value.trim();
       const noHp = document.getElementById('noHp').value.trim();
       const jenisKendaraan = jenisKendaraanSelect.value;
       const tahun = parseInt(tahunSelect.value, 10);
+
+      if (!providerAsuransi) {
+        alert('Silakan pilih Provider Mitra Asuransi.');
+        document.getElementById('providerAsuransi').focus();
+        return;
+      }
+      if (!Number.isFinite(tahun)) {
+        alert('Silakan pilih Tahun Pembuatan kendaraan.');
+        tahunSelect.focus();
+        return;
+      }
       const merkMobil = document.getElementById('merkMobil').value.trim();
       const wilayah = document.getElementById('wilayah').value;
       const upRaw = hargaInput.value.replace(/[^0-9]/g, '');
@@ -1257,6 +1294,11 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       noteHtml += ' Diskon mengurangi premi sebelum biaya administrasi. Biaya Administrasi Rp 100.000 ditambahkan setelah diskon. Biaya meterai (jika berlaku) belum termasuk.';
       document.getElementById('resNote').innerHTML = noteHtml;
 
+      // Tampilkan hasil setelah kalkulasi berhasil.
+      document.getElementById('emptyState').style.display = 'none';
+      document.getElementById('resultContent').style.display = 'block';
+    });
+
     // Simpan rincian hasil hitung terakhir untuk dokumen PDF.
     let lastPremiumDetails = null;
     document.getElementById('premiForm').addEventListener('submit', function () {
@@ -1264,6 +1306,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         const val = id => (document.getElementById(id)?.textContent || '').trim();
         if (document.getElementById('resultContent').style.display === 'none') return;
         lastPremiumDetails = {
+          provider: document.getElementById('providerAsuransi').value,
           nama: val('resNama'), hp: val('resHp'), kendaraan: val('resMobil'),
           usia: val('resUsia'), kategori: val('resKategori'),
           wilayahJenis: val('resJenis'), up: val('resUp'),
@@ -1283,7 +1326,27 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
       }, 0);
     });
 
-    document.getElementById('btnDownloadPdf').addEventListener('click', function () {
+    // Memuat logo sebagai gambar agar dapat disisipkan ke dokumen PDF.
+    function loadLogoForPdf(src) {
+      return new Promise(resolve => {
+        if (!src) return resolve(null);
+        const img = new Image();
+        img.onload = function () {
+          try {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth || img.width;
+            canvas.height = img.naturalHeight || img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+            resolve({ data: canvas.toDataURL('image/png'), width: canvas.width, height: canvas.height });
+          } catch (err) { resolve(null); }
+        };
+        img.onerror = () => resolve(null);
+        img.src = src;
+      });
+    }
+
+    document.getElementById('btnDownloadPdf').addEventListener('click', async function () {
       const btn = this;
       if (!lastPremiumDetails) {
         alert('Silakan hitung estimasi premi terlebih dahulu sebelum mengunduh rincian PDF.');
@@ -1303,13 +1366,35 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         const L = 18, R = W - 18;
         let y = 18;
 
-        // Kop atas berupa nama AsuransiMobilMudah saja.
-        pdf.setFont('helvetica','bold'); pdf.setFontSize(18);
+        // Kop PDF: logo AsuransiMobilMudah × logo provider mitra.
+        const providerLogoPath = LOGO_PDF.providers[d.provider] || '';
+        const [brandLogo, partnerLogo] = await Promise.all([
+          loadLogoForPdf(LOGO_PDF.brand),
+          loadLogoForPdf(providerLogoPath)
+        ]);
+        const logoY = y;
+        const logoMaxW = 43, logoMaxH = 16;
+        const addLogoOrFallback = (logo, fallback, centerX) => {
+          if (logo) {
+            const ratio = Math.min(logoMaxW / logo.width, logoMaxH / logo.height);
+            const w = logo.width * ratio, h = logo.height * ratio;
+            pdf.addImage(logo.data, 'PNG', centerX - w / 2, logoY + (logoMaxH - h) / 2, w, h);
+          } else {
+            pdf.setFont('helvetica', 'bold'); pdf.setFontSize(10);
+            pdf.setTextColor(15, 76, 129); pdf.text(fallback, centerX, logoY + 10, {align:'center'});
+          }
+        };
+        addLogoOrFallback(brandLogo, 'AsuransiMobilMudah', W * 0.27);
+        addLogoOrFallback(partnerLogo, d.provider || 'Mitra Asuransi', W * 0.73);
+        pdf.setFont('helvetica','bold'); pdf.setFontSize(16);
+        pdf.setTextColor(15,76,129); pdf.text('×', W / 2, logoY + 10, {align:'center'});
+        y += 21;
+        pdf.setFont('helvetica','bold'); pdf.setFontSize(14);
         pdf.setTextColor(15,76,129);
-        pdf.text('AsuransiMobilMudah', L, y);
-        y += 8;
+        pdf.text('Rincian Penawaran Premi', W / 2, y, {align:'center'});
+        y += 6;
         pdf.setDrawColor(15,76,129); pdf.setLineWidth(.6);
-        pdf.line(L,y,R,y); y += 10;
+        pdf.line(L,y,R,y); y += 9;
 
         const section = title => {
           pdf.setFont('helvetica','bold'); pdf.setFontSize(11);
@@ -1324,6 +1409,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         };
         // Data tertanggung
         section('DATA TERTANGGUNG');
+        row('Provider Mitra Asuransi', d.provider);
         row('Nama Lengkap', d.nama);
         row('Nomor HP / WhatsApp', d.hp);
         y += 2;
