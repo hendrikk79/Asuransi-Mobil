@@ -668,6 +668,24 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style id="year-dropdown-fix">
+#tahunKendaraan {
+  display: block !important;
+  width: 100% !important;
+  min-height: 42px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 5 !important;
+  appearance: auto !important;
+  -webkit-appearance: menulist !important;
+}
+#tahunKendaraan:disabled {
+  opacity: 1 !important;
+  cursor: pointer !important;
+}
+</style>
 </head>
 <body>
 <header class="site-header">
@@ -947,13 +965,21 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
     };
 
     // Populate Year Dropdown (Current year down to 15 years ago).
-    // Placeholder tetap ada agar pengguna diminta memilih tahun secara eksplisit.
+    // Pastikan dropdown tetap aktif dan pilihan tahun selalu terisi.
     const tahunSelect = document.getElementById('tahunKendaraan');
-    for (let y = CURRENT_YEAR; y >= CURRENT_YEAR - 15; y--) {
-      const opt = document.createElement('option');
-      opt.value = y;
-      opt.textContent = y;
-      tahunSelect.appendChild(opt);
+    tahunSelect.disabled = false;
+    tahunSelect.style.pointerEvents = 'auto';
+    tahunSelect.style.position = 'relative';
+    tahunSelect.style.zIndex = '2';
+    tahunSelect.style.appearance = 'auto';
+    tahunSelect.style.webkitAppearance = 'menulist';
+    if (tahunSelect.options.length <= 1) {
+      for (let y = CURRENT_YEAR; y >= CURRENT_YEAR - 15; y--) {
+        const opt = document.createElement('option');
+        opt.value = String(y);
+        opt.textContent = String(y);
+        tahunSelect.appendChild(opt);
+      }
     }
 
     // Format Rupiah Input
