@@ -20,12 +20,9 @@ a{color:inherit;text-decoration:none}
 .nav-links{display:flex;gap:28px;align-items:center;font-weight:500;font-size:.95rem}
 .nav-links a{padding:8px 0;transition:color .2s}
 .nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--primary)}
-.mobile-nav-toggle{display:none;background:#fff;border:1px solid #CBD5E1;width:44px;height:44px;border-radius:9px;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;color:#1E293B}
-.menu-icon,.menu-icon::before,.menu-icon::after{display:block;width:21px;height:2px;background:currentColor;border-radius:2px;position:relative;content:"";transition:transform .2s}
+.mobile-nav-toggle{display:none;background:#fff;border:1px solid #e2e8f0;width:42px;height:42px;border-radius:8px;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;color:#1E293B}
+.menu-icon,.menu-icon::before,.menu-icon::after{display:block;width:20px;height:2px;background:currentColor;border-radius:2px;position:relative;content:""}
 .menu-icon::before{position:absolute;top:-7px}.menu-icon::after{position:absolute;top:7px}
-.mobile-nav-toggle[aria-expanded="true"] .menu-icon{background:transparent}
-.mobile-nav-toggle[aria-expanded="true"] .menu-icon::before{top:0;transform:rotate(45deg);background:#1E293B}
-.mobile-nav-toggle[aria-expanded="true"] .menu-icon::after{top:0;transform:rotate(-45deg);background:#1E293B}
 .faq-content{max-width:790px;margin:0 auto;padding:48px 20px 68px;min-height:55vh}
 .faq-content h1{text-align:center;color:#1a202c;font-size:clamp(1.6rem,4vw,2.15rem);line-height:1.25;margin:0 0 12px}
 .faq-content .subtitle{text-align:center;color:#64748b;margin:0 0 28px}
@@ -58,10 +55,10 @@ footer{background:#0F172A;color:#CBD5E1;padding:50px 0 30px}
 @media(max-width:900px){.nav-links{gap:16px;font-size:.87rem}}
 @media(max-width:768px){
  .container{padding:0 16px}
- .nav-wrapper{height:68px}
+ .nav-wrapper{height:75px}
  .logo{font-size:clamp(1rem,4.2vw,1.35rem)}
  .mobile-nav-toggle{display:flex}
- .nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;align-items:stretch;gap:0;padding:8px 16px 14px;box-shadow:0 8px 16px rgba(0,0,0,.1);border-top:1px solid #e2e8f0;font-size:.95rem;max-height:calc(100dvh - 68px);overflow-y:auto}
+ .nav-links{display:none;position:absolute;top:75px;left:0;right:0;background:#fff;flex-direction:column;align-items:stretch;gap:0;padding:8px 16px 14px;box-shadow:0 8px 16px rgba(0,0,0,.1);border-top:1px solid #e2e8f0;font-size:.95rem;max-height:calc(100dvh - 75px);overflow-y:auto}
  .nav-links.is-open{display:flex}
  .nav-links a{display:block;padding:12px 5px;border-bottom:1px solid #f1f5f9}
  .nav-links a:last-child{border-bottom:0}
