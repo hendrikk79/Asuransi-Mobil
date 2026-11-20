@@ -672,18 +672,9 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 #tahunKendaraan {
   display: block !important;
   width: 100% !important;
-  min-height: 42px !important;
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
-  position: relative !important;
-  z-index: 5 !important;
-  appearance: auto !important;
-  -webkit-appearance: menulist !important;
-}
-#tahunKendaraan:disabled {
-  opacity: 1 !important;
-  cursor: pointer !important;
 }
 </style>
 </head>
@@ -965,14 +956,9 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
     };
 
     // Populate Year Dropdown (Current year down to 15 years ago).
-    // Pastikan dropdown tetap aktif dan pilihan tahun selalu terisi.
+    // Placeholder tetap ada agar pengguna diminta memilih tahun secara eksplisit.
     const tahunSelect = document.getElementById('tahunKendaraan');
     tahunSelect.disabled = false;
-    tahunSelect.style.pointerEvents = 'auto';
-    tahunSelect.style.position = 'relative';
-    tahunSelect.style.zIndex = '2';
-    tahunSelect.style.appearance = 'auto';
-    tahunSelect.style.webkitAppearance = 'menulist';
     if (tahunSelect.options.length <= 1) {
       for (let y = CURRENT_YEAR; y >= CURRENT_YEAR - 15; y--) {
         const opt = document.createElement('option');
@@ -1470,7 +1456,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         row('Kategori OJK', d.kategori);
         row('Wilayah & Jenis Perlindungan', d.wilayahJenis);
         row('Nomor Polisi / Plat Nomor', d.noPolisi);
-        row('Nilai Pertanggungan', <strong>d.up</strong>);
+        row('Nilai Pertanggungan', d.up);
         y += 2;
 
         // Rincian premi
@@ -1604,7 +1590,7 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
         pdf.setFont('helvetica','bold'); pdf.setFontSize(10.5); pdf.setTextColor(...ink); pdf.text(d.nama||'-',L+3,y+11);
         pdf.setFont('helvetica','normal'); pdf.setFontSize(8); pdf.text('No. HP / WhatsApp: '+(d.hp||'-'),L+3,y+16.5); y+=25;
         ensureSpace(40); section('INFORMASI KENDARAAN');
-        row('Merek / Tipe / Tahun',d.kendaraan); row('Nomor Polisi / Plat Nomor',d.noPolisi); row('Usia Kendaraan',d.usia); row('Kategori OJK',d.kategori); row('Wilayah & Jenis Perlindungan',d.wilayahJenis); row('Nilai Pertanggungan',<strong>d.up</strong>); y+=1;
+        row('Merek / Tipe / Tahun',d.kendaraan); row('Nomor Polisi / Plat Nomor',d.noPolisi); row('Usia Kendaraan',d.usia); row('Kategori OJK',d.kategori); row('Wilayah & Jenis Perlindungan',d.wilayahJenis); row('Nilai Pertanggungan',d.up); y+=1;
         ensureSpace(50); section('RINCIAN TAGIHAN PREMI');
         row('Premi Pokok ('+d.ratePokok+')',d.premiPokok); if(d.loading)row('Loading Rate Usia',d.loading);
         if(d.banjir)row('Perluasan Banjir & Angin Topan',d.banjir); if(d.gempa)row('Perluasan Gempa Bumi & Tsunami',d.gempa);
