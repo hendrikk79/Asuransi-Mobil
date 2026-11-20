@@ -87,12 +87,14 @@ footer{background:#0F172A;color:#CBD5E1;padding:50px 0 30px}
 <header class="site-header">
     <div class="container nav-wrapper">
       <a href="/" class="logo">Asuransi<span>MobilMudah</span></a>
-      <nav class="nav-links">
-        <a href="/"></a>
+      <button class="mobile-nav-toggle" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobile-site-navigation">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+      <nav class="nav-links" id="mobile-site-navigation">
         <a href="/cek-premi">Cek Premi</a>
         <a href="/asuransi-rekanan">Asuransi Rekanan</a>
         <a href="/proses-klaim">Klaim</a>
-        <a href="/faq">FAQ</a>
+        <a href="/faq" aria-current="page">FAQ</a>
       </nav>
     </div>
   </header>
@@ -271,6 +273,7 @@ function filterQnA(){
   const header=document.querySelector('.site-header');
   const button=header.querySelector('.mobile-nav-toggle');
   const nav=header.querySelector('.nav-links');
+  if (!button || !nav) return;
   function close(){nav.classList.remove('is-open');button.setAttribute('aria-expanded','false');button.setAttribute('aria-label','Buka menu navigasi')}
   button.addEventListener('click',()=>{const open=nav.classList.toggle('is-open');button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Tutup menu navigasi':'Buka menu navigasi')});
   nav.addEventListener('click',e=>{if(e.target.closest('a'))close()});
