@@ -760,6 +760,31 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 
 </style>
 
+<style id="amm-scroll-reveal">
+  .amm-reveal-pending { opacity: 0; translate: 0 24px; }
+  .amm-reveal-visible {
+    animation: amm-reveal-in 850ms cubic-bezier(.22,.61,.36,1) var(--amm-delay, 0ms) both;
+  }
+  @keyframes amm-reveal-in {
+    from { opacity: 0; translate: 0 24px; }
+    to { opacity: 1; translate: 0 0; }
+  }
+  .amm-reveal-pending:focus-within, .amm-reveal-visible:focus-within {
+    opacity: 1; translate: none; animation: none;
+  }
+  @media (max-width: 768px) {
+    .amm-reveal-pending { translate: 0 16px; }
+    @keyframes amm-reveal-in {
+      from { opacity: 0; translate: 0 16px; }
+      to { opacity: 1; translate: 0 0; }
+    }
+  }
+  @media (prefers-reduced-motion: reduce), print {
+    .amm-reveal-pending, .amm-reveal-visible {
+      opacity: 1; translate: none; animation: none !important;
+    }
+  }
+</style>
 </head>
 <body>
 
@@ -1051,5 +1076,45 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 
  <!-- Popup Promo -->
   
+<script id="amm-scroll-reveal-script">
+(function () {
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var groups = [
+    '.hero-grid > div:first-child > *', '.hero-visual',
+    '.partners .container > p', '.partner-logos > *',
+    '.section-title > *', '.feature-box', '.product-card',
+    '.banner-tengah', '.testi-card', '.footer-grid > div', '.footer-bottom'
+  ];
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      el.classList.remove('amm-reveal-pending');
+      el.classList.add('amm-reveal-visible');
+      observer.unobserve(el);
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -24px 0px' });
+  groups.forEach(function (selector) {
+    var previousParent = null, index = 0;
+    document.querySelectorAll(selector).forEach(function (el) {
+      if (el.parentElement !== previousParent) index = 0;
+      previousParent = el.parentElement;
+      el.style.setProperty('--amm-delay', Math.min(index++, 3) * 110 + 'ms');
+      el.classList.add('amm-reveal-pending');
+      el.addEventListener('animationend', function (event) {
+        if (event.target === el && event.animationName === 'amm-reveal-in') {
+          el.classList.remove('amm-reveal-visible');
+        }
+      });
+      el.addEventListener('focusin', function () {
+        observer.unobserve(el);
+        el.classList.remove('amm-reveal-pending', 'amm-reveal-visible');
+      });
+      observer.observe(el);
+    });
+  });
+})();
+</script>
 </body>
 </html>
