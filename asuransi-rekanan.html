@@ -436,6 +436,15 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 }
 </style>
 
+<style id="amm-language-style">
+.amm-language {display:flex;align-items:center;gap:3px;flex:none;margin-left:12px;white-space:nowrap;}
+.amm-language button {appearance:none;display:inline-flex;align-items:center;gap:4px;padding:5px 6px;border:1px solid transparent;border-radius:5px;background:transparent;color:#64748b;font:600 11px/1.2 Arial,sans-serif;cursor:pointer;}
+.amm-language button[aria-pressed="true"] {border-color:#0F4C81;background:#eff6ff;color:#0F4C81;}
+.amm-language svg {width:19px;height:13px;display:block;border:1px solid #d1d5db;flex:none;}
+@media(min-width:769px) and (max-width:1050px){body > header.site-header .nav-links{gap:12px!important;font-size:.82rem!important;}body > header.site-header .nav-links a{font-size:.82rem!important;}}
+@media(max-width:768px){.amm-language{margin-left:auto;margin-right:8px;gap:2px}.amm-language button{padding:4px 3px;font-size:10px} .amm-language svg{width:16px;height:11px} body > header.site-header .nav-wrapper{gap:0!important;} }
+@media(max-width:390px){.amm-language button span{display:none}.amm-language{margin-right:5px}.amm-language button{padding:5px}}
+</style>
 </head>
 <body><header class="site-header">
 <div class="container nav-wrapper">
@@ -656,5 +665,23 @@ body > header.site-header .mobile-nav-toggle .menu-icon::after {
 })();
 </script>
 
+<script id="amm-language-script">
+(()=>{
+const dictionary={"Cek Premi": "Check Premium", "Asuransi Rekanan": "Insurance Partners", "Klaim": "Claims", "Konsultan & Agen Asuransi Kendaraan Bermotor. Melayani pembuatan polis baru, perpanjangan polis, dan konsultasi klaim.": "Motor Insurance Consultant & Agent. Providing new policies, policy renewals and claims consultation.", "Kontak Langsung": "Direct Contact", "Jam Layanan": "Business Hours", "Senin - Jumat: 09.00 - 16.00 WIB": "Monday - Friday: 09:00 - 16:00 WIB", "Sabtu: 09.00 - 14.00 WIB": "Saturday: 09:00 - 14:00 WIB", "Bantuan Darurat Klaim: 24 Jam": "Emergency Claims Assistance: 24 Hours", "© 2026 Asuransi Mobil Mudah. Seluruh Hak Cipta Dilindungi.": "© 2026 Asuransi Mobil Mudah. All Rights Reserved.", "Rekanan Asuransi Terpercaya": "Trusted Insurance Partners", "Pilihan perusahaan asuransi kendaraan bermotor terbaik yang bekerja sama dengan kami": "A selection of leading motor insurance companies working with us"};
+const key='amm-language'; let lang='id'; try{lang=localStorage.getItem(key)==='en'?'en':'id'}catch(e){}
+const original=new WeakMap(), attrs=new WeakMap();
+const skip='script,style,svg,.logo,.footer-grid h3,.slide,.amm-language,#resNama,#resHp,#resMobil';
+function translate(s){let k=s.trim();let t=dictionary[k];if(!t){if(k.startsWith('Contoh:'))t=k.replace('Contoh:','Example:');else if(/^\d+ Tahun$/.test(k))t=k.replace('Tahun','Years');else if(/^Wilayah [123] - /.test(k))t=k.replace('Wilayah','Region');else if(k.startsWith('Tarif dasar OJK:'))t=k.replace('Tarif dasar OJK:','OJK Base Rate:');}return t?s.replace(k,()=>t):s;}
+function render(){document.documentElement.lang=lang; const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(!n.parentElement||n.parentElement.closest(skip)||!n.nodeValue.trim())continue;let old=original.get(n);if(!old||n.nodeValue!==old.last)old={source:n.nodeValue,last:n.nodeValue};let next=lang==='en'?translate(old.source):old.source;old.last=next;original.set(n,old);if(n.nodeValue!==next)n.nodeValue=next;}
+for(const el of document.querySelectorAll('[placeholder],[aria-label]')){if(el.closest(skip))continue;let a=attrs.get(el)||{};for(const k of ['placeholder','aria-label'])if(el.hasAttribute(k)){let v=el.getAttribute(k);let old=a[k];if(!old||v!==old.last)old={source:v};old.last=lang==='en'?translate(old.source):old.source;a[k]=old;if(v!==old.last)el.setAttribute(k,old.last);}attrs.set(el,a);}
+for(const b of document.querySelectorAll('.amm-language button'))b.setAttribute('aria-pressed',String(b.dataset.lang===lang));}
+window.ammTranslate=s=>lang==='en'?translate(s):s;
+function start(){const nav=document.querySelector('.nav-wrapper');if(!nav)return;const box=document.createElement('div');box.className='amm-language';box.setAttribute('role','group');box.setAttribute('aria-label','Language / Bahasa');box.innerHTML=`<button type="button" data-lang="id" aria-label="Bahasa Indonesia" title="Bahasa Indonesia"><svg viewBox="0 0 30 20" aria-hidden="true"><path fill="#e31b23" d="M0 0h30v10H0z"/><path fill="#fff" d="M0 10h30v10H0z"/></svg><span>IDN</span></button><button type="button" data-lang="en" aria-label="English" title="English"><svg viewBox="0 0 60 40" aria-hidden="true"><path fill="#012169" d="M0 0h60v40H0z"/><path stroke="#fff" stroke-width="9" d="M0 0l60 40M60 0L0 40"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 40M60 0L0 40"/><path stroke="#fff" stroke-width="14" d="M30 0v40M0 20h60"/><path stroke="#C8102E" stroke-width="8" d="M30 0v40M0 20h60"/></svg><span>ENG</span></button>`;
+const menu=nav.querySelector('.mobile-nav-toggle');if(menu)nav.insertBefore(box,menu);else nav.append(box);
+box.addEventListener('click',e=>{const b=e.target.closest('button[data-lang]');if(!b)return;lang=b.dataset.lang;try{localStorage.setItem(key,lang)}catch(e){}render();});
+window.addEventListener('storage',e=>{if(e.key===key){lang=e.newValue==='en'?'en':'id';render()}});window.addEventListener('pageshow',()=>{try{lang=localStorage.getItem(key)==='en'?'en':'id'}catch(e){}render()});
+render();let pending=false;new MutationObserver(()=>{if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;render()})}}).observe(document.body,{childList:true,subtree:true,characterData:true});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();</script>
 </body>
 </html>
